@@ -1,0 +1,79 @@
+/* css styles
+body {
+    background-color: #f0f0f0;
+}
+*/
+
+.navbar-dark .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ccd1d5' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+}
+
+.navbar-dark .navbar-toggler {
+    color: whitesmoke;
+    border-color: rgba(89,89,89,0);
+}
+
+.navbar-dark {
+	background-color: #313352;
+	border: none;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+}
+
+.navbar-dark .navbar-nav .show>.nav-link, .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active {
+    color: #00d0c3;
+}
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+    color: #00d6e5;
+}
+.navbar #quarto-search.type-overlay .aa-Autocomplete svg.aa-SubmitIcon {
+    width: 26px;
+    height: 26px;
+    color: whitesmoke;
+    opacity: 1;
+}
+
+.below-prelude {
+    padding: 5pc;
+    align-content: center;
+    text-align: center;
+}
+
+.navbar-logo {
+	width: auto;
+	max-height: 4pc;
+}
+
+.quarto-title-banner {
+	background-image: url(www/particles.png);
+	background-size: cover;
+	background-attachment: fixed;
+	margin-top:-5pc;
+	padding-top: 10pc;
+	padding-bottom: 5pc;
+	color: #f5f5f5;
+}
+
+.mymeta .mymeta-title {
+    margin-top: 1em;
+    text-transform: uppercase;
+    font-size: .8em;
+    opacity: .8;
+    font-weight: 400;
+}
+
+details > summary {
+    color: #5d6166;
+}
+
+.alinea {
+	text-align: justify;
+}
+
+.footer {
+    width: 100%;
+    bottom: 0;
+    z-index: 1
+}
