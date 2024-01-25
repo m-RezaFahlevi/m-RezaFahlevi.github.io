@@ -210,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="animate__animated animate__fadeInUp" prefix="schema: https://schema.org/" resource="#me">
 <p>📱 <span property="schema:telephone">(+62) 812-7548-0237</span> 🇮🇩</p>
-<p><a property="schema:nationality" typeof="schema:Country" href="https://indonesia.go.id/"><span property="schema:name">Indonesia</span></a> | Founder of Fahlevisia website | Computer Science Alumnus | Lifelong Learner</p>
+<p><a property="schema:nationality" typeof="schema:Country" href="https://indonesia.go.id/"><span property="schema:name">Indonesia</span></a> | <span property="schema:jobTitle">Founder of <a href="https://www.fahlevisia.com">Fahlevisia</a></span> website | Computer Science Alumnus | Lifelong Learner</p>
 </div>
 <div data-align="center">
 <p><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&amp;size=23&amp;duration=1500&amp;pause=1000&amp;color=316794&amp;width=550&amp;lines=%3CHello+World+%F0%9F%87%AC%F0%9F%87%A7%2F%3E;%3CHello+Dunia+%F0%9F%87%AE%F0%9F%87%A9%2F%3E;%3C%5C%F0%9F%87%AA%F0%9F%87%AC+%D8%A3%D9%8E%D9%87%D9%92%D9%84%D9%8B%D8%A7+%D9%88%D9%8E%D8%B3%D9%8E%D9%87%D9%92%D9%84%D9%8B%3E" alt="Typing SVG"></a></p>
@@ -424,16 +424,18 @@ Bachelor of Computer Science (Sarjana Ilmu Komputer - <b><span property="schema:
 		position: absolute; 
 		width: 100%; 
 		padding-left:3pc;
-		font-size: 3pc;">
-		<img src="https://www.fahlevisia.com/www/fahlevisiaicon.png" height="15%" width="15%" alt="Fahlevisia"><br>
+		font-size: 3pc;" resource="https://www.fahlevisia.com/#fahlevisia" typeof="schema:WebPage">
+		<a href="https://www.fahlevisia.com">
+			<img src="https://www.fahlevisia.com/www/fahlevisiaicon.png" height="15%" width="15%" alt="Fahlevisia"><br>
+		</a>
 		<img src="https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi.github.io/main/www/fahlevisiawhite.svg" alt="fahlevisia_repositori" style="margin-left:-0.8pc;">
-		<p style="color: white; font-size:1.5pc;">© <span id="cpRight"></span> by Muhammad Reza Fahlevi</p>
+		<p style="color: white; font-size:1.5pc;">© <span id="cpRight" property="schema:copyrightYear"></span> by Muhammad Reza Fahlevi</p>
 		<script>
 			obtCopyRightYear() // obtain copy right year
 
 			function obtCopyRightYear() {
 				const copyRightYear = new Date()
-				document.getElementById("cpRight").innerHTML = copyRightYear.getFullYear()
+				document.getElementById("cpRight").innerHTML =  "<span typeof='schema:Number'>" + copyRightYear.getFullYear() + "</span>"
 			}
 
 			function getCurrAccsReader(EnOrId, isAbbr) {
