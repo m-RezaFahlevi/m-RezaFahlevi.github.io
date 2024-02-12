@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head prefix="og: https://ogp.me/ns# schema: https://schema.org/">
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Muhammad Reza Fahlevi">
+<meta name="dcterms.date" content="2024-01-12">
+<meta name="description" content="A C++ header file as an extension of std::vector<double>">
+
+<meta property="og:title" content="Linav: Computation of Vectors in Linear Algebra">
+<meta property="og:description" content="A C++ header file as an extension of std::vector&lt;double&gt;">
+<meta property="og:url" content="https://www.fahlevisia.com/post_articles/linav/">
+<meta property="og:image" content="https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi/main/www/LinavThumbnail.png">
+<meta property="og:type" content="article">
+<meta property="og:article:author" content="Muhammad Reza Fahlevi">
+<meta property="og:article:published_time" content="2024-01-12">
+<meta property="og:article:section" content="Computer Science">
+<meta property="og:article:tag" content="LinearAlgebra">
+<meta property="og:article:tag" content="Vectors">
+<meta property="og:article:tag" content="C++">
+
+<title>Linav: Computation of Vectors in Linear Algebra</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" integrity="sha512-d0olNN35C6VLiulAobxYHZiXJmq+vl+BGIgAxQtD5+kqudro/xNMvv2yIHAciGHpExsIbKX3iLg+0B6d0k4+ZA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/regular.min.css" integrity="sha512-TzeemgHmrSO404wTLeBd76DmPp5TjWY/f2SyZC6/3LsutDYMVYfOx2uh894kr0j9UM6x39LFHKTeLn99iz378A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" integrity="sha512-pZlKGs7nEqF4zoG0egeK167l6yovsuL8ap30d07kA5AJUq+WysFlQ02DLXAmN3n0+H3JVz5ni8SJZnrOaYXWBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+<link rel="shortcut icon" href="https://www.fahlevisia.com/www/fahlevisiaicon.png" type="image/x-icon">
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full.js" integrity="sha256-kbAFUDxdHwlYv01zraGjvjNZayxKtdoiJ38bDTFJtaQ=" crossorigin="anonymous">
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.css">
+<script src="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../www/fahlevisiawhite.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target=""><i class="bi bi-house" role="img">
+</i> 
+ <span class="menu-text">Beranda</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../articles.html" rel="" target=""><i class="bi bi-journal-text" role="img">
+</i> 
+ <span class="menu-text">Artikel</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../artikelYth.html" rel="" target=""><i class="bi bi-newspaper" role="img">
+</i> 
+ <span class="menu-text">Artikel Bpk/Ibu Yth.</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../muhammadrezafahlevi.html" rel="" target=""><i class="bi bi-info-circle-fill" role="img">
+</i> 
+ <span class="menu-text">Tentang</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Linav: Computation of Vectors in Linear Algebra</h1>
+                  <div>
+        <div class="description">
+          A C++ header file as an extension of std::vector&lt;double&gt;
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Linear Algebra</div>
+                <div class="quarto-category">Vectors</div>
+                <div class="quarto-category">C++</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Muhammad Reza Fahlevi </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 12, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#theory-and-computation" id="toc-theory-and-computation" class="nav-link" data-scroll-target="#theory-and-computation"><span class="header-section-number">2</span> Theory and Computation</a>
+  <ul class="collapse">
+  <li><a href="#abstract-vector-space-and-space-of-mathbbrn" id="toc-abstract-vector-space-and-space-of-mathbbrn" class="nav-link" data-scroll-target="#abstract-vector-space-and-space-of-mathbbrn"><span class="header-section-number">2.1</span> Abstract Vector Space and Space of <span class="math inline">\(\mathbb{R}^n\)</span></a></li>
+  <li><a href="#pointwise-operators-from-mathbbrn-to-itself" id="toc-pointwise-operators-from-mathbbrn-to-itself" class="nav-link" data-scroll-target="#pointwise-operators-from-mathbbrn-to-itself"><span class="header-section-number">2.2</span> Pointwise Operators from <span class="math inline">\(\mathbb{R}^n\)</span> to Itself</a></li>
+  <li><a href="#linear-maps" id="toc-linear-maps" class="nav-link" data-scroll-target="#linear-maps"><span class="header-section-number">2.3</span> Linear Maps</a></li>
+  <li><a href="#ell_p-norm-and-euclidean-norm" id="toc-ell_p-norm-and-euclidean-norm" class="nav-link" data-scroll-target="#ell_p-norm-and-euclidean-norm"><span class="header-section-number">2.4</span> <span class="math inline">\(\ell_{p}\)</span>-norm and Euclidean Norm</a></li>
+  </ul></li>
+  <li><a href="#design-and-implementation" id="toc-design-and-implementation" class="nav-link" data-scroll-target="#design-and-implementation"><span class="header-section-number">3</span> Design and Implementation</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion"><span class="header-section-number">4</span> Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5</span> Conclusion</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="header-section-number">6</span> Acknowledgements</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
+  <li><a href="#appendix-sources-code" id="toc-appendix-sources-code" class="nav-link" data-scroll-target="#appendix-sources-code"><span class="header-section-number">8</span> Appendix: Sources Code</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div style="margin-top: -7%;">
+    <div class="mymeta" resource="#linav" typeof="schema:Article">
+        <span property="schema:name" content="Linav: Computation of Vectors in Linear Algebra"></span>
+        <span property="schema:description" content="A C++ header file as an extension of std::vector<double>"></span>
+        <span property="schema:author" resource="https://www.fahlevisia.com/muhammadrezafahlevi.html#me" typeof="schema:Person"></span>
+        <span property="schema:datePublished" content="2024-02-11"></span>
+        <span property="schema:copyrightHolder" content="https://www.fahlevisia.com/muhammadrezafahlevi.html#me" typeof="schema:Person"></span>
+        <span property="schema:copyrightYear" content="2024"></span>
+        <span property="schema:articleSection" content="Computer Science"></span>
+        <span property="schema:thumbnail" resource="https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi/main/www/LinavThumbnail.png" typeof="schema:ImageObject"></span>
+        <div class="mymeta-title">Email</div>
+        <div class="alinea"><p>muhammadrezafahlevi666@gmail.com</p></div>
+        <div class="mymeta-title">Abstract</div>
+        <div class="alinea">
+            <p property="schema:abstract">C++ is one of favorite programming language for those who are having good understanding in algorithms and interested in computing something manually. One of advantage computation using C++ is its speed when execute the program, it is suitable for approximating hard real-parameter optimization problem. It is so often that such a problem is formulated in the form of vectors, and main operators used in vectors are pointwise (elementwise) addition and s-multiplication. Eventhough there are library out there to do so, it is a good practice to develope our own C++ header$\textemdash\texttt{linav.h}\textemdash$for computation of vectors in linear algebra, at least once in a lifetime. By using $\texttt{linav.h}$, it is possible to do a computation of vectors, especially to compute the pointwise addition and s-multiplication which is make it opens a great possibility of interesting application thereof.</p>
+        </div>
+    </div>
+</div>
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<div class="alinea">
+<p>C++ is a programming language created by Bjarne Strostup, and originally it’s intended to be a superset of C programming language since in C++ we could create a class . So, we can do the so-called object oriented programming (Stroustrup, B., 2020). One of useful header file of C++ is <code>vector</code>. Unlike an ordinary array, where once we have declared an array of fixed length, once we try to add another element to an ordinary array which exceed its length, it will cause an error. Meanwhile, if we declare something like the following code</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v <span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">};</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    v<span class="op">.</span>pushback<span class="op">(</span><span class="fl">4.3</span><span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">.</span>at<span class="op">(</span><span class="dv">3</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="alinea">
+<p>it will not produce an error, and the elements of <code>v</code> after 4.3 is included in <code>v</code> are 1.0, 2.0, 3.0, and 4.3.</p>
+<p><span class="math inline">\(\quad\)</span> Nevertheless, the problem arise when we try to treate <code>std::vector&lt;double&gt; v {1.0, 2.0, 3.0}</code> as a vector in linear algebra. For example, we want to do a pointwise addition and s-multiplication as follows</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v <span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">};</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> u <span class="op">=</span> v <span class="op">+</span> v<span class="op">;</span> <span class="co">// produce an error</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">double</span> sc <span class="op">=</span> <span class="fl">3.5</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> w <span class="op">=</span> sc <span class="op">*</span> v<span class="op">;</span> <span class="co">// also produce an error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We expect that <code>u</code> is a vector having <span class="math inline">\((2.0,4.0,6.0)\)</span> as its elements, and <code>w</code> is a vector having <span class="math inline">\((3.5,7.0,10.5)\)</span> as its element. Instead, we got an error.</p>
+<p><span class="math inline">\(\quad\)</span> If only <code>std::vector</code> support pointwise addition and s-multiplication, then we capable to do a numerical computation, extensively. Especially, computation of vectors in linear algebra, which has various application. The following passages discuss about the applications of vectors in linear algebra and the use of <code>std::vector</code>.</p>
+<p><span class="math inline">\(\quad\)</span> In Artinez, C., et al.&nbsp;(2018), they explained genetic algorithms construction to solve real-parameter optimization problem, the solutions of the problem (individuals) are encoded as the elements of <span class="math inline">\(\mathbb{R}\)</span>-vector space. The crossover operator of genetic algorithm takes a pair of vectors as its input and produced another vectors as its output. And so for its mutation operator, the only different is that mutation operator takes only one vector as its input and produce one vector as its output. A genetic algorithms where the individuals are encoded (represented) in vectors is called real-coded genetic algorithms. One of main research in this subject is how to develop a better crossover and mutation operators. A review about genetic algorithms was done by Katoch S., et al.&nbsp;(2021), where in this paper, Katoch S., et al.&nbsp;provide a table for different name and mathematical formulation of crossover and mutation operators, and it is so often that crossover and mutation operators use pointwise addition and s-multiplication in its mathematical formulation. Pointwise addition and s-multiplication in computation of vectors in linear algebra also used in differential evolution algorithms, and a great review of this method and its application was done by Bilal et al., (2020).</p>
+<p><span class="math inline">\(\quad\)</span> One of advance computation of the use of <code>std::vector</code> is SU3lib, a C++ library for computation of Wigner and Racah coefficients of SU(3) by Dytrych, T. et al.&nbsp;(2021). In this paper, <code>std::vector&lt;double&gt;</code> data type is used as representation of the arrangement of resulting coefficients as a linear array.</p>
+<p><span class="math inline">\(\quad\)</span> There is a C++ standard library header specialize in the computation of linear algebra called <code>linalg</code>, which capable to perform pointwise addition and s-multiplication. Nevertheless, it is a good practice to develope our own header, at least once in a lifetime. Therefore, in this article, we develope a C++ header called <code>linav.h</code> which stand for vector in linear algebra, and we develope <code>linav.h</code> as an extension of <code>std::vector</code>. By using <code>linav.h</code>, computation with regards to vector in linear algebra is possible.</p>
+<p><span class="math inline">\(\quad\)</span> This paper is organized as follows. Section 2 is the discussion of theory and computation with regards to vectors in linear algebra. In section 2, we have definition of abstract vector space for which the definition of <span class="math inline">\(\mathbb{R}^{n}\)</span>-vector spaces is defined thereof, pointwise (elementwise) operators, linear maps, and finally the <span class="math inline">\(\ell_{p}\)</span>-norm. In section 3, we implement the abstract concept of mathematics into real programming language C++. Section 4 is results and discussion, in this section we provide a table of summary of computation. Finally, we conclude our discussion in section 5.</p>
+<p><span class="math inline">\(\quad\)</span> If the honourable reader is only interested in the applications of things, then he/she may skip section 2. If the honourable reader is interested in science of computation, especially in numerical computation, then it is recommended for he/she to read section 2.</p>
+</div>
+</section>
+<section id="theory-and-computation" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Theory and Computation</h1>
+<section id="abstract-vector-space-and-space-of-mathbbrn" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="abstract-vector-space-and-space-of-mathbbrn"><span class="header-section-number">2.1</span> Abstract Vector Space and Space of <span class="math inline">\(\mathbb{R}^n\)</span></h2>
+<div class="alinea">
+<div id="def-abstract-vector-space" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (abstract vector space) </strong></span>The vector space of a set <span class="math inline">\(V\)</span> is the triplet <span class="math inline">\((V,+,\cdot)\)</span> where <span class="math inline">\(+\colon V\times V\to V\)</span> and <span class="math inline">\(\cdot\colon \mathbb{R}\times V\to V\)</span> are known as pointwise addition and s-multiplication, respectively. Which <span class="math inline">\(\forall\vec{x},\vec{y},\vec{z}\in V\)</span> and <span class="math inline">\(\forall\lambda,\mu\in\mathbb{R}\)</span> satisfy the following 8 axioms (Dadhley, R., 2019; Körner, T.W., 2012).</p>
+<div style="padding-left: 1pc; margin-top: -1pc;">
+<p>(1). [the commutative law] <span class="math inline">\(\vec{x}+\vec{y}=\vec{y}+\vec{x}\)</span> <br> (2). [the associative law] <span class="math inline">\((\vec{x}+\vec{y})+\vec{z}=\vec{x}+(\vec{y}+\vec{z})\)</span> <br> (3). [the existance of neutral element] <span class="math inline">\(\exists\vec{0}\in V\colon\forall\vec{x}\in V\colon\vec{x}+\vec{0}=\vec{x}\)</span> <br> (4). [the existance of inverse element] <span class="math inline">\(\forall\vec{x}\in V\colon\exists\vec{x}^{\prime}\in V\colon\vec{x}+\vec{x}^{\prime}=\vec{0}\)</span> <br> (5). [the associative law] <span class="math inline">\(\lambda\cdot(\mu\cdot\vec{x})=(\lambda\cdot\mu)\cdot\vec{x}\)</span> <br> (6). [the distributive law] <span class="math inline">\((\lambda+\mu)\vec{\cdot x}=\lambda\cdot\vec{x}+\mu\cdot\vec{x}\)</span> <br> (7). [the distributive law] <span class="math inline">\(\lambda\cdot(\vec{x}+\vec{y})=\lambda\cdot\vec{x}+\lambda\cdot\vec{y}\)</span> <br> (8). [the existance of unitary element] <span class="math inline">\(\exists\iota\in\mathbb{R}\colon\forall\vec{x}\in V\colon\iota\cdot\vec{x}=\vec{x}\)</span></p>
+</div>
+</div>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>The element of vector space <span class="math inline">\((V,+,\cdot)\)</span> is called vector, conviniently.</p>
+</div>
+<div id="def-two" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 </strong></span>Let <span class="math inline">\((U,+,\cdot)\)</span> and <span class="math inline">\((V,+,\cdot)\)</span> are vector spaces s.t. <span class="math inline">\(U\subseteq V\)</span>, then <span class="math inline">\(U\)</span> is defined as the subspace of <span class="math inline">\(V\)</span>.</p>
+</div>
+<div id="def-three" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 </strong></span>The set <span class="math inline">\(\mathbb{R}^{n}\coloneqq\mathbb{R}\times\mathbb{R}\times\cdots\times\mathbb{R}\)</span> is the set of n-tuples of all real numbers i.e., <span class="math display">\[
+\mathbb{R}^{n}\coloneqq\{(x_{1},x_{2},\cdots,x_{n})\colon\forall i=1,2,\ldots,n,\,x_{i}\in\mathbb{R}\}
+\]</span></p>
+</div>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>One of special case of <span class="math inline">\(\mathbb{R}^{n}\)</span> is when <span class="math inline">\(n=2\)</span> or <span class="math inline">\(n=3\)</span>, i.e., <span class="math display">\[
+\mathbb{R}^{2}\coloneqq\{(x_{1},x_{2})\colon x_{1},x_{2}\in\mathbb{R}\}\quad\text{or }\quad\mathbb{R}^{3}\coloneqq\{(x_{1},x_{2},x_{3})\colon x_{1},x_{2},x_{3}\in\mathbb{R}\}
+\]</span></p>
+<p>and the element of <span class="math inline">\(\mathbb{R}^{n}\)</span> is called a point in <span class="math inline">\(\mathbb{R}^{n}\)</span>.</p>
+</div>
+<p><strong>Notation.</strong> n-tuple of a real number is denoted by a letter with an arrow on that letter. E.g., <span class="math inline">\(\vec{x},\vec{y},\vec{z},\text{etc.}\)</span> Thereby, if <span class="math inline">\(\vec{x}\in\mathbb{R}^{3}\)</span> and <span class="math inline">\(\vec{y}\in\mathbb{R}^{3}\)</span> s.t. <span class="math inline">\(\vec{x}=(x_{1},x_{2})^{\top}\)</span> and <span class="math inline">\(\vec{y}=(y_{1},y_{2},y_{3})^{\top}\)</span>, then <span class="math inline">\(\vec{x}\)</span> is a point in <span class="math inline">\(\mathbb{R}^{2}\)</span> and <span class="math inline">\(\vec{y}\)</span> is a point in <span class="math inline">\(\mathbb{R}^{3}\)</span>.</p>
+<p>By using the definition of abstract vector space, we are capable to construct the vector space of <span class="math inline">\(\mathbb{R}^{n}\)</span>.</p>
+</div>
+<div class="alinea">
+<div id="exm-real-vector-space" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (<span class="math inline">\(\mathbb{R}^n\)</span> vector space) </strong></span>The following triplet <span class="math inline">\((\mathbb{R}^{n},+,\cdot)\)</span> is a vector space s.t. if the pointwise addition and s-multiplication are defined as follows</p>
+<div style="padding-left:1pc; margin-top: -1pc;">
+<p>(i). [pointwise addition] <span class="math inline">\(+\colon\mathbb{R}^{n}\times\mathbb{R}^{n}\to\mathbb{R}^{n}\)</span> s.t. <span id="eq-pointwise-addition"><span class="math display">\[
+\forall\vec{x},\vec{y}\in\mathbb{R}^{n}\colon(\vec{x},\vec{y})\mapsto\vec{x}+\vec{y}\coloneqq(x_{1}+y_{1},x_{2}+y_{2},\ldots,x_{n}+y_{n})^{\top}
+\tag{1}\]</span></span></p>
+<p>(ii). [s-multiplication] <span class="math inline">\(\cdot\colon\mathbb{R}\times\mathbb{R}^{n}\to\mathbb{R}^{n}\)</span> s.t. <span id="eq-s-multiplication"><span class="math display">\[
+\forall\lambda\in\mathbb{\mathbb{R}}\colon\forall\vec{x}\in\mathbb{R}^{n}\colon(\lambda,\vec{x})\mapsto\lambda\cdot\vec{x}=(\lambda x_{1},\lambda x_{2},\ldots,\lambda x_{n})^{\top}
+\tag{2}\]</span></span></p>
+</div>
+<p>then it satisfy the 8 axioms stated in the definition of abstract vector spaces.</p>
+</div>
+</div>
+<div class="alinea">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>The existance of the neutral element for <span class="math inline">\(\mathbb{R}^{n}\)</span> is the <span class="math inline">\(n\)</span>-tuple s.t. all elements such <span class="math inline">\(n\)</span>-tuple are zero, i.e., <span class="math inline">\(\vec{0}=(0,0,\ldots,0)^{\top}.\)</span> If <span class="math inline">\(\vec{0}\)</span> is called as a null vector and <span class="math inline">\(\vec{0}\in\mathbb{R}^{n}\)</span>, then <span class="math inline">\(\vec{0}\)</span> is defined as the null vector in <span class="math inline">\(\mathbb{R}^{n}\)</span>. thus, <span class="math inline">\(\forall\vec{x}\in\mathbb{R}^{n}\colon\vec{x}+\vec{0}=\vec{x}\)</span>.</p>
+<p>The existance of the inverse element can be showed by observing the s-multiplication of <span class="math inline">\(\forall\vec{x}\)</span> by <span class="math inline">\(-1\)</span> is <span class="math inline">\(-\vec{x}=(-x_{1},-x_{2},\ldots,-x_{n})^{\top}\)</span> and <span class="math inline">\(-\vec{x}\in\mathbb{R}^{n}\)</span>. Thus, <span class="math inline">\(\forall\vec{x}\in\mathbb{R}\colon\vec{x}+(-1)\cdot\vec{x}=\vec{0}\)</span>.</p>
+<p>The existance of unitary element of <span class="math inline">\(\mathbb{R}\)</span> is <span class="math inline">\(1\)</span>, so we have that <span class="math inline">\(\forall\vec{x}\in\mathbb{R}^{n}\colon1\cdot\vec{x}=\vec{x}\)</span>. The rest is trivial. After checking all <span class="math inline">\(8\)</span>-axioms stated in the definition of abstract vector space (<a href="#def-abstract-vector-space">Definition&nbsp;1</a>), we have that the following triplet <span class="math inline">\((\mathbb{R}^{n},+,\cdot)\)</span> indeed a vector spaces.</p>
+<p style="text-align: right;">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+</div>
+</section>
+<section id="pointwise-operators-from-mathbbrn-to-itself" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="pointwise-operators-from-mathbbrn-to-itself"><span class="header-section-number">2.2</span> Pointwise Operators from <span class="math inline">\(\mathbb{R}^n\)</span> to Itself</h2>
+<div class="alinea">
+<p>From previous section we have seen 2 pointwise operators namely, pointwise addition and s-multiplication. Notice that these operators are not addition and multiplication of real numbers, instead, pointwise addition operator is addition for vector space. Similarly, the s-multiplication is multiplication of real number and vector which yields a vector.</p>
+<p><span class="math inline">\(\quad\)</span> In order to understand what we mean by this, observe the distributive law in the <a href="#def-abstract-vector-space">definition of vector space</a>, it’s stated that <span class="math inline">\(\forall\vec{x}\in V,\forall\lambda,\mu\in\mathbb{R}\colon(\lambda+\mu)\cdot\vec{x}=\lambda\cdot\vec{x}+\mu\cdot\vec{x}\)</span>, more explicitly, this axiom can be rewritten as follow</p>
+<p><span id="eq-distributive-law"><span class="math display">\[
+\forall\vec{x}\in V\colon\forall\lambda,\mu\in\mathbb{R}\colon(\lambda+_{\mathbb{R}}\mu)\cdot_{V}\vec{x}=\lambda\cdot_{V}\vec{x}+_{V}\mu\cdot_{V}\vec{x}
+\tag{3}\]</span></span></p>
+<p>observe the subscript of each operator. On the left hand side, we have that <span class="math inline">\(+_{\mathbb{R}}\)</span> is addition operator on two real numbers, meanwhile, on the right hand side, we only have <span class="math inline">\(+_{V}\)</span> which is pointwise addition, for which it’s addition on the vector space <span class="math inline">\(V\)</span>, which is different from <span class="math inline">\(+_{\mathbb{R}}\)</span>.</p>
+<p><span class="math inline">\(\quad\)</span> For the case of s-multiplication, observe the associative law in the definition of vector space, this axiom can be rewritten more explicitly as follow</p>
+<p><span id="eq-associative-law"><span class="math display">\[
+\forall\vec{x}\in\mathbb{R}^{n}\colon\forall\lambda,\mu\in\mathbb{R}\colon(\lambda\cdot_{\mathbb{R}}\mu)\cdot_{V}\vec{x}=\lambda\cdot_{V}(\mu\cdot_{V}\vec{x})
+\tag{4}\]</span></span></p>
+<p>on the left hand side, we have <span class="math inline">\(\cdot_{\mathbb{R}}\)</span> on <span class="math inline">\((\lambda\cdot_{\mathbb{R}}\mu)\)</span> which is multiplication of 2 real numbers, meanwhile, on the right hand side we only have <span class="math inline">\(\cdot_{V}\)</span> which is s-multiplication, a multiplication of real number and vector which yields a vector, and it’s different multiplication from <span class="math inline">\(\cdot_{\mathbb{R}}\)</span>.</p>
+<p><span class="math inline">\(\quad\)</span> At the first glimpse, perharps our honorable readers think these are just what every gentleman and lady know, the subscript on the pointwise addition and s-multiplication i.e., <span class="math inline">\(+_{V}\)</span> and <span class="math inline">\(\cdot_{V}\)</span> just “unnecessary abstraction”, apperently. However, in the computation point of view— which is application of these “unnecessary abstraction”—it turn out that it serves clarity of what kind of object that we need, and what operators which take those object as its input and what kind of object that the output will produce (Dadhley, R., 2019). Another operators which take a vector as its input and produce a vector beside pointwise addition and s-multiplication are pointwise subtraction, multiplication, powered by, absolute value, and normalize vector.</p>
+<p><span class="math inline">\(\quad\)</span> We compute the pointwise addition as it is defined, and so for the s-multiplication, i.e, for pointwise addition we have 2 vectors, and then we define a vector which is the addition 2 vectors thereof. Similarly, for s-multiplication, we have a vector and a real number, then we define a vector which is a vector obtained from a vector we have and its components are multiplied by a real number (see <a href="#exm-real-vector-space">Example&nbsp;1</a>).</p>
+<p><span class="math inline">\(\quad\)</span> Theoritically, pointwise substraction is a composition of pointwise addition and s-multiplication of two vectors, <span class="math inline">\(-_{V}\equiv+_{V}\circ\cdot_{V}\)</span> i.e, a pointwise addition after s-multiplication of <span class="math inline">\(2\)</span> vectors. So, the <span class="math inline">\(-_{V}\)</span> theoritically defined as</p>
+<p><span id="eq-mapsof-pointwise-substraction"><span class="math display">\[
+-_{V}   \equiv+\circ\cdot\colon V\times (\mathbb{R}\times V)\to V
+\tag{5}\]</span></span></p>
+<p>s.t.</p>
+<p><span id="eq-mapsto-pointwise-substraction"><span class="math display">\[
+\exists\lambda\colon\forall\vec{x}\colon\forall\vec{y}\colon(\vec{x},(\lambda,\vec{y}))\mapsto(\vec{x},\lambda\cdot\vec{y})\mapsto\vec{x}+\lambda\cdot\vec{y}
+\tag{6}\]</span></span></p>
+<p>by set <span class="math inline">\(\lambda=-1\)</span>, thus</p>
+<p><span id="eq-pointwise-substraction-theoritically"><span class="math display">\[
+-_{V}(\vec{x},\vec{y})\equiv\vec{x}+(-1)\vec{y}\eqqcolon\vec{x}-\vec{y}
+\tag{7}\]</span></span></p>
+<p>Nevertheless, it’s not practical to compute the pointwise substraction by taking the s-multiplication of vector by <span class="math inline">\(-1\)</span> and then take its pointwise addition by vector, instead, we just compute the pointwise substraction as we compute the pointwise addition, but we use <span class="math inline">\(-\)</span> operator on its elements, i.e., if <span class="math inline">\(\vec{x}=(x_{1,}x_{2},\ldots,x_{n})^{\top}\)</span> and <span class="math inline">\(\vec{y}=(y_{1},y_{2},\ldots,y_{n})^{\top}\)</span>, then the pointwise substraction is a map <span class="math inline">\(-\colon V\times V \to V\)</span> s.t.</p>
+<p><span id="eq-pointwise-substraction-practical"><span class="math display">\[
+(\vec{x},\vec{y})\mapsto\vec{x}-\vec{y}\coloneqq(x_{1}-y_{1},x_{2}-y_{2},\ldots,x_{n}-y_{n})^{\top}
+\tag{8}\]</span></span></p>
+<div id="def-ast-pow-abs" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 </strong></span>Let <span class="math inline">\(\vec{x},\vec{y}\in\mathbb{R}^{n}\)</span> and <span class="math inline">\(\lambda\in\mathbb{R}\)</span>, the following are elementwise multiplication, powered by, and absolute value operators for vectors, its map, and its computation.</p>
+<div style="padding-left: 1pc; margin-top: -1pc;">
+<p>(1). [elementwise multiplication] <span class="math inline">\(\ast\colon V\times V \to V\)</span> s.t.</p>
+<p><span id="eq-mapsto-ast"><span class="math display">\[
+(\vec{x},\vec{y})\mapsto\vec{x}\ast\vec{y}\coloneqq(x_{1}y_{1},x_{2}y_{2},\ldots,x_{n}y_{n})^{\top}
+\tag{9}\]</span></span></p>
+<p>(2). [elementwise powered by] <span class="math inline">\(\text{pow}(\cdot,\cdot)\colon V\times\mathbb{R} \to V\)</span> s.t.</p>
+<p><span id="eq-mapsto-pow"><span class="math display">\[
+(\vec{x},\lambda)\mapsto\text{pow}(\vec{x},\lambda)\coloneqq(x_{1}^{\lambda},x_{2}^{\lambda},\ldots,x_{n}^{\lambda})^{\top}
+\tag{10}\]</span></span></p>
+<p>(3). [elementwise absolute value] <span class="math inline">\(\text{abs}(\cdot)\colon V \to V\)</span> s.t.</p>
+<p><span id="eq-mapsto-abs"><span class="math display">\[
+\vec{x}\mapsto\text{abs}(\vec{x})\coloneqq(\vert x_{1}\vert,\vert x_{2}\vert,\ldots,\vert x_{n}\vert)^{\top}
+\tag{11}\]</span></span></p>
+</div>
+</div>
+<p>we use these operators as it is to do a computation of 2 vectors when involving these operators.</p>
+</div>
+</section>
+<section id="linear-maps" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="linear-maps"><span class="header-section-number">2.3</span> Linear Maps</h2>
+<div class="alinea">
+<div id="def-linear-maps" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5 (linear maps) </strong></span>Suppose that <span class="math inline">\((V,+,\cdot)\)</span> and <span class="math inline">\((W,+,\cdot)\)</span> are vector spaces, let <span class="math inline">\(\vec{x},\vec{y}\in\mathbb{R}\)</span> and <span class="math inline">\(\lambda\in\mathbb{R}\)</span>, then a map <span class="math inline">\(\phi\colon V\to W\)</span> is linear if and only if <span class="math inline">\(\phi\)</span> satisfy the following properties (Körner, T.W., 2012):</p>
+<div style="padding-left: 1pc; margin-top: -1pc;">
+<p>(1). <span class="math inline">\(\phi(\vec{x}+\vec{y})=\phi(\vec{x})+\phi(\vec{y})\)</span> <br> (2). <span class="math inline">\(\phi(\lambda\vec{x})=\lambda\phi(\vec{x})\)</span></p>
+</div>
+</div>
+<div id="def-sum-of-component" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6 (sum of component) </strong></span>Let <span class="math inline">\((\mathbb{R}^{n},+,\cdot)\)</span> be vector space and <span class="math inline">\(\vec{x}\in\mathbb{R}^{n}\)</span>, then the sum of component of a vector <span class="math inline">\(\vec{x}\)</span> is defined as <span class="math inline">\(\text{sum}(\cdot)\colon\mathbb{R}^{n}\to\mathbb{R}\)</span> s.t.</p>
+<p><span id="eq-sum-of-component"><span class="math display">\[
+\vec{x}\mapsto\text{sum}(\vec{x})\coloneqq\sum_{i=1}^{n}x_{i}=x_{1}+x_{2}+\cdots+x_{n}
+\tag{12}\]</span></span></p>
+<p>for <span class="math inline">\(\vec{x}=(x_1,x_2,\ldots,x_n)^\top\)</span>.</p>
+</div>
+<div id="lem-soc-islinear" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 </strong></span>The sum of component of a vector i.e., <span class="math inline">\(\text{sum}(\cdot)\)</span> is a linear map.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>In order to prove either a map is linear or not, then we must check such a map satisfy the <a href="#def-linear-maps">definition of a linear map</a>. To do so, let <span class="math inline">\((\mathbb{R}^{n},+,\cdot)\)</span> be vector space.</p>
+<div style="padding-left: 1pc;">
+<p>(1). Observe that for <span class="math inline">\(\text{sum}(\cdot)\colon\mathbb{R}^{n}\to\mathbb{R}\)</span>, by definition</p>
+<p><span class="math display">\[
+\begin{align}
+\forall\vec{x},\vec{y}\in\mathbb{R}^{n}\colon\text{sum}(\vec{x}+\vec{y}) &amp;= \sum_{i=1}^{n}(x_{i}+y_{i}) \\
+&amp;= \sum_{i=1}^{n}x_{i}+\sum_{i=1}^{n}y_{i} \\
+\text{sum}(\vec{x}+\vec{y}) &amp;= \text{sum}(\vec{x})+\text{sum}(\vec{y})
+\end{align}
+\]</span></p>
+<p>(2). Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+\forall\vec{x}\in\mathbb{R}^{n}\colon\forall\lambda\in\mathbb{R}\colon \text{sum}(\lambda\vec{x}) &amp;= \sum_{i=1}^{n}\lambda x_{i} \\
+&amp;= \lambda\sum_{i=1}^{n}x_{i} \\
+\text{sum}(\lambda\vec{x}) &amp;= \lambda\text{ sum}(\vec{x})
+\end{align}
+\]</span></p>
+</div>
+<p>Thereby, the sum of component operator satisfy <a href="#def-linear-maps">definition of a linear map</a>.</p>
+<p style="text-align: right;">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+<p><span class="math inline">\(\quad\)</span> Theoritically, it’s okay to compute the sum of component by using <a href="#def-sum-of-component">Definition&nbsp;6</a> as it is. However, it is not so when we attempt to compute it by using a programming language like C++. Due to numerical issue, we compute the sum of component <span class="math inline">\(\text{sum}(\cdot)\colon\mathbb{R}^{n}\to\mathbb{R}\)</span> by using Kahan’s sum algorithm as follows (Solomon, J., 2015).</p>
+<pre id="kahanSum" class="pseudocode">    \begin{algorithm}
+    \caption{Kahan's sum, $\text{sum}(\cdot)\colon\mathbb{R}^{n}\to\mathbb{R}$}
+    \begin{algorithmic}
+    \STATE Define $\vec{x}\in\mathbb{R}^{n}$ s.t., $\vec{x}=(x_{1},x_{2},\ldots,x_{n})^{\top}$
+    \STATE Let $s,s_{\text{next}},c\in\mathbb{R}$ s.t. $s,s_{\text{next}},c\longleftarrow0$
+    \FOR{$i\longleftarrow1,2,\ldots,n$}
+        \STATE $v\longleftarrow x_{i}+c$
+        \STATE $s_{\text{next}}\longleftarrow s+v$
+        \STATE $c\longleftarrow v-(s_{\text{next}}-s)$
+        \STATE $s\longleftarrow s_{\text{next}}$
+    \ENDFOR
+    \RETURN $s$
+    \end{algorithmic}
+    \end{algorithm}
+</pre>
+<div id="def-inner-product" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7 (the inner product) </strong></span>Let <span class="math inline">\((\mathbb{R}^{n},+,\cdot)\)</span> be vector space and <span class="math inline">\(\vec{x},\vec{y}\in\mathbb{R}^{n}\)</span>, then the inner product of a two vectors <span class="math inline">\(\vec{x}\)</span> and <span class="math inline">\(\vec{y}\)</span> are defined as <span class="math inline">\(\langle\cdot,\cdot\rangle\colon\mathbb{R}^{n}\times\mathbb{R}^{n}\to\mathbb{R}\)</span> s.t.</p>
+<p><span id="eq-the-inner-product"><span class="math display">\[
+(\vec{x},\vec{y})\mapsto\langle\vec{x},\vec{y}\rangle\coloneqq\sum_{i=1}^{n}x_{i}y_{i}=x_{1}y_{1}+x_{2}y_{2}+\cdots+x_{n}y_{n}
+\tag{13}\]</span></span></p>
+</div>
+<div id="lem-two" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 2 </strong></span>Suppose that <span class="math inline">\((\mathbb{R}^{n},+,\cdot)\)</span> be vector space and the following map <span class="math inline">\(\langle\cdot,\cdot\rangle\colon\mathbb{R}^{n}\times\mathbb{R}^{n}\to\mathbb{R}\)</span> is the inner product of 2 vectors, let <span class="math inline">\(\vec{x},\vec{y},\vec{z}\in\mathbb{R}^{n}\)</span> and <span class="math inline">\(\lambda,\mu\in\mathbb{R}\)</span>. Then, the following properties hold.</p>
+<div style="padding-left:1pc; margin-top:-1pc;">
+<p>(1). <span class="math inline">\(\langle\vec{x},\vec{x}\rangle\geq0\)</span> <br> (2). <span class="math inline">\(\langle\vec{x},\vec{x}\rangle=0\Leftrightarrow\vec{x}=\vec{0}\)</span> <br> (3). <span class="math inline">\(\langle\vec{x},\vec{y}\rangle=\langle\vec{y},\vec{x}\rangle\)</span> <br> (4). <span class="math inline">\(\langle\vec{x}+\vec{y},\vec{z}\rangle=\langle\vec{x},\vec{z}\rangle+\langle\vec{y},\vec{z}\rangle\)</span> <br> (5). <span class="math inline">\(\langle\vec{x},\vec{y}+\vec{z}\rangle=\langle\vec{x},\vec{y}\rangle+\langle\vec{x},\vec{z}\rangle\)</span> <br> (6). <span class="math inline">\(\langle\lambda\vec{x},\mu\vec{y}\rangle=\lambda\mu\langle\vec{x},\vec{y}\rangle\)</span></p>
+</div>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We prove all 3 properties by using the definition of <a href="#def-inner-product">the inner product itself</a>.</p>
+<div style="padding-left: 1pc;">
+<p>(1). Observe that <span class="math inline">\(\forall x\in\mathbb{R}\colon x^{2}\geq0\)</span> and <span class="math inline">\(x=0\Leftrightarrow x^{2}=0\)</span>. If <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{n})^{\top}\)</span> s.t. <span class="math inline">\(x_{i}\in\mathbb{R}\)</span> for <span class="math inline">\(i=1,2,\ldots,n\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\langle\vec{x},\vec{x}\rangle&amp;=\sum_{i=1}^{n}x_{i}^{2}\geq0 \\
+\therefore\langle\vec{x},\vec{x}\rangle &amp;\geq0
+\end{align}
+\]</span></p>
+<p>(2). Special case in (1) is <span class="math inline">\(x=0\Leftrightarrow x^{2}=0\)</span>, let <span class="math inline">\(\langle\vec{x},\vec{x}\rangle=0\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\langle\vec{x},\vec{x}\rangle &amp;= 0 \\
+&amp;=  0^{2} \\
+&amp;= n0^{2} \\
+&amp;=\sum_{i=1}^{n}0^{2} \\
+&amp;=  0^{2}+0^{2}+\cdots+0^{2} \\
+\langle\vec{x},\vec{x}\rangle &amp;= 0\times0+0\times0+\cdots+0\times0 \\
+\Leftrightarrow\vec{x} &amp;= \vec{0} \\
+\therefore\langle\vec{x},\vec{x}\rangle &amp;=0 \Leftrightarrow\vec{x}=\vec{0}
+\end{align}
+\]</span></p>
+<p>(3). Let <span class="math inline">\(\vec{x},\vec{y}\in\mathbb{R}^{n}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\langle\vec{x},\vec{y}\rangle&amp;=\sum_{i=1}^{n}x_{i}y_{i} \\
+&amp;=\sum_{i=1}^{n}y_{i}x_{i} \\
+\langle\vec{x},\vec{y}\rangle&amp;=\langle\vec{y},\vec{x}\rangle
+\end{align}
+\]</span></p>
+<p>(4). Observe that <span class="math display">\[
+\begin{align}
+\langle\vec{x}+\vec{y},\vec{z}\rangle &amp;= \sum_{i=1}^{n}(x_{i}+y_{i})z_{i} \\
+&amp;= \sum_{i=1}^{n}(x_{i}z_{i}+y_{i}z_{i}) \\
+&amp;= \sum_{i=1}^{n}x_{i}z_{i}+\sum_{i=1}^{n}y_{i}z_{i} \\
+\langle\vec{x}+\vec{y},\vec{z}\rangle &amp;= \langle\vec{x},\vec{z}\rangle+\langle\vec{y},\vec{z}\rangle
+\end{align}
+\]</span></p>
+<p>(5). By definition of <a href="#def-inner-product">the inner product</a> and <a href="#eq-pointwise-addition">the pointwise addition</a> of 2 vectors, observe that <span class="math display">\[
+\begin{align}
+\langle\vec{x},\vec{y}+\vec{z}\rangle &amp;= \sum_{i=1}^{n}x_{i}(y_{i}+z_{i}) \\
+&amp;= \sum_{i=1}^{n}(x_{i}y_{i}+x_{i}z_{i}) \\
+&amp;= \sum_{i=1}^{n}x_{i}y_{i}+\sum_{i=1}^{n}x_{i}z_{i} \\
+\langle\vec{x},\vec{y}+\vec{z}\rangle &amp;= \langle\vec{x},\vec{y}\rangle+\langle\vec{x},\vec{z}\rangle
+\end{align}
+\]</span></p>
+<p>(6). By definition of <a href="#def-inner-product">the inner product</a> and <a href="#eq-s-multiplication">the s-multiplication</a>, observe that <span class="math display">\[
+\begin{align}
+\langle\lambda\vec{x},\mu\vec{y}\rangle &amp;= \sum_{i=1}^{n}(\lambda x_{i})(\mu y_{i}) \\
+&amp;= \sum_{i=1}^{n}(\lambda\mu)(x_{i}y_{i}) \\
+&amp;= \lambda\mu\sum_{i=1}^{n}x_{i}y_{i} \\
+\langle\lambda\vec{x},\mu\vec{y}\rangle &amp;= \lambda\mu\langle\vec{x},\vec{y}\rangle
+\end{align}
+\]</span></p>
+</div>
+<p style="text-align: right;">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+<div id="cor-one" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 </strong></span>The inner product <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span> is linear.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Immidiete.</p>
+<p style="text-align: right;">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+<div id="thm-compinpro" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 </strong></span>Let <span class="math inline">\(\vec{x},\vec{y}\in\mathbb{R}^n\)</span> and <span class="math inline">\(\lambda,\mu\in\mathbb{R}\setminus{\{0\}},\)</span> then the inner product of <span class="math inline">\(\vec{x}\)</span> and <span class="math inline">\(\vec{y}\)</span> can be computed as follow</p>
+<p><span id="eq-compinpro"><span class="math display">\[
+\langle\vec{x},\vec{y}\rangle\coloneqq\lambda\mu\left\langle \frac{1}{\lambda}\vec{x},\frac{1}{\mu}\vec{y}\right\rangle
+\tag{14}\]</span></span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>From <a href="#lem-two">Lemma&nbsp;2</a>, we see that for <span class="math inline">\(\vec{x},\vec{y}\in\mathbb{R}^n\)</span> and <span class="math inline">\(\lambda,\mu\in\mathbb{R}\setminus{\{0\}}\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+\left\langle\frac{1}{\lambda}\vec{x},\frac{1}{\mu}\vec{y}\right\rangle &amp;= \frac{1}{\lambda}\frac{1}{\mu}\langle\vec{x},\vec{y}\rangle \\
+\Leftrightarrow \lambda\mu\left\langle\frac{1}{\lambda}\vec{x},\frac{1}{\mu}\vec{y}\right\rangle &amp;= \lambda\mu\frac{1}{\lambda}\frac{1}{\mu}\langle\vec{x},\vec{y}\rangle \\
+\lambda\mu\left\langle\frac{1}{\lambda}\vec{x},\frac{1}{\mu}\vec{y}\right\rangle &amp;=\langle\vec{x},\vec{y}\rangle
+\end{align}
+\]</span></p>
+<p style="text-align: right;">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+<p><span class="math inline">\(\quad\)</span> We compute the inner product <span class="math inline">\(\langle\vec{x},\vec{y}\rangle\)</span> by using <a href="#thm-compinpro">Theorem&nbsp;1</a> instead of using the <a href="#def-inner-product">Definition&nbsp;7</a>. Theoritically, there is nothing wrong in computing the inner product by using the definition as it is. Nevertheless, when we compute it by using programming language, we have to declare what data type shall we use, and each datatype has their own boundary (a.k.a. “bottleneck”).</p>
+<p><span class="math inline">\(\quad\)</span> For example, suppose that we want to do numerical computation by using C++ programming language, and in our code, we declare variable <code>double sc</code>. Now, <code>sc</code> is a variable in C++ having <code>double</code> as its datatype, then the limits of <code>sc</code> <span class="math inline">\(\textemdash\)</span> the max or min value that <code>sc</code> can store <span class="math inline">\(\textemdash\)</span> can be known by using the <code>limits</code> header as follows.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="pp">#include </span><span class="im">&lt;limits&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="dt">double</span> min_limits <span class="op">=</span> <span class="bu">std::</span>numeric_limits<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;::</span>min<span class="op">();</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="dt">double</span> max_limits <span class="op">=</span> <span class="bu">std::</span>numeric_limits<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;::</span>max<span class="op">();</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> min_limits <span class="op">&lt;&lt;</span> <span class="st">"&lt;= x &lt;="</span> <span class="op">&lt;&lt;</span> max_limits<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>by compiling and execute the program above, it yields (in our machine)</p>
+<p><span class="math display">\[
+\texttt{2.22507e-308 &lt;= x &lt;= 1.79769e+308}
+\]</span></p>
+<p>Now, in theoritical perspective, let <span class="math inline">\(x=1.79769\times10^{308}\)</span>, then add <span class="math inline">\(x\)</span> by <span class="math inline">\(x\)</span> itself, we should have that <span class="math inline">\(x+x=2x=(2\times1.79769)\times10^{308}=3.59538\times10^{308}\)</span>. But, it is not so when we have the following code</p>
+<div class="sourceCode" id="cb4" data-code-line-numbers="false"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> max_limits <span class="op">+</span> max_limits <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which yields <code>inf</code> (infinity, <span class="math inline">\(\infty\)</span>), and this is one of undesired behaviour and numerical issue that we have to handle.</p>
+<p><span class="math inline">\(\quad\)</span> In order to avoid undesired behaviour and numerical issue when computing the inner product of 2 vectors, say <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{n})^{\top}\)</span> and <span class="math inline">\(\vec{y}=(y_{1},y_{2},\ldots,y_{n})^{\top}\)</span>, we use <a href="#thm-compinpro">Theorem&nbsp;1</a> by choosing <span class="math inline">\(\lambda,\mu\in\mathbb{R}\)</span> s.t.</p>
+<p><span id="eq-maxlambda"><span class="math display">\[
+\lambda\coloneqq\max\left\{ \vert x_{1}\vert,\vert x_{2}\vert,\ldots,\vert x_{n}|\colon\vec{x}=(x_{1},x_{2},\ldots,x_{n})^{\top}\right\}
+\tag{15}\]</span></span> <span id="eq-maxmu"><span class="math display">\[
+\mu\coloneqq\max\left\{ \vert y_{1}\vert,\vert y_{2}\vert,\ldots,\vert y_{n}\vert\colon\vec{y}=(y_{1},y_{2},\ldots,y_{n})^{\top}\right\}
+\tag{16}\]</span></span></p>
+<p>if <span class="math inline">\(\lambda=0\)</span> or <span class="math inline">\(\mu=0\)</span>, then <span class="math inline">\(\lambda=\varepsilon\)</span> or <span class="math inline">\(\mu=\varepsilon\)</span> for <span class="math inline">\(0&lt;\varepsilon\ll1\)</span> in order to avoid division by <span class="math inline">\(0\)</span>. In other words, we try to seek the absolute maximum elements<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> of <span class="math inline">\(\vec{x}\)</span> and <span class="math inline">\(\vec{y}\)</span>, if it is found that <span class="math inline">\(0\)</span> is the absolute maximum elements of <span class="math inline">\(\vec{x}\)</span> or <span class="math inline">\(\vec{y}\)</span>, then we replace <span class="math inline">\(0\)</span> by <span class="math inline">\(\varepsilon\)</span>. After that, we compute their s-multiplication, <span class="math inline">\((1/\lambda)\vec{x}\)</span> and <span class="math inline">\((1/\mu)\vec{y}\)</span>, and then compute their inner product <span class="math inline">\(\langle(1/\lambda)\vec{x},(1/\mu)\vec{y}\rangle\)</span>. Finally, we multiply it back by <span class="math inline">\(\lambda\mu\)</span> so we have computed <span class="math inline">\(\langle\vec{x},\vec{y}\rangle\)</span>. The following is the algorithm we use to compute <span class="math inline">\(\langle\vec{x},\vec{y}\rangle\)</span>.</p>
+<pre id="innerProduct" class="pseudocode">    \begin{algorithm}
+    \caption{The inner product, $\langle\cdot,\cdot\rangle\colon\mathbb{R}^{n}\times\mathbb{R}^{n}\to\mathbb{R}$}
+    \begin{algorithmic}
+    \STATE Define $\vec{x},\vec{y}\in\mathbb{R}^{n}$ s.t. $\vec{x}=(x_{1},x_{2},\ldots,x_{n})^{\top}$ and $\vec{y}=(y_{1},y_{2},\ldots,y_{n})^{\top}$
+    \STATE Let $\lambda,\mu\in\mathbb{R}$ s.t. $\lambda,\mu$ are defined by using equation $(18)$ and $(19)$, respectively.
+    \STATE $\textbf{if } \lambda = 0 \textbf{ then } \lambda\longleftarrow\varepsilon$
+    \STATE $\textbf{if } \mu = 0 \textbf{ then }\mu\longleftarrow\varepsilon$
+    \STATE Let $\vec{a},\vec{b},\vec{c}\in\mathbb{R}^{n}$
+    \STATE $\vec{a}\longleftarrow(1/\lambda)\vec{x}$
+    \STATE $\vec{b}\longleftarrow(1/\mu)\vec{y}$
+    \STATE $\vec{c}\longleftarrow\vec{a}\ast\vec{b}\qquad$ \COMMENT{pointwise multiplication of 2 vectors}
+    \STATE $\langle\vec{x},\vec{y}\rangle\longleftarrow\lambda\mu\text{ sum}(\vec{c})\qquad$ \COMMENT{$\text{sum}(\vec{c})$ is computed by using Kahan's sum algorithm}
+    \RETURN{$\langle\vec{x},\vec{y}\rangle$}
+    \end{algorithmic}
+    \end{algorithm}
+</pre>
+</div>
+</section>
+<section id="ell_p-norm-and-euclidean-norm" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="ell_p-norm-and-euclidean-norm"><span class="header-section-number">2.4</span> <span class="math inline">\(\ell_{p}\)</span>-norm and Euclidean Norm</h2>
+<div class="alinea">
+<div id="def-lpnorm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8 </strong></span>(Solomon, J., 2015) The <span class="math inline">\(\ell_{p}\)</span>-norm is defined as a function <span class="math inline">\(\|\cdot\|_{p}\colon V\to[0,\infty)\)</span> s.t.</p>
+<p><span id="eq-lpnorm"><span class="math display">\[
+\forall\vec{x}\in V\colon\vec{x}\mapsto\|\vec{x}\|_{p}\coloneqq\left(\sum_{i=1}^{n}\vert x_{i}\vert^{p}\right)^{1/p}
+\tag{17}\]</span></span></p>
+<p>special case of <span class="math inline">\(\ell_{p}\)</span>-norm is having <span class="math inline">\(p=2\)</span> which is known as the Euclidean norm i.e., <span class="math inline">\(\parallel\cdot\parallel_{2}\colon V\to[0,\infty)\)</span> s.t.</p>
+<p><span id="eq-eunorm"><span class="math display">\[
+\forall\vec{x}\in V\colon\vec{x}\mapsto\|\vec{x}\|_{2}\coloneqq\sqrt{\sum_{i=1}^{n}x_{i}^{2}}
+\tag{18}\]</span></span></p>
+<p>or having <span class="math inline">\(p=1\)</span>, we have the taxi cab norm</p>
+<p><span id="eq-taxicabnorm"><span class="math display">\[
+\forall\vec{x}\in V\colon\vec{x}\mapsto\|\vec{x}\|_{1}\coloneqq\sum_{i=1}^{n}\vert x_{i}\vert
+\tag{19}\]</span></span></p>
+</div>
+<div id="lem-lpnorm" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 3 </strong></span><span class="math inline">\(\forall\vec{x}\in V \colon\forall\lambda\in\mathbb{R}\colon\parallel\lambda\vec{x}\parallel_{p} = \vert\lambda\vert\parallel\vec{x}\parallel_{p}\)</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By using the definition of <a href="#eq-s-multiplication">s-multiplication</a> and <a href="#def-lpnorm">Definition&nbsp;8</a> (see <a href="#eq-lpnorm">Equation&nbsp;17</a>), let <span class="math inline">\(\vec{x}\in V\)</span> and <span class="math inline">\(\lambda\in\mathbb{R}\)</span>, then observe that</p>
+<p><span class="math display">\[
+\begin{align}
+\parallel\lambda\vec{x}\parallel_{p} &amp;= \left(\sum_{i=1}^{n}\vert\lambda x_{i}\vert^{p}\right)^{1/p} \\
+&amp;= \left(\sum_{i=1}^{n}\vert\lambda\vert^{p}\vert x_{i}\vert^{p}\right)^{1/p} \\
+&amp;= \left(\vert\lambda\vert^{p}\sum_{i=1}^{n}\vert x_{i}\vert^{p}\right)^{1/p} \\
+&amp;= \left(\vert\lambda\vert^{p}\right)^{1/ p}\left(\sum_{i=1}^{n}\vert x_{i}\vert^{p}\right)^{1/p} \\
+&amp;= \vert\lambda\vert^{p/p}\left(\sum_{i=1}^{n}\vert x_{i}\vert^{p}\right)^{1/p} \\
+&amp;= \vert\lambda\vert\left(\sum_{i=1}^{n}\vert x_{i}\vert^{p}\right)^{1/p} \\
+\parallel\lambda\vec{x}\parallel_{p} &amp;= \vert\lambda\vert\|\vec{x}\|_{p}
+\end{align}
+\]</span></p>
+<p style="text-align:right">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+<div id="thm-comp-lpnorm" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 </strong></span>Let <span class="math inline">\(\vec{x}\in V\)</span> and <span class="math inline">\(\lambda\in\mathbb{R}^n\setminus\{0\}\)</span>, then</p>
+<p><span id="eq-comp-lpnorm"><span class="math display">\[
+\parallel\vec{x}\parallel_{p} = \vert\lambda\vert\left|\left|\frac{1}{\lambda}\vec{x}\right|\right|_{p}
+\tag{20}\]</span></span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>From <a href="#lem-lpnorm">Lemma&nbsp;3</a>, we see that for <span class="math inline">\(\vec{x}\in V\)</span> and <span class="math inline">\(\lambda\in\mathbb{R}^n\setminus\{0\}\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+\left|\left|\frac{1}{\lambda}\vec{x}\right|\right|_{p} &amp;= \left|\frac{1}{\lambda}\right|\parallel\vec{x}\parallel_{p} \\
+\Leftrightarrow\vert\lambda\vert\left|\left|\frac{1}{\lambda}\vec{x}\right|\right|_{p} &amp;= \vert\lambda\vert\left|\frac{1}{\lambda}\right|\parallel\vec{x}\parallel_{p} \\
+&amp;= \vert\lambda\vert\frac{1}{\vert\lambda\vert}\parallel\vec{x}\parallel_{p} \\
+\vert\lambda\vert\left|\left|\frac{1}{\lambda}\vec{x}\right|\right|_{p} &amp;= \parallel\vec{x}\parallel_{p}
+\end{align}
+\]</span></p>
+<p style="text-align: right;">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+<p><span class="math inline">\(\quad\)</span> As always, due to numerical issue, we compute the <span class="math inline">\(\ell_{p}\)</span>-norm for <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{n})^{\top}\)</span> by using <a href="#thm-comp-lpnorm">Theorem&nbsp;2</a> where we choose <span class="math inline">\(\lambda\in\mathbb{R}\)</span> using <a href="#eq-maxlambda">Equation&nbsp;15</a>. The following <a href="#lpNormAlg">Algorithm 3</a> is algorithm we use to compute it. Once we establish algorithm to compute the <span class="math inline">\(\ell_{p}\)</span>-norm of a vector, then we compute the Euclidean norm by substitute <span class="math inline">\(p=2\)</span>, and <span class="math inline">\(p=1\)</span> for the taxi cab norm.</p>
+<pre id="lpNormAlg" class="pseudocode">    \begin{algorithm}
+    \caption{The $\ell_{p}$-norm, $\|\cdot\|_{p}\colon\mathbb{R}^{n}\to[0,\infty)$}
+    \begin{algorithmic}
+    \STATE Define $\vec{x}\in\mathbb{R}^{n}$ s.t. $\vec{x}=(x_{1},x_{2},\ldots,x_{n})^{\top}$ and $p\in\mathbb{R}$
+    \STATE Let $\lambda\in\mathbb{R}$ s.t. $\lambda$ is defined by using equation $(18)$
+    \STATE $\textbf{if } \lambda = 0 \textbf{ then } \lambda\longleftarrow\varepsilon$
+    \STATE Let $\vec{a}\in\mathbb{R}^{n}$ and $b\in\mathbb{R}$
+    \STATE $\vec{a}\longleftarrow(1/\lambda)\vec{x}$
+    \STATE $b\longleftarrow\text{sum}(\text{pow}(\text{abs}(\vec{a}),p))\qquad$ \COMMENT{$\text{pow}(\cdot,\cdot)$ is computed by using equation (12)}
+    \STATE $\|\vec{x}\|_{p}\longleftarrow\lambda b^{1/p}$
+    \RETURN{$\parallel\vec{x}\parallel_{p}$}
+    \end{algorithmic}
+    \end{algorithm}
+</pre>
+<div id="def-eudist" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 9 </strong></span>From the Euclidean norm we define the Euclidean distance of <span class="math inline">\(2\)</span> vectors, say <span class="math inline">\(\vec{x}\)</span> and <span class="math inline">\(\vec{y}\)</span>, as a map <span class="math inline">\(d\colon\mathbb{\mathbb{R}}^{n}\times\mathbb{R}^{n}\to\mathbb{R}\)</span> s.t.</p>
+<p><span id="eq-eudist"><span class="math display">\[
+\forall\vec{x},\vec{y}\in\mathbb{R}^{n}\colon(\vec{x},\vec{y})\mapsto d(\vec{x},\vec{y})\coloneqq\|\vec{x}-\vec{y}\|_{2}
+\tag{21}\]</span></span></p>
+</div>
+<div id="def-normvec" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 10 </strong></span>Normal vector <span class="math inline">\(\hat{x}\in V\)</span> is a vector which has its Euclidean norm is equal to one, i.e., <span class="math inline">\(\|\hat{x}\|_{2}=1\)</span>.</p>
+</div>
+<div id="thm-normvec" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 </strong></span><span class="math inline">\(\forall\vec{x}\in\mathbb{R}^{n}\setminus\{\vec{0}\}\colon\exists\hat{x}\in\mathbb{R}^{n}\colon\hat{x}=\|\vec{x}\|_{2}^{-1}\vec{x}\Leftrightarrow\|\hat{x}\|_{2}=1\)</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(\vec{x},\hat{x}\in\mathbb{R}^{n}\setminus\{\vec{0}\}\)</span>, s.t., <span class="math inline">\(\hat{x}=\|\vec{x}\|_{2}^{-1}\vec{x}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\Leftrightarrow\|\hat{x}\|_{2}&amp;=\|\|\vec{x}\|_{2}^{-1}\vec{x}\|_{2} \\
+&amp;=\vert\|\vec{x}\|_{2}^{-1}\vert\|\vec{x}\|_{2} \\
+&amp;=\|\vec{x}\|_{2}^{-1}\|\vec{x}\|_{2} \\
+&amp;=\|\vec{x}\|_{2}^{1-1} \\
+&amp;=\|\vec{x}\|_{2}^{0} \\
+\Leftrightarrow\|\hat{x}\|_{2}&amp;=1
+\end{align}
+\]</span></p>
+<p style="text-align: right;">
+<span class="math inline">\(\square\)</span>
+</p>
+</div>
+</div>
+</section>
+</section>
+<section id="design-and-implementation" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Design and Implementation</h1>
+<div class="alinea">
+<p>It’s better before we code/implementing the abstract concept of mathematics/pseudocode into a real code/programming language, we design the class of object by using one of Unified Modelling Language’s (UML) diagrams, i.e., class diagram (Fowler, M., 2004). Moreover, we need to make the structure of our files which make the files more organize. To do so, we create a folder name Linav which consist of 4 files (see Figure 1).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="www/package_diag.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Files in Linav folder</figcaption>
+</figure>
+</div>
+<p>All of our files are located in a folder name Linav, which contain 4 files in total, i.e., 1 file which has extension . <code>h</code>, and 3 files which have extension <code>.cpp</code>, these files are <code>linav.h</code>, <code>linav.cpp</code>, <code>linop.cpp</code>, and <code>printprog.cpp</code>.</p>
+<p><span class="math inline">\(\quad\)</span> All class and required functions are declared in <code>linav.h</code> file. In <code>linav.h</code>, we declare a class name Linav, it consists of 2 private data members, 1 public default constructor, 2 public parameterized constructors, 3 public member functions, and 3 public member operators (see Figure 2). And, it contains declaration of 14 functions to print the results, and 10 functions that take Linav’s object as its input. File <code>linav.cpp</code> contain a program for Linav’s class, file <code>linop.cpp</code> contains program to compute these 10 functions that take Linav’s object as its input, and finally <code>printprog.cpp</code> contain program how we print the results. All of these class and functions are declared in the scope of namespace named anum (NUMerical Analysis, and it is readed as a-noom) in <code>linav.h</code> file.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="www/Linav.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Class diagram</figcaption>
+</figure>
+</div>
+<p>From Figure 2 we declare a Linav class, 14 functions to print, and 10 functions in <code>linav.h</code> file as follow</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#ifndef LINAV_H</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="pp">#define LINAV_H</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">namespace</span> anum <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="kw">class</span> Linav <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>        <span class="dt">unsigned</span> <span class="dt">int</span> D<span class="op">;</span> <span class="co">// dimension</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>        <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>            Linav<span class="op">();</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>            Linav<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> dimension<span class="op">);</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>            Linav<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;);</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>            <span class="dt">double</span> accs<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> ith_position<span class="op">);</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>            <span class="dt">void</span> updt<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> ith_position<span class="op">,</span> <span class="dt">double</span><span class="op">);</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>            <span class="dt">unsigned</span> <span class="dt">int</span> get_dim<span class="op">();</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>            Linav <span class="kw">operator</span> <span class="op">+(</span>Linav rhs<span class="op">);</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>            Linav <span class="kw">operator</span> <span class="op">-(</span>Linav rhs<span class="op">);</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>            Linav <span class="kw">operator</span> <span class="op">*(</span>Linav rhs<span class="op">);</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>    <span class="op">};</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a></span>
+<span id="cb5-23"><a href="#cb5-23"></a>    <span class="co">// All of these void functions are in printprog.cpp</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>    <span class="dt">void</span> print<span class="op">(</span>Linav<span class="op">);</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>    <span class="dt">void</span> println<span class="op">(</span>Linav<span class="op">);</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>    <span class="dt">void</span> print<span class="op">(</span>Linav<span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">);</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>    <span class="dt">void</span> println<span class="op">(</span>Linav<span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">);</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>    <span class="dt">void</span> print<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> Linav<span class="op">);</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>    <span class="dt">void</span> println<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> Linav<span class="op">);</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>    <span class="dt">void</span> print<span class="op">(</span><span class="dt">double</span><span class="op">);</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>    <span class="dt">void</span> println<span class="op">(</span><span class="dt">double</span><span class="op">);</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a>    <span class="dt">void</span> print<span class="op">(</span><span class="dt">double</span><span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">);</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>    <span class="dt">void</span> println<span class="op">(</span><span class="dt">double</span><span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">);</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>    <span class="dt">void</span> print<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> <span class="dt">double</span><span class="op">);</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a>    <span class="dt">void</span> println<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> <span class="dt">double</span><span class="op">);</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a>    <span class="dt">void</span> print<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">);</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>    <span class="dt">void</span> println<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">);</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a></span>
+<span id="cb5-39"><a href="#cb5-39"></a>    <span class="co">// All of these linear operators are in linop.cpp file</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a>    Linav <span class="kw">operator</span><span class="op">*(</span><span class="dt">double</span><span class="op">,</span> Linav<span class="op">)</span> <span class="co">// the s-multiplication</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a>    Linav <span class="kw">operator</span><span class="op">*(</span>Linav<span class="op">,</span> <span class="dt">double</span><span class="op">);</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>    Linav abs<span class="op">(</span>Linav<span class="op">);</span> <span class="co">// the pointwise absolute</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a>    <span class="dt">double</span> sum<span class="op">(</span>Linav<span class="op">);</span> <span class="co">// the Kahan's </span></span>
+<span id="cb5-44"><a href="#cb5-44"></a>    Linav power<span class="op">(</span>Linav<span class="op">,</span> <span class="dt">double</span><span class="op">);</span> <span class="co">// the pointwise power</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a>    <span class="dt">double</span> lpnorm<span class="op">(</span>Linav<span class="op">,</span> <span class="dt">double</span> p<span class="op">);</span> <span class="co">// the lpnorm</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a>    <span class="dt">double</span> eunorm<span class="op">(</span>Linav<span class="op">);</span> <span class="co">// the Euclidean norm</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a>    <span class="dt">double</span> inpro<span class="op">(</span>Linav<span class="op">,</span> Linav<span class="op">);</span> <span class="co">// the inner product</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a>    <span class="dt">double</span> distance<span class="op">(</span>Linav<span class="op">,</span> Linav<span class="op">);</span> <span class="co">// the Euclidean distance of two vectors</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a>    Linav normalize<span class="op">(</span>Linav<span class="op">);</span> <span class="co">// compute the normalize vector</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="op">}</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="pp">#endif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="results-and-discussion" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Results and Discussion</h1>
+<div class="alinea">
+<p>In order to use our linav header, it is better to create a new folder having your purpose as the name of this new folder, and in that new folder contains of our Linav folder and your main file named <code>mainprog.cpp</code>. For the purpose of demonstration only, suppose that our new folder has name <code>linear_algebra</code>, in our case, it consists of our Linav folder, <code>mainprog.cpp</code>, and 2 bash script files, i.e., <code>compandrun.sh</code>, and <code>compfile.sh</code>. For <code>compfile.sh</code>, it is a script to compile the program and show the compile time.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">echo</span> “g++ Linav/linav.h Linav/linav.cpp Linav/linop.cpp Linav/printprog.cpp mainfile.cpp <span class="at">-o</span> mainfile <span class="at">-O2</span> <span class="at">--time”</span><span class="kw">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">g++</span> Linav/linav.h Linav/linav.cpp  Linav/linop.cpp Linav/printprog.cpp mainfile.cpp <span class="at">-o</span> mainfile <span class="at">-O2</span> <span class="at">--time</span><span class="kw">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and <code>compandrun.sh</code> is a script to compile the <code>mainprogram.cpp</code> file and then run the <code>mainprogram</code> file, the script is written as follow.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">echo</span> “g++ Linav/linav.h Linav/linav.cpp Linav/linop.cpp Linav/printprog.cpp mainfile.cpp <span class="at">-o</span> mainfile <span class="at">-O2”</span><span class="kw">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">g++</span> Linav/linav.h Linav/linav.cpp  Linav/linop.cpp Linav/printprog.cpp mainfile.cpp <span class="at">-o</span> mainfile <span class="at">-O2</span><span class="kw">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">./mainfile</span><span class="kw">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, our <code>mainprog.cpp</code> file is written as follows, in the first line we include our header <code>linav.h</code>, i.e.,</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">#include “Linav/linav.h”</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, in the main function, we construct 4 Linav’s objects by using constructor,</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">// constructor</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>anum<span class="op">::</span>Linav x<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">});</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>anum<span class="op">::</span>Linav y<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">});</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>anum<span class="op">::</span>Linav x0<span class="op">(</span><span class="dv">3</span><span class="op">);</span> <span class="co">// null vector in 3-dimension</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>anum<span class="op">::</span>Linav y0<span class="op">;</span> <span class="co">// null vector in 2-dimension</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, we are able to compute the pointwise addition, substraction, multiplication, and s-multiplication</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">// pointwise addition, substraction, and multiplication, and</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">// s-multiplication</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>anum<span class="op">::</span>print<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">Demonstration of pointwise addition, substraction, "</span><span class="op">);</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"and multiplication </span><span class="sc">\n</span><span class="st">and s-multiplication"</span><span class="op">);</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>anum<span class="op">::</span>Linav z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"Vector x = "</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"Vector y = "</span><span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"null vector, x0 = "</span><span class="op">,</span> x0<span class="op">);</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"null vector in plane = "</span><span class="op">,</span> y0<span class="op">);</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"Pointwise addition. x + y = "</span><span class="op">,</span> z<span class="op">);</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"Pointwise substraction. x - y = "</span><span class="op">,</span> x <span class="op">-</span> y<span class="op">);</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"s-multiplication. 2 * x = "</span><span class="op">,</span> <span class="dv">2</span> <span class="op">*</span> x<span class="op">);</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"s-multiplication. x * 2 = "</span><span class="op">,</span> x <span class="op">*</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"x + (y * 2) = "</span><span class="op">,</span> x <span class="op">+</span> <span class="op">(</span>y <span class="op">*</span> <span class="fl">2.0</span><span class="op">));</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"x * (y * 2) = "</span><span class="op">,</span> x <span class="op">*</span> <span class="op">(</span>y <span class="op">*</span> <span class="fl">2.0</span><span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We use <code>try-catch</code> technique to catch out of range error and domain error (Stroustrup, B., 2001). So, if an error occurs, then it produces no side effect and the program does not terminate (but maybe it will produce undesired results).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">// catch the exception</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">Demonstration of an available exception"</span><span class="op">);</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>anum<span class="op">::</span>print<span class="op">(</span>x <span class="op">+</span> anum<span class="op">::</span>Linav<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">{</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">}));</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>println<span class="op">(</span><span class="st">"x is still "</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>anum<span class="op">::</span>print<span class="op">(</span>x <span class="op">-</span> anum<span class="op">::</span>Linav<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">{</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">}));</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>println<span class="op">(</span><span class="st">"x is still "</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>anum<span class="op">::</span>print<span class="op">(</span>x <span class="op">*</span> anum<span class="op">::</span>Linav<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">{</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">}));</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>println<span class="op">(</span><span class="st">"x is still "</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>anum<span class="op">::</span>print<span class="op">(</span>x<span class="op">.</span>accs<span class="op">(</span><span class="dv">5</span><span class="op">));</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>x<span class="op">.</span>updt<span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="fl">3.2</span><span class="op">);</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>anum<span class="op">::</span>println<span class="op">(</span>inpro<span class="op">(</span>x<span class="op">,</span>y0<span class="op">));</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="dt">double</span> a <span class="op">=</span> distance<span class="op">(</span>x<span class="op">,</span> y0<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Since we have computed the object which is behave like vector in linear algebra, then we may compute a function f s.t. <span class="math inline">\(\mathbb{R}^{n}\ni\vec{x}\mapsto f(\vec{x})\)</span>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// operators</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">Demonstration of a linear operators"</span><span class="op">);</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>z<span class="op">.</span>updt<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="op">-</span><span class="fl">7.35</span><span class="op">);</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>anum<span class="op">::</span>print<span class="op">(</span><span class="st">"z update = "</span><span class="op">,</span> z<span class="op">);</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"; abs(z) = "</span><span class="op">,</span> abs<span class="op">(</span>z<span class="op">));</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"sum(x) = "</span><span class="op">,</span> sum<span class="op">(</span>x<span class="op">));</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"sum(y) = "</span><span class="op">,</span> sum<span class="op">(</span>y<span class="op">));</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"sum(z) = "</span><span class="op">,</span> sum<span class="op">(</span>z<span class="op">));</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"power(x, 0.5) = x^0.5 = "</span><span class="op">,</span> power<span class="op">(</span>x<span class="op">,</span> <span class="fl">0.5</span><span class="op">));</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"lpnorm(y, 2) = "</span><span class="op">,</span> lpnorm<span class="op">(</span>y<span class="op">,</span> <span class="fl">2.0</span><span class="op">));</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"lpnorm(x, 7) = "</span><span class="op">,</span> lpnorm<span class="op">(</span>x<span class="op">,</span> <span class="fl">7.0</span><span class="op">));</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"inpro(x, z) = &lt;x,z&gt; = "</span><span class="op">,</span> inpro<span class="op">(</span>x<span class="op">,</span> z<span class="op">));</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"&lt;0,0&gt; in R^3 = "</span><span class="op">,</span> inpro<span class="op">(</span>x0<span class="op">,</span> x0<span class="op">));</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"distance(x, y) = "</span><span class="op">,</span>distance<span class="op">(</span>x<span class="op">,</span> y<span class="op">));</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>anum<span class="op">::</span>print<span class="op">(</span><span class="st">"normalize x = "</span><span class="op">,</span> normalize<span class="op">(</span>x<span class="op">));</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">" =&gt; ||hat(x)|| = "</span><span class="op">,</span> eunorm<span class="op">(</span>normalize<span class="op">(</span>x<span class="op">)));</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>anum<span class="op">::</span>print<span class="op">(</span><span class="st">"normalize y = "</span><span class="op">,</span> normalize<span class="op">(</span>y<span class="op">));</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">" =&gt; ||hat(y)|| = "</span><span class="op">,</span> eunorm<span class="op">(</span>normalize<span class="op">(</span>y<span class="op">)));</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>anum<span class="op">::</span>print<span class="op">(</span><span class="st">"normalize z = "</span><span class="op">,</span> normalize<span class="op">(</span>z<span class="op">));</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">" =&gt; ||hat(z)|| = "</span><span class="op">,</span> eunorm<span class="op">(</span>normalize<span class="op">(</span>z<span class="op">)));</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"eunorm(x) = "</span><span class="op">,</span> eunorm<span class="op">(</span>x<span class="op">));</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>anum<span class="op">::</span>println<span class="op">(</span><span class="st">"lpnorm(x, 2) = "</span><span class="op">,</span> lpnorm<span class="op">(</span>x<span class="op">,</span> <span class="fl">2.0</span><span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math inline">\(\quad\)</span> The experiment is conducted on machine with the following specification, Operating System: Fedora Linux 38 KDE. Plasma Version: 5.27.6. KDE Frameworks Version: 5.108.0. Qt Version: 5.15.10. Kernel Version: 6.4.6-200.fc38.x86_64 (64-bit). Graphics Platform: X11. Processors: 4 × Intel® Core™ i5-4210U CPU @ 1.70GHz. Memory: 3.7 GiB of RAM. Graphics Processor: Mesa Intel® HD Graphics 4400. Manufacturer: ASUSTeK COMPUTER INC. Product Name: X455LD System Version: 1.0. And the implementation of is using C++ programming language with g++ (GCC) 13.2.1 20230728 (Red Hat 13.2.1-1). After compile the and execute file, we have the following result (see Figure 3) and the computation we have done is summarized in table 1.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="www/ss1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">./mainprog</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="www/ss2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">./mainprog continued</figcaption>
+</figure>
+</div>
+</div>
+
+<p style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px; text-align: center;">Table 1: Summary of computation</p><table class="table table-hover">
+    
+    <tbody><tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <th>No.</th>
+        <th>Operator</th>
+        <th>Map</th>
+        <th>Definition</th>
+        <th>Code</th>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>1</td>
+        <td>Pointwise addition</td>
+        <td>$+\colon V\to V$</td>
+        <td>$\vec{x}+\vec{y}\coloneqq\left(\begin{array}{c}
+            x_{1}+y_{1}\\
+            x_{2}+y_{2}\\
+            \vdots\\
+            x_{n}+y_{n}
+            \end{array}\right)$</td>
+        <td><code>x + y</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>2</td>
+        <td>s-multiplication</td>
+        <td>$\cdot\colon V\times\mathbb{R}\to V$</td>
+        <td>$\vec{x}\lambda=\lambda\vec{x}\coloneqq\left(\begin{array}{c}
+            \lambda x_{1}\\
+            \lambda x_{2}\\
+            \vdots\\
+            \lambda x_{n}
+            \end{array}\right)$</td>
+        <td><code>x * sc</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>3</td>
+        <td>Pointwise substraction </td>
+        <td>$+\circ\cdot-1$</td>
+        <td>$\vec{x}+(-1)\vec{y}\coloneqq\left(\begin{array}{c}
+            x_{1}-y_{1}\\
+            x_{2}-y_{2}\\
+            \vdots\\
+            x_{n}-y_{n}
+            \end{array}\right)$</td>
+        <td><code>x - y</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>4</td>
+        <td>Pointwise powered by</td>
+        <td>$\text{pow}(\cdot)\colon V\times\mathbb{R}\to V$</td>
+        <td>$\text{pow}(\vec{x},\lambda)\coloneqq\left(\begin{array}{c}
+            x_{1}^{\lambda}\\
+            x_{2}^{\lambda}\\
+            \vdots\\
+            x_{n}^{\lambda}
+            \end{array}\right)$</td>
+        <td><code>pow(x,sc)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>5</td>
+        <td>Pointwise multiplication</td>
+        <td>$\ast\colon V\times V\to V$</td>
+        <td>$\vec{x}\ast\vec{y}\coloneqq\left(\begin{array}{c}
+            x_{1}y_{1}\\
+            x_{2}y_{2}\\
+            \vdots\\
+            x_{n}y_{n}
+            \end{array}\right)$</td>
+        <td><code>x * y</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>6</td>
+        <td>Pointwise absolute</td>
+        <td>$\text{abs}(\cdot)\colon V\to V$</td>
+        <td>$\text{abs}(\vec{x})\coloneqq\left(\begin{array}{c}
+            \vert x_{1}\vert\\
+            \vert x_{2}\vert\\
+            \vdots\\
+            \vert x_{n}\vert
+            \end{array}\right)$</td>
+        <td><code>abs(x)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>7</td>
+        <td>Sum of component</td>
+        <td>$\text{sum}(\cdot)\colon V\to\mathbb{R}$</td>
+        <td>$\text{sum}(\vec{x})\coloneqq{\displaystyle \sum_{i=1}^{n}x_{i}}$</td>
+        <td><code>sum(x)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>8</td>
+        <td>Inner product</td>
+        <td>$\langle\cdot,\cdot\rangle\colon V\times V\to\mathbb{R}$</td>
+        <td>$\langle\vec{x},\vec{y}\rangle\coloneqq{\displaystyle \sum_{i=1}^{n}x_{i}y_{1}}$</td>
+        <td><code>inpro(x,y)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>9</td>
+        <td>$\ell_{p}$-norm</td>
+        <td>$\parallel\cdot\parallel_{p}\colon V\to [0,\infty)$</td>
+        <td>$\|\vec{x}\|_{p}\coloneqq\left({\displaystyle \sum_{i=1}^{n}\vert x_{i}\vert^{p}}\right)^{{\displaystyle 1/p}}$</td>
+        <td><code>lpnorm(x,p)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>10</td>
+        <td>Euclidean norm</td>
+        <td>$\parallel\cdot\parallel_{2}\colon V\to [0,\infty)$</td>
+        <td>$\|\vec{x}\|_{2}\coloneqq\sqrt{{\displaystyle \sum_{i=1}^{n}x_{i}^{2}}}$</td>
+        <td><code>eunorm(x)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>11</td>
+        <td>Euclidean distance</td>
+        <td>$d\colon V\times V\to [0,\infty)$</td>
+        <td>$d(\vec{x},\vec{y})\coloneqq\|\vec{x}-\vec{y}\|_{2}$</td>
+        <td><code>distance(x,y)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>12</td>
+        <td>Normalize vector</td>
+        <td>$\hat{\cdot}\colon V\to V$</td>
+        <td>$\hat{x}\coloneqq\left(\begin{array}{c}
+            \vert\vert\vec{x}\vert\vert_{2}^{-1}x_{1}\\
+            \vert\vert\vec{x}\vert\vert_{2}^{-1}x_{2}\\
+            \vdots\\
+            \vert\vert\vec{x}\vert\vert_{2}^{-1}x_{n}
+            \end{array}\right)$</td>
+        <td><code>normalize</code></td>
+    </tr>
+</tbody></table>
+
+</section>
+<section id="conclusion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Conclusion</h1>
+<div class="alinea">
+<p>Header <code>linav.h</code> is a C++ header that enable us to extend <code>std::vector&lt;double&gt;</code> object to behave like a vectors in linear algebra. So, we may do a computation of vectors in linear algebra like pointwise addition and s-multiplication. This header also enable us to compute (linear) maps that take vectors as its input and maps it into the set of vector or real number. For example, computation of norm, Euclidean distance, inner product, and pointwise multiplication of 2 vectors to mention a few. Eventhough <code>anum::Linav</code> enable us to do vectors computation, it is intended to be used mainly for numerical computation which is mostly we find that require datatype of the input is a real number, not a natural number. Therefore, the constructor of <code>anum::Linav</code> only able to construct an object from <code>std::vector&lt;double&gt;</code>, anything else will produce an error. For the future, if we want to have <code>std::vector&lt;int&gt;</code> to behave like vectors in linear algebra by using <code>anum::Linav</code>, then we do that only for completness purpose.</p>
+</div>
+</section>
+<section id="acknowledgements" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Acknowledgements</h1>
+<div class="alinea">
+<p>The author is thanked to the honorable reader who dedicated some portion of his/her time reading this article.</p>
+</div>
+</section>
+<section id="references" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> References</h1>
+<table class="table" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Artínez, C.,</td>
+<td>Rodriguez, F.J. and Lozano, M. (2018) 'Genetic Algorithms', in: Martí, R., Pardalos, P. and Resende, M. (eds) <em>Handbook of Heuristics</em>. Springer, Cham. Available at: <a href="https://doi.org/10.1007/978-3-319-07124-4_28" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/978-3-319-07124-4_28</a></td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Bilal. et al.</td>
+<td>(2020) 'Differential Evolution: A review of more than to decades of research', <em>Engineering Application of Artificial Intelligence</em>, 90, p. 103479. Available at: <a href="https://doi.org/10.1016/j.engappai.2020.103479" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.engappai.2020.103479</a></td>
+</tr>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Dadhley, R.</td>
+<td>(2019) 'Notes on THE WE-HERAEUS International Winter School on Gravity and Light'. Available at: <a href="https://richie291.wixsite.com/theoreticalphysics/post/the-we-heraeus-international-winter-school-on-gravity-and-light" target="_blank" rel="noopener noreferrer">https://richie291.wixsite.com/theoreticalphysics/post/the-we-heraeus-international-winter-school-on-gravity-and-light</a> (Accessed: 7 February 2024).</td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Dytrych, T. et al.</td>
+<td>(2021) 'SU3lib: A C++ library for accurate computation of Wigner and Racah Coefficients of SU(3)', <em>Computer Physics Communications</em>, 269, p.108137. Available at: <a href="https://doi.org/10.1016/j.cpc.2021.108137" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.cpc.2021.108137</a></td>
+</tr>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Fowler, M.</td>
+<td>(2004) <em>UML Distilled: A Brief Guide to the Standard Object Modeling Language</em>. 3rd edn. New York: Addison-Wesley.</td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Katoch S.,</td>
+<td>Chauchan, S.S. and Kumar, V. (2021) 'A review on genetic algorithms: past, present, and future', <em>Multimed Tools Appl</em>, 80, pp. 8102–8104. Avaiable at: <a href="https://doi.org/10.1007/s11042-020-10139-6" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s11042-020-10139-6</a></td>
+</tr>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Körner, T.W.</td>
+<td>(2012) <em>Vectors, Pure and Applied: A General Introduction to Linear Algebra</em>. Cambridge: Cambridge University Press.</td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Solomon, J.</td>
+<td>(2015) <em>Numerical Algorithms: Methods for Computer Vision, Machine Learning, and Graphics</em>. USA: A. K. Peters, Ltd.</td>
+</tr>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Stroustrup, B.</td>
+<td>(2020) 'Thriving in a crowded and changing world: C++ 2006–2020', <em>Proc. ACM Program</em>. Lang., 4. HOPL, Article 70 (June 2020), pp. 1-168. Available at: <a href="https://doi.org/10.1145/3386320%20target=" data-_blank"="" rel="noopener noreferrer">https://doi.org/10.1145/3386320</a></td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Stroustrup, B.</td>
+<td>(2001) 'Exception Safety: Concepts and Techniques', in Deny, C., Knudsen, J.L., Romanovsky, A. and Tripathi, A. (eds), <em>Advances in Exception Handling Techniques</em>. Springer Verlag Lectures Notes in Computer Science. Available at: <a href="https://www.stroustrup.com/except.pdf" target="_blank" rel="noopener noreferrer">https://www.stroustrup.com/except.pdf</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="appendix-sources-code" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Appendix: Sources Code</h1>
+<div class="alinea">
+<p>We had explained what is written in <code>mainprog.cpp</code> and <code>linav.h</code> in section results and discussion. In this appendix we provide our honorable reader with our source code, i.e., what was written in file <code>linav.cpp</code>, <code>linop.cpp</code>, and <code>printprog.cpp</code>. The following is what was written in <code>Linav/linav.cpp</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1"></a><span class="pp">#include </span><span class="im">"linav.h"</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="pp">#include </span><span class="im">&lt;limits&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">/*</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co"> * If Linav v is constructed without</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co"> * any parameter, then v is assumed to be</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co"> * a zero vector in R^2.</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co"> */</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>anum<span class="op">::</span>Linav<span class="op">::</span>Linav<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="kw">this</span><span class="op">-&gt;</span>D <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>    <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">.</span>push_back<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>    <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">.</span>push_back<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="op">}</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">/*  </span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co"> * Declare a null vector</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co"> * in D-dimension</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co"> */</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a>anum<span class="op">::</span>Linav<span class="op">::</span>Linav<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> dimension<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> dimension<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">.</span>push_back<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>        <span class="kw">this</span><span class="op">-&gt;</span>D <span class="op">=</span> dimension<span class="op">;</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a>    <span class="op">}</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="op">}</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a></span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="co">/*</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="co"> * Declare the vector x = (x1, x2, ..., xn);</span></span>
+<span id="cb13-29"><a href="#cb13-29"></a><span class="co"> */</span></span>
+<span id="cb13-30"><a href="#cb13-30"></a>anum<span class="op">::</span>Linav<span class="op">::</span>Linav<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>    <span class="kw">this</span><span class="op">-&gt;</span>D <span class="op">=</span> v<span class="op">.</span>size<span class="op">();</span></span>
+<span id="cb13-32"><a href="#cb13-32"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;::</span>const_iterator itr_v <span class="op">=</span> v<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> D<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb13-34"><a href="#cb13-34"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">.</span>push_back<span class="op">(*</span>itr_v<span class="op">);</span></span>
+<span id="cb13-35"><a href="#cb13-35"></a>        <span class="op">++</span>itr_v<span class="op">;</span></span>
+<span id="cb13-36"><a href="#cb13-36"></a>    <span class="op">}</span></span>
+<span id="cb13-37"><a href="#cb13-37"></a></span>
+<span id="cb13-38"><a href="#cb13-38"></a><span class="op">}</span></span>
+<span id="cb13-39"><a href="#cb13-39"></a></span>
+<span id="cb13-40"><a href="#cb13-40"></a><span class="co">// get the ith-value of x</span></span>
+<span id="cb13-41"><a href="#cb13-41"></a><span class="dt">double</span> anum<span class="op">::</span>Linav<span class="op">::</span>accs<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> ith_position<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-42"><a href="#cb13-42"></a>    <span class="dt">double</span> ith_comp<span class="op">;</span></span>
+<span id="cb13-43"><a href="#cb13-43"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb13-44"><a href="#cb13-44"></a>        ith_comp <span class="op">=</span> <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">.</span>at<span class="op">(</span>ith_position<span class="op">);</span></span>
+<span id="cb13-45"><a href="#cb13-45"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>out_of_range<span class="op">&amp;</span> oor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-46"><a href="#cb13-46"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"Out of Range Error Occurs: "</span> <span class="op">&lt;&lt;</span> oor<span class="op">.</span>what<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">' '</span><span class="op">;</span></span>
+<span id="cb13-47"><a href="#cb13-47"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"the avaiable indexes are 0-"</span> <span class="op">&lt;&lt;</span> D <span class="op">-</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb13-48"><a href="#cb13-48"></a>    <span class="op">}</span></span>
+<span id="cb13-49"><a href="#cb13-49"></a>    <span class="cf">return</span> ith_comp<span class="op">;</span> </span>
+<span id="cb13-50"><a href="#cb13-50"></a><span class="op">}</span></span>
+<span id="cb13-51"><a href="#cb13-51"></a></span>
+<span id="cb13-52"><a href="#cb13-52"></a><span class="co">// change the ith_component/element of vector</span></span>
+<span id="cb13-53"><a href="#cb13-53"></a><span class="dt">void</span> anum<span class="op">::</span>Linav<span class="op">::</span>updt<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> ith_position<span class="op">,</span> <span class="dt">double</span> val<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-54"><a href="#cb13-54"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb13-55"><a href="#cb13-55"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">.</span>at<span class="op">(</span>ith_position<span class="op">)</span> <span class="op">=</span> val<span class="op">;</span></span>
+<span id="cb13-56"><a href="#cb13-56"></a>    <span class="op">}</span> <span class="cf">catch</span><span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>out_of_range<span class="op">&amp;</span> oor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-57"><a href="#cb13-57"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"Out of Range Error Occurs: "</span> <span class="op">&lt;&lt;</span> oor<span class="op">.</span>what<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">' '</span><span class="op">;</span></span>
+<span id="cb13-58"><a href="#cb13-58"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"the avaiable indexes are 0-"</span> <span class="op">&lt;&lt;</span> D <span class="op">-</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb13-59"><a href="#cb13-59"></a>    <span class="op">}</span> </span>
+<span id="cb13-60"><a href="#cb13-60"></a><span class="op">}</span></span>
+<span id="cb13-61"><a href="#cb13-61"></a></span>
+<span id="cb13-62"><a href="#cb13-62"></a><span class="dt">unsigned</span> <span class="dt">int</span> anum<span class="op">::</span>Linav<span class="op">::</span>get_dim<span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> <span class="kw">this</span><span class="op">-&gt;</span>D<span class="op">;</span> <span class="op">}</span> <span class="co">// get the dimension of x</span></span>
+<span id="cb13-63"><a href="#cb13-63"></a></span>
+<span id="cb13-64"><a href="#cb13-64"></a><span class="co">// pointwsie addition</span></span>
+<span id="cb13-65"><a href="#cb13-65"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span>Linav<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span>Linav rhs<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-66"><a href="#cb13-66"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">;</span></span>
+<span id="cb13-67"><a href="#cb13-67"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb13-68"><a href="#cb13-68"></a>        <span class="co">// check the criteria of adding two vectors, if two vectors</span></span>
+<span id="cb13-69"><a href="#cb13-69"></a>        <span class="co">// have different dimension each other, then domain error</span></span>
+<span id="cb13-70"><a href="#cb13-70"></a>        <span class="co">// will be catched.</span></span>
+<span id="cb13-71"><a href="#cb13-71"></a>        <span class="cf">if</span> <span class="op">(</span>D <span class="op">!=</span> rhs<span class="op">.</span>get_dim<span class="op">())</span></span>
+<span id="cb13-72"><a href="#cb13-72"></a>            <span class="bu">std::</span>domain_error<span class="op">(</span>“cannot add two vectors having different dimension\n”<span class="op">);</span></span>
+<span id="cb13-73"><a href="#cb13-73"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> D<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb13-74"><a href="#cb13-74"></a>            <span class="dt">double</span> temp <span class="op">=</span> x<span class="op">.</span>at<span class="op">(</span>ith<span class="op">)</span> <span class="op">+</span> rhs<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">);</span></span>
+<span id="cb13-75"><a href="#cb13-75"></a>            v<span class="op">.</span>push_back<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb13-76"><a href="#cb13-76"></a>        <span class="op">}</span></span>
+<span id="cb13-77"><a href="#cb13-77"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>domain_error<span class="op">&amp;</span> doerr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-78"><a href="#cb13-78"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"Domain Error Occurs: "</span> <span class="op">&lt;&lt;</span> doerr<span class="op">.</span>what<span class="op">();</span></span>
+<span id="cb13-79"><a href="#cb13-79"></a>    <span class="op">}</span></span>
+<span id="cb13-80"><a href="#cb13-80"></a>    Linav C<span class="op">(</span>v<span class="op">);</span> <span class="co">// create a new instance of vector C</span></span>
+<span id="cb13-81"><a href="#cb13-81"></a>    <span class="cf">return</span> C<span class="op">;</span></span>
+<span id="cb13-82"><a href="#cb13-82"></a><span class="op">}</span></span>
+<span id="cb13-83"><a href="#cb13-83"></a></span>
+<span id="cb13-84"><a href="#cb13-84"></a><span class="co">// pointwise multiplication</span></span>
+<span id="cb13-85"><a href="#cb13-85"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span>Linav<span class="op">::</span><span class="kw">operator</span><span class="op">*(</span>Linav rhs<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-86"><a href="#cb13-86"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">;</span></span>
+<span id="cb13-87"><a href="#cb13-87"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb13-88"><a href="#cb13-88"></a>        <span class="co">// check the criteria of performing pointwise multiplication of two vectors.</span></span>
+<span id="cb13-89"><a href="#cb13-89"></a>        <span class="co">// If two vectors have different dimension, then terminate the program.</span></span>
+<span id="cb13-90"><a href="#cb13-90"></a>        <span class="cf">if</span> <span class="op">(</span>D <span class="op">!=</span> rhs<span class="op">.</span>get_dim<span class="op">())</span></span>
+<span id="cb13-91"><a href="#cb13-91"></a>            <span class="bu">std::</span>domain_error<span class="op">(</span><span class="st">"cannot do pointwise multiplication of two vectors having different dimension</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb13-92"><a href="#cb13-92"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> D<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb13-93"><a href="#cb13-93"></a>            <span class="dt">double</span> temp <span class="op">=</span> x<span class="op">.</span>at<span class="op">(</span>ith<span class="op">)</span> <span class="op">*</span> rhs<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">);</span></span>
+<span id="cb13-94"><a href="#cb13-94"></a>            v<span class="op">.</span>push_back<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb13-95"><a href="#cb13-95"></a>        <span class="op">}</span></span>
+<span id="cb13-96"><a href="#cb13-96"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>domain_error<span class="op"> &amp;</span>doerr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-97"><a href="#cb13-97"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"Domain Error Occurs: "</span> <span class="op">&lt;&lt;</span> doerr<span class="op">.</span>what<span class="op">();</span></span>
+<span id="cb13-98"><a href="#cb13-98"></a>    <span class="op">}</span></span>
+<span id="cb13-99"><a href="#cb13-99"></a>    Linav V<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb13-100"><a href="#cb13-100"></a>    <span class="cf">return</span> V<span class="op">;</span></span>
+<span id="cb13-101"><a href="#cb13-101"></a><span class="op">}</span></span>
+<span id="cb13-102"><a href="#cb13-102"></a></span>
+<span id="cb13-103"><a href="#cb13-103"></a><span class="co">// pointwise substraction</span></span>
+<span id="cb13-104"><a href="#cb13-104"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span>Linav<span class="op">::</span><span class="kw">operator</span><span class="op">-(</span>Linav rhs<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-105"><a href="#cb13-105"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">;</span></span>
+<span id="cb13-106"><a href="#cb13-106"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb13-107"><a href="#cb13-107"></a>        <span class="co">// check the criteria of performing pointwise substraction of two vectors.</span></span>
+<span id="cb13-108"><a href="#cb13-108"></a>        <span class="co">// If two vectors have different dimension, then domain error will be catched.</span></span>
+<span id="cb13-109"><a href="#cb13-109"></a>        <span class="cf">if</span> <span class="op">(</span>D <span class="op">!=</span> rhs<span class="op">.</span>get_dim<span class="op">())</span></span>
+<span id="cb13-110"><a href="#cb13-110"></a>            <span class="bu">std::</span>domain_error<span class="op">(</span><span class="st">"cannot substract two vectors having different dimension</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb13-111"><a href="#cb13-111"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> D<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb13-112"><a href="#cb13-112"></a>            <span class="dt">double</span> temp <span class="op">=</span> x<span class="op">.</span>at<span class="op">(</span>ith<span class="op">)</span> <span class="op">-</span> rhs<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">);</span></span>
+<span id="cb13-113"><a href="#cb13-113"></a>            v<span class="op">.</span>push_back<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb13-114"><a href="#cb13-114"></a>        <span class="op">}</span></span>
+<span id="cb13-115"><a href="#cb13-115"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>domain_error<span class="op"> &amp;</span>doerr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-116"><a href="#cb13-116"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"Domain Error Occurs: "</span> <span class="op">&lt;&lt;</span> doerr<span class="op">.</span>what<span class="op">();</span></span>
+<span id="cb13-117"><a href="#cb13-117"></a>    <span class="op">}</span></span>
+<span id="cb13-118"><a href="#cb13-118"></a>    Linav V<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb13-119"><a href="#cb13-119"></a>    <span class="cf">return</span> V<span class="op">;</span></span>
+<span id="cb13-120"><a href="#cb13-120"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The following is what was written in <code>Linav/linop.cpp</code></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1"></a><span class="pp">#include </span><span class="im">"linav.h"</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="pp">#include </span><span class="im">&lt;limits&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="pp">#include </span><span class="im">&lt;stdexcept&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span><span class="kw">operator</span><span class="op">*(</span><span class="dt">double</span> scalar<span class="op">,</span> Linav rhs<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">int</span> Dimension <span class="op">=</span> rhs<span class="op">.</span>get_dim<span class="op">();</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> Dimension<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a>        <span class="dt">double</span> temp <span class="op">=</span> scalar <span class="op">*</span> rhs<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">);</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>        v<span class="op">.</span>push_back<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>    <span class="op">}</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>    anum<span class="op">::</span>Linav V<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>    <span class="cf">return</span> V<span class="op">;</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="op">}</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a></span>
+<span id="cb14-18"><a href="#cb14-18"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span><span class="kw">operator</span><span class="op">*(</span>Linav rhs<span class="op">,</span> <span class="dt">double</span> scalar<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> scalar <span class="op">*</span> rhs<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co">// pointwise absolute value</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span>abs<span class="op">(</span>Linav v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v_abs<span class="op">;</span></span>
+<span id="cb14-23"><a href="#cb14-23"></a>    <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">int</span> Dimension <span class="op">=</span> v<span class="op">.</span>get_dim<span class="op">();</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> Dimension<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a>        <span class="dt">double</span> temp <span class="op">=</span> <span class="bu">std::</span>abs<span class="op">(</span>v<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">));</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a>        v_abs<span class="op">.</span>push_back<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a>    <span class="op">}</span></span>
+<span id="cb14-28"><a href="#cb14-28"></a>    Linav V<span class="op">(</span>v_abs<span class="op">);</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a>    <span class="cf">return</span> V<span class="op">;</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="op">}</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="co">// The Kahan's sum</span></span>
+<span id="cb14-33"><a href="#cb14-33"></a><span class="dt">double</span> anum<span class="op">::</span>sum<span class="op">(</span>Linav v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-34"><a href="#cb14-34"></a>    <span class="dt">double</span> khs <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span> <span class="co">// kahan's sum</span></span>
+<span id="cb14-35"><a href="#cb14-35"></a>    <span class="dt">double</span> khs_next <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span> <span class="co">// next khs</span></span>
+<span id="cb14-36"><a href="#cb14-36"></a>    <span class="dt">double</span> c <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span> <span class="co">// compute the compensate</span></span>
+<span id="cb14-37"><a href="#cb14-37"></a>    <span class="dt">double</span> temp <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb14-38"><a href="#cb14-38"></a>    <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">int</span> Dimension <span class="op">=</span> v<span class="op">.</span>get_dim<span class="op">();</span></span>
+<span id="cb14-39"><a href="#cb14-39"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> Dimension<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-40"><a href="#cb14-40"></a>        temp <span class="op">=</span> v<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">)</span> <span class="op">+</span> c<span class="op">;</span></span>
+<span id="cb14-41"><a href="#cb14-41"></a>        khs_next <span class="op">=</span> khs <span class="op">+</span> temp<span class="op">;</span></span>
+<span id="cb14-42"><a href="#cb14-42"></a>        c <span class="op">=</span> temp <span class="op">-</span> <span class="op">(</span>khs_next <span class="op">-</span> khs<span class="op">);</span></span>
+<span id="cb14-43"><a href="#cb14-43"></a>        khs <span class="op">=</span> khs_next<span class="op">;</span></span>
+<span id="cb14-44"><a href="#cb14-44"></a>    <span class="op">}</span></span>
+<span id="cb14-45"><a href="#cb14-45"></a>    <span class="cf">return</span> khs<span class="op">;</span></span>
+<span id="cb14-46"><a href="#cb14-46"></a><span class="op">}</span></span>
+<span id="cb14-47"><a href="#cb14-47"></a></span>
+<span id="cb14-48"><a href="#cb14-48"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span>power<span class="op">(</span>Linav v<span class="op">,</span> <span class="dt">double</span> p<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-49"><a href="#cb14-49"></a>    <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">int</span> Dimension <span class="op">=</span> v<span class="op">.</span>get_dim<span class="op">();</span></span>
+<span id="cb14-50"><a href="#cb14-50"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v_pwr<span class="op">;</span></span>
+<span id="cb14-51"><a href="#cb14-51"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> Dimension<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-52"><a href="#cb14-52"></a>        <span class="dt">double</span> temp <span class="op">=</span> <span class="bu">std::</span>pow<span class="op">(</span>v<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">),</span> p<span class="op">);</span></span>
+<span id="cb14-53"><a href="#cb14-53"></a>        v_pwr<span class="op">.</span>push_back<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb14-54"><a href="#cb14-54"></a>    <span class="op">}</span></span>
+<span id="cb14-55"><a href="#cb14-55"></a>    Linav V<span class="op">(</span>v_pwr<span class="op">);</span></span>
+<span id="cb14-56"><a href="#cb14-56"></a>    <span class="cf">return</span> V<span class="op">;</span></span>
+<span id="cb14-57"><a href="#cb14-57"></a><span class="op">}</span></span>
+<span id="cb14-58"><a href="#cb14-58"></a></span>
+<span id="cb14-59"><a href="#cb14-59"></a><span class="dt">double</span> anum<span class="op">::</span>lpnorm<span class="op">(</span>Linav v<span class="op">,</span> <span class="dt">double</span> p<span class="op">)</span> <span class="op">{</span>    </span>
+<span id="cb14-60"><a href="#cb14-60"></a>    <span class="co">// maxel is maximum absolute element. To avoid division</span></span>
+<span id="cb14-61"><a href="#cb14-61"></a>    <span class="co">// by zero, initially, maxel is epsilon</span></span>
+<span id="cb14-62"><a href="#cb14-62"></a>    <span class="dt">double</span> maxel <span class="op">=</span> <span class="bu">std::</span>numeric_limits<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;::</span>epsilon<span class="op">();</span></span>
+<span id="cb14-63"><a href="#cb14-63"></a></span>
+<span id="cb14-64"><a href="#cb14-64"></a>    <span class="co">// looking for the max absolute element of v</span></span>
+<span id="cb14-65"><a href="#cb14-65"></a>    <span class="co">// by using linear search;</span></span>
+<span id="cb14-66"><a href="#cb14-66"></a>    <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">int</span> Dimension <span class="op">=</span> v<span class="op">.</span>get_dim<span class="op">();</span></span>
+<span id="cb14-67"><a href="#cb14-67"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> Dimension<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-68"><a href="#cb14-68"></a>        <span class="dt">bool</span> is_updt <span class="op">=</span> <span class="bu">std::</span>abs<span class="op">(</span>v<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">))</span> <span class="op">&gt;</span> maxel<span class="op">;</span></span>
+<span id="cb14-69"><a href="#cb14-69"></a>        maxel <span class="op">=</span> is_updt <span class="op">?</span> <span class="bu">std::</span>abs<span class="op">(</span>v<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">))</span> <span class="op">:</span> maxel<span class="op">;</span></span>
+<span id="cb14-70"><a href="#cb14-70"></a>    <span class="op">}</span></span>
+<span id="cb14-71"><a href="#cb14-71"></a></span>
+<span id="cb14-72"><a href="#cb14-72"></a>    <span class="co">// create a new vector x s.t. x := (1/maxel) v</span></span>
+<span id="cb14-73"><a href="#cb14-73"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> vtemp<span class="op">;</span></span>
+<span id="cb14-74"><a href="#cb14-74"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> Dimension<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-75"><a href="#cb14-75"></a>        <span class="dt">double</span> temp <span class="op">=</span> <span class="bu">std::</span>abs<span class="op">(</span>v<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">)</span> <span class="op">/</span> maxel<span class="op">);</span></span>
+<span id="cb14-76"><a href="#cb14-76"></a>        vtemp<span class="op">.</span>push_back<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb14-77"><a href="#cb14-77"></a>    <span class="op">}</span></span>
+<span id="cb14-78"><a href="#cb14-78"></a></span>
+<span id="cb14-79"><a href="#cb14-79"></a>    Linav vpnorm<span class="op">(</span>vtemp<span class="op">);</span></span>
+<span id="cb14-80"><a href="#cb14-80"></a>    vpnorm <span class="op">=</span> power<span class="op">(</span>vpnorm<span class="op">,</span> p<span class="op">);</span> <span class="co">// pointwise powered by p</span></span>
+<span id="cb14-81"><a href="#cb14-81"></a></span>
+<span id="cb14-82"><a href="#cb14-82"></a>    <span class="co">// take the pth-root after Kahan's sum, then multiply it back by</span></span>
+<span id="cb14-83"><a href="#cb14-83"></a>    <span class="co">// maximum element maxel to get the pnorm of v</span></span>
+<span id="cb14-84"><a href="#cb14-84"></a>    <span class="dt">double</span> pnormval <span class="op">=</span> maxel <span class="op">*</span> <span class="bu">std::</span>pow<span class="op">(</span>sum<span class="op">(</span>vpnorm<span class="op">),</span> <span class="bu">std::</span>pow<span class="op">(</span>p<span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">));</span></span>
+<span id="cb14-85"><a href="#cb14-85"></a>    <span class="cf">return</span> pnormval<span class="op">;</span></span>
+<span id="cb14-86"><a href="#cb14-86"></a><span class="op">}</span></span>
+<span id="cb14-87"><a href="#cb14-87"></a></span>
+<span id="cb14-88"><a href="#cb14-88"></a><span class="co">// special case of lpnorm is when p = 2, </span></span>
+<span id="cb14-89"><a href="#cb14-89"></a><span class="co">// it's known as the Euclidean norm</span></span>
+<span id="cb14-90"><a href="#cb14-90"></a><span class="dt">double</span> anum<span class="op">::</span>eunorm<span class="op">(</span>Linav v<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> lpnorm<span class="op">(</span>v<span class="op">,</span> <span class="fl">2.0</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb14-91"><a href="#cb14-91"></a></span>
+<span id="cb14-92"><a href="#cb14-92"></a><span class="co">// inner product</span></span>
+<span id="cb14-93"><a href="#cb14-93"></a><span class="dt">double</span> anum<span class="op">::</span>inpro<span class="op">(</span>Linav u<span class="op">,</span> Linav v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-94"><a href="#cb14-94"></a>    <span class="dt">double</span> val_inpro<span class="op">;</span></span>
+<span id="cb14-95"><a href="#cb14-95"></a></span>
+<span id="cb14-96"><a href="#cb14-96"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb14-97"><a href="#cb14-97"></a>        <span class="co">// check the criteria of performing inner product. If two vectors</span></span>
+<span id="cb14-98"><a href="#cb14-98"></a>        <span class="co">// have different dimension, then domain error will be catched</span></span>
+<span id="cb14-99"><a href="#cb14-99"></a>        <span class="cf">if</span> <span class="op">(</span>u<span class="op">.</span>get_dim<span class="op">()</span> <span class="op">!=</span> v<span class="op">.</span>get_dim<span class="op">())</span></span>
+<span id="cb14-100"><a href="#cb14-100"></a>            <span class="cf">throw</span> <span class="bu">std::</span>domain_error<span class="op">(</span><span class="st">"Cannot take inner product of two vectors having different dimension</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb14-101"><a href="#cb14-101"></a></span>
+<span id="cb14-102"><a href="#cb14-102"></a>        <span class="co">// looking for the max of the absolute element of vectors u and v</span></span>
+<span id="cb14-103"><a href="#cb14-103"></a>        <span class="co">// by using linear search.</span></span>
+<span id="cb14-104"><a href="#cb14-104"></a>        <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">int</span> Dimension <span class="op">=</span> u<span class="op">.</span>get_dim<span class="op">();</span></span>
+<span id="cb14-105"><a href="#cb14-105"></a>        <span class="dt">double</span> u_max <span class="op">=</span> <span class="bu">std::</span>numeric_limits<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;::</span>epsilon<span class="op">();</span></span>
+<span id="cb14-106"><a href="#cb14-106"></a>        <span class="dt">double</span> v_max <span class="op">=</span> <span class="bu">std::</span>numeric_limits<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;::</span>epsilon<span class="op">();</span></span>
+<span id="cb14-107"><a href="#cb14-107"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> ith <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> ith <span class="op">&lt;</span> Dimension<span class="op">;</span> ith<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-108"><a href="#cb14-108"></a>            <span class="dt">double</span> u_temp <span class="op">=</span> <span class="bu">std::</span>abs<span class="op">(</span>u<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">));</span></span>
+<span id="cb14-109"><a href="#cb14-109"></a>            <span class="dt">double</span> v_temp <span class="op">=</span> <span class="bu">std::</span>abs<span class="op">(</span>v<span class="op">.</span>accs<span class="op">(</span>ith<span class="op">));</span></span>
+<span id="cb14-110"><a href="#cb14-110"></a>            <span class="cf">if</span> <span class="op">(</span>u_temp <span class="op">&gt;</span> u_max<span class="op">)</span> u_max <span class="op">=</span> u_temp<span class="op">;</span></span>
+<span id="cb14-111"><a href="#cb14-111"></a>            <span class="cf">if</span> <span class="op">(</span>v_temp <span class="op">&gt;</span> v_max<span class="op">)</span> v_max <span class="op">=</span> v_temp<span class="op">;</span></span>
+<span id="cb14-112"><a href="#cb14-112"></a>        <span class="op">}</span></span>
+<span id="cb14-113"><a href="#cb14-113"></a></span>
+<span id="cb14-114"><a href="#cb14-114"></a>        Linav u_shr <span class="op">=</span> u <span class="op">*</span> <span class="bu">std::</span>pow<span class="op">(</span>u_max<span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">);</span> <span class="co">// u_shr is u shrinked</span></span>
+<span id="cb14-115"><a href="#cb14-115"></a>        Linav v_shr <span class="op">=</span> v <span class="op">*</span> <span class="bu">std::</span>pow<span class="op">(</span>v_max<span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">);</span> <span class="co">// v_shr is v shrinked</span></span>
+<span id="cb14-116"><a href="#cb14-116"></a>        val_inpro <span class="op">=</span> u_max <span class="op">*</span> v_max <span class="op">*</span> sum<span class="op">(</span>u_shr <span class="op">*</span> v_shr<span class="op">);</span>     </span>
+<span id="cb14-117"><a href="#cb14-117"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>domain_error<span class="op"> &amp;</span>doerr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-118"><a href="#cb14-118"></a>        <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">"Domain Error Occurs: "</span> <span class="op">&lt;&lt;</span> doerr<span class="op">.</span>what<span class="op">();</span></span>
+<span id="cb14-119"><a href="#cb14-119"></a>    <span class="op">}</span></span>
+<span id="cb14-120"><a href="#cb14-120"></a></span>
+<span id="cb14-121"><a href="#cb14-121"></a>    <span class="cf">return</span> val_inpro<span class="op">;</span></span>
+<span id="cb14-122"><a href="#cb14-122"></a><span class="op">}</span></span>
+<span id="cb14-123"><a href="#cb14-123"></a></span>
+<span id="cb14-124"><a href="#cb14-124"></a><span class="co">// the Euclidean distance of two vector</span></span>
+<span id="cb14-125"><a href="#cb14-125"></a><span class="dt">double</span> anum<span class="op">::</span>distance<span class="op">(</span>Linav u<span class="op">,</span> Linav v<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> eunorm<span class="op">(</span>u <span class="op">-</span> v<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb14-126"><a href="#cb14-126"></a></span>
+<span id="cb14-127"><a href="#cb14-127"></a><span class="co">// compute the normalize vector, i.e.,</span></span>
+<span id="cb14-128"><a href="#cb14-128"></a><span class="co">// vector which has the Euclidean norm is equal to one</span></span>
+<span id="cb14-129"><a href="#cb14-129"></a>anum<span class="op">::</span>Linav anum<span class="op">::</span>normalize<span class="op">(</span>Linav v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-130"><a href="#cb14-130"></a>    <span class="dt">double</span> mu <span class="op">=</span> eunorm<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb14-131"><a href="#cb14-131"></a>    Linav v_hat <span class="op">=</span> v <span class="op">*</span> <span class="op">(</span><span class="bu">std::</span>pow<span class="op">(</span>mu<span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">));</span> <span class="co">// v_hat := (1/mu) * v</span></span>
+<span id="cb14-132"><a href="#cb14-132"></a>    <span class="cf">return</span> v_hat<span class="op">;</span></span>
+<span id="cb14-133"><a href="#cb14-133"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And finally, the following is what was written in <code>printprog.cpp</code></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">#include </span><span class="im">"linav.h"</span><span class="pp"> </span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="dt">void</span> anum<span class="op">::</span>print<span class="op">(</span>Linav v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">int</span> Dimension <span class="op">=</span> v<span class="op">.</span>get_dim<span class="op">();</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">"("</span><span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> Dimension<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">.</span>accs<span class="op">(</span>i<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">", "</span><span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">"</span><span class="sc">\b\b</span><span class="st"> </span><span class="sc">\b</span><span class="st">)"</span><span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="op">}</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="dt">void</span> anum<span class="op">::</span>println<span class="op">(</span>Linav v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a>    print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="op">}</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a></span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="dt">void</span> anum<span class="op">::</span>print<span class="op">(</span>Linav v<span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> sentence<span class="op">;</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>    print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="op">}</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a></span>
+<span id="cb15-22"><a href="#cb15-22"></a><span class="dt">void</span> anum<span class="op">::</span>println<span class="op">(</span>Linav v<span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>    print<span class="op">(</span>v<span class="op">,</span> sentence<span class="op">);</span></span>
+<span id="cb15-24"><a href="#cb15-24"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb15-25"><a href="#cb15-25"></a><span class="op">}</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a></span>
+<span id="cb15-27"><a href="#cb15-27"></a><span class="dt">void</span> anum<span class="op">::</span>print<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> Linav v<span class="op">)</span> <span class="op">{</span> print<span class="op">(</span>v<span class="op">,</span> sentence<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb15-28"><a href="#cb15-28"></a></span>
+<span id="cb15-29"><a href="#cb15-29"></a><span class="dt">void</span> anum<span class="op">::</span>println<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> Linav v<span class="op">)</span> <span class="op">{</span> println<span class="op">(</span>v<span class="op">,</span> sentence<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb15-30"><a href="#cb15-30"></a></span>
+<span id="cb15-31"><a href="#cb15-31"></a><span class="dt">void</span> anum<span class="op">::</span>print<span class="op">(</span><span class="dt">double</span> scalar<span class="op">)</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> scalar<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb15-32"><a href="#cb15-32"></a></span>
+<span id="cb15-33"><a href="#cb15-33"></a><span class="dt">void</span> anum<span class="op">::</span>println<span class="op">(</span><span class="dt">double</span> scalar<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-34"><a href="#cb15-34"></a>    print<span class="op">(</span>scalar<span class="op">);</span></span>
+<span id="cb15-35"><a href="#cb15-35"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb15-36"><a href="#cb15-36"></a><span class="op">}</span></span>
+<span id="cb15-37"><a href="#cb15-37"></a></span>
+<span id="cb15-38"><a href="#cb15-38"></a><span class="dt">void</span> anum<span class="op">::</span>print<span class="op">(</span><span class="dt">double</span> scalar<span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-39"><a href="#cb15-39"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> sentence<span class="op">;</span></span>
+<span id="cb15-40"><a href="#cb15-40"></a>    print<span class="op">(</span>scalar<span class="op">);</span></span>
+<span id="cb15-41"><a href="#cb15-41"></a><span class="op">}</span></span>
+<span id="cb15-42"><a href="#cb15-42"></a></span>
+<span id="cb15-43"><a href="#cb15-43"></a><span class="dt">void</span> anum<span class="op">::</span>println<span class="op">(</span><span class="dt">double</span> scalar<span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-44"><a href="#cb15-44"></a>    print<span class="op">(</span>scalar<span class="op">,</span> sentence<span class="op">);</span></span>
+<span id="cb15-45"><a href="#cb15-45"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb15-46"><a href="#cb15-46"></a><span class="op">}</span></span>
+<span id="cb15-47"><a href="#cb15-47"></a></span>
+<span id="cb15-48"><a href="#cb15-48"></a><span class="dt">void</span> anum<span class="op">::</span>print<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> <span class="dt">double</span> scalar<span class="op">)</span> <span class="op">{</span> print<span class="op">(</span>scalar<span class="op">,</span> sentence<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb15-49"><a href="#cb15-49"></a></span>
+<span id="cb15-50"><a href="#cb15-50"></a><span class="dt">void</span> anum<span class="op">::</span>println<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">,</span> <span class="dt">double</span> scalar<span class="op">)</span> <span class="op">{</span> println<span class="op">(</span>scalar<span class="op">,</span> sentence<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb15-51"><a href="#cb15-51"></a></span>
+<span id="cb15-52"><a href="#cb15-52"></a><span class="dt">void</span> anum<span class="op">::</span>print<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">)</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> sentence<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb15-53"><a href="#cb15-53"></a></span>
+<span id="cb15-54"><a href="#cb15-54"></a><span class="dt">void</span> anum<span class="op">::</span>println<span class="op">(</span><span class="bu">std::</span>string<span class="op"> </span>sentence<span class="op">)</span> <span class="op">{</span> print<span class="op">(</span>sentence<span class="op">);</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="mymeta">
+    <div class="mymeta-title">Copyright</div>
+    <div style="text-align: justify; font-size: .9em;">
+        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+        <span property="dct:title">Linav: Computation of Vectors in Linear Algebra</span> © 2024 by <span property="cc:attributionName">Muhammad Reza Fahlevi</span> is licensed under 
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution-NonCommercial-ShareAlike 4.0 International</a><br>
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank">
+            <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1">
+        </a>
+        </p>
+    </div>
+</div>
+<div class="mymeta">
+    <details>
+        <summary class="mymeta-title" style="opacity: 1;"><span>Cite this article</span></summary>
+        <div class="mymeta-title">Harvard</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, M.R. (2024) 'Linav: Computation of Vectors in Linear Algebra'. Available at: https://www.fahlevisia.com/post_articles/linav/ (Accessed: <span id="currAccsHarvard"></span>).</p>
+        </div>
+        <div class="mymeta-title">APA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, M.R. (2024, January 25) <i>Linav: Computation of Vectors in Linear Algebra</i>. Fahlevisia. Retrieved <span id="currAccsAPA"></span>, from https://www.fahlevisia.com/post_articles/linav/</p>
+        </div>
+        <div class="mymeta-title">Chicago</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, M.R. "Linav: Computation of Vectors in Linear Algebra." Accessed <span id="currAccsChicago"></span>. https://www.fahlevisia.com/post_articles/linav/</p>
+        </div>
+        <div class="mymeta-title">IEEE</div>
+        <div style="text-align: justify; font-size: .9em;;">
+            <p>M.R. Fahlevi. "Linav: Computation of Vectors in Linear Algebra." <i>Fahlevisia</i>, Jan. 24, 2024. Accessed: <span id="currAccsIEEE"></span>. [Online]. Available: https://www.fahlevisia.com/post_articles/linav/</p>
+        </div>
+        <div class="mymeta-title">MHRA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, Muhammad Reza, Linav: Computation of Vectors in Linear Algebra (2024) &lt;https://www.fahlevisia.com/post_articles/linav/&gt; [accessed <span id="currAccsMHRA"></span>]</p>
+        </div>
+        <div class="mymeta-title">MLA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Muhammad Reza Fahlevi. "Linav: Computation of Vectors in Linear Algebra". <i>Fahlevisia</i>, 24 January 2024, https://www.fahlevisia.com/post_articles/linav/</p>
+        </div>
+        <div class="mymeta-title">OSCOLA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Muhammad Reza Fahlevi, 'Linav: Computation of Vectors in Linear Algebra' (Fahlevisia, 24 January 2024) &lt;https://www.fahlevisia.com/post_articles/linav/&gt; accessed <span id="currAccsOSCOLA"></span>.</p>
+        </div>
+        <div class="mymeta-title">Vancouver</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi MR. Linav: Computation of Vectors in Linear Algebra [Internet]. 2024 [cited <span id="currAccsVancouver"></span>]. Available from: https://www.fahlevisia.com/post_articles/linav/</p>
+        </div>
+    </details>
+</div>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>We could find it either by using linear search, or by sorting (take the absolute value of the elements first before comparing them) the elements and then return the element of the last index if it is sorted in ascending order, or return the element in the first index if it is sorted in descending order.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<footer class="footer">
+	<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1440 320">
+		<path fill="#313352" fill-opacity="1" d="M0,64L80,101.3C160,139,320,213,480,240C640,267,800,245,960,224C1120,203,1280,181,1360,170.7L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+	</svg>
+	<div style="background-image: url(https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi/main/www/particles.png); background-size: cover;
+		position: absolute; 
+		width: 100%; 
+		padding-left:3pc;
+		font-size: 3pc;">
+		<a href="https://www.fahlevisia.com">
+			<img src="https://www.fahlevisia.com/www/fahlevisiaicon.png" height="15%" width="15%" alt="Fahlevisia"><br>
+			<img src="https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi.github.io/main/www/fahlevisiawhite.svg" alt="fahlevisia_repositori" style="margin-left:-0.8pc;">
+		</a>
+		<p style="color: white; font-size:1.5pc;">© <span id="cpRight"></span> by <a href="https://www.fahlevisia.com/muhammadrezafahlevi.html">Muhammad Reza Fahlevi</a></p>
+		<script>
+			obtCopyRightYear() // obtain copy right year
+
+			function obtCopyRightYear() {
+				const copyRightYear = new Date()
+				document.getElementById("cpRight").innerHTML =  "<span typeof='schema:Number'>" + copyRightYear.getFullYear() + "</span>"
+			}
+
+			function getCurrAccsReader(EnOrId, isAbbr) {
+        		var monthName
+
+        		if ((EnOrId == "id") && (isAbbr === false)) {
+        		    monthName = ["Januari", "Februari", "Maret", "April", "May", "Juni", "July", "Agustus", "September", "Oktober", "November", "Desember"]
+        		} else if ((EnOrId == "id") && (isAbbr === true)) {
+					monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+				} else if ((EnOrId == "en") && (isAbbr === true)) {
+					monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+				} else {
+        		    monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        		}
+
+        		const dateObj = new Date()
+
+        		const whatYear = dateObj.getFullYear()
+        		const whatMonth = dateObj.getMonth()
+        		const whatDate = dateObj.getDate()
+
+				
+        		const currAccsDate = whatDate + " " + monthName[whatMonth] + " " + whatYear
+        		return currAccsDate
+    		}
+		</script>
+	</div>
+</footer>
+<script>
+    document.getElementsByClassName("quarto-title-meta-contents")[0].innerHTML = "<p style='font-size: 15px;'><a href='https://www.fahlevisia.com/muhammadrezafahlevi.html' target='_blank'>Muhammad Reza Fahlevi</a> <a href='https://orcid.org/0009-0007-6787-6479' class='quarto-title-author-orcid'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=='></a></p>"
+    
+    document.getElementsByClassName("quarto-title-meta-contents")[1].innerHTML = "<p style='font-size: 15px'>12 January 2024</p>"
+
+    const today = getCurrAccsReader("en", false).split(" ") // [date, month, year]
+    const todayAbbr = getCurrAccsReader("en", true).split(" ") // [date, month, year] but month is abbrivieted
+    /*
+     * today[0]: date
+     * today[1]: month
+     * today[2]: year
+     * 
+     * todayAbbr[0]: date
+     * todayAbbr[1]: month but month is abbrivieted
+     * todayAbbr[2]: year
+     */
+    document.getElementById("currAccsHarvard").innerHTML = today[0] + " " + today[1] + " " + today[2]
+    document.getElementById("currAccsAPA").innerHTML = today[1] + " " + today[0] + ", " + today[2]
+    document.getElementById("currAccsChicago").innerHTML = today[1] + " " + today[0] + ", " + today[2]
+    document.getElementById("currAccsIEEE").innerHTML = todayAbbr[1] + ". " + todayAbbr[0] + ", " + todayAbbr[2]
+    document.getElementById("currAccsMHRA").innerHTML = today[0] + " " + today[1] + " " + today[2]
+    document.getElementById("currAccsOSCOLA").innerHTML = today[0] + " " + today[1] + " " + today[2]
+    document.getElementById("currAccsVancouver").innerHTML = todayAbbr[2] + " " + todayAbbr[1] + " " + todayAbbr[0]
+    
+    pseudocode.renderElement(document.getElementById("kahanSum"), { lineNumber: true })
+    pseudocode.renderElement(document.getElementById("innerProduct"), { lineNumber: true })
+    pseudocode.renderElement(document.getElementById("lpNormAlg"), { lineNumber: true })
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
