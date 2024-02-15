@@ -68,6 +68,33 @@ details > summary {
     color: #5d6166;
 }
 
+.sociabuzz-fahlevisia-tribe {
+    background-image: url('www/particles.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    height: 30pc;
+    color:white;
+}
+
+.btn-to-SociaBuzz {
+    padding: 1pc;
+    background-color: #00c8b7;
+    color: white;
+    border: none;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 2pc;
+}
+
+.btn-to-SociaBuzz:hover {
+    background-color: #00b4a5;
+    text-shadow: 1px 1px 1pc whitesmoke;
+    box-shadow: 1px 1px 1pc #00d8c8;
+}
+
 .alinea {
 	text-align: justify;
     font-size: 15px;
