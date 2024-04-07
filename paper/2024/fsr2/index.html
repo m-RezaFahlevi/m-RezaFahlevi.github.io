@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" prefix="og: https://ogp.me/ns# schema: https://schema.org/"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Muhammad Reza Fahlevi   Verified  ">
+<meta name="dcterms.date" content="2024-04-07">
+<meta name="description" content="A C++ header file to construct vectors and matrix">
+
+<meta property="og:title" content="Limav: Computation of Matrix and Vectors in Linear Algebra">
+<meta property="og:description" content="A C++ header file to construct vectors and matrix">
+<meta property="og:url" content="https://www.fahlevisia.com/paper/2024/fsr2/">
+<meta property="og:image" content="https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi/main/www/LimavThumbnail.png">
+<meta property="og:type" content="article">
+<meta property="og:article:author" content="Muhammad Reza Fahlevi">
+<meta property="og:article:published_time" content="2024-04-7">
+<meta property="og:article:section" content="Computer Science">
+<meta property="og:article:tag" content="LinearAlgebra">
+<meta property="og:article:tag" content="Vectors">
+<meta property="og:article:tag" content="Matrix">
+<meta property="og:article:tag" content="C++">
+
+<title>Limav: Computation of Vectors and Matrix in Linear Algebra</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" integrity="sha512-d0olNN35C6VLiulAobxYHZiXJmq+vl+BGIgAxQtD5+kqudro/xNMvv2yIHAciGHpExsIbKX3iLg+0B6d0k4+ZA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/regular.min.css" integrity="sha512-TzeemgHmrSO404wTLeBd76DmPp5TjWY/f2SyZC6/3LsutDYMVYfOx2uh894kr0j9UM6x39LFHKTeLn99iz378A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" integrity="sha512-pZlKGs7nEqF4zoG0egeK167l6yovsuL8ap30d07kA5AJUq+WysFlQ02DLXAmN3n0+H3JVz5ni8SJZnrOaYXWBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+<link rel="shortcut icon" href="https://www.fahlevisia.com/www/fahlevisiaicon.png" type="image/x-icon">
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full.js" integrity="sha256-kbAFUDxdHwlYv01zraGjvjNZayxKtdoiJ38bDTFJtaQ=" crossorigin="anonymous">
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.css">
+<script src="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../www/fahlevisiawhite.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target=""><i class="bi bi-house" role="img">
+</i> 
+ <span class="menu-text">Beranda</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../paper/index.html" rel="" target=""><i class="bi bi-journal-text" role="img">
+</i> 
+ <span class="menu-text">Paper</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../artikelYth.html" rel="" target=""><i class="bi bi-newspaper" role="img">
+</i> 
+ <span class="menu-text">Artikel Bpk/Ibu Yth.</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog.html" rel="" target=""><i class="bi bi-journal-richtext" role="img">
+</i> 
+ <span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../muhammadrezafahlevi.html" rel="" target=""><i class="bi bi-info-circle-fill" role="img">
+</i> 
+ <span class="menu-text">Tentang</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Limav: Computation of Vectors and Matrix in Linear Algebra</h1>
+                  <div>
+        <div class="description">
+          A C++ header file to construct vectors and matrix
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">C++</div>
+                <div class="quarto-category">Linear Algebra</div>
+                <div class="quarto-category">Matrix</div>
+                <div class="quarto-category">Vectors</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Muhammad Reza Fahlevi <svg aria-label="Verified" class="x1lliihq x1n2onr6" fill="rgb(0, 149, 246)" height="18" role="img" viewbox="0 0 40 40" width="18"></svg><br>
+  <title>&lt;br /&gt;
+  Verified&lt;br /&gt;
+  </title><br>
+  <path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fill-rule="evenodd"></path> </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 7, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#theory-and-computation" id="toc-theory-and-computation" class="nav-link" data-scroll-target="#theory-and-computation"><span class="header-section-number">2</span> Theory and Computation</a>
+  <ul class="collapse">
+  <li><a href="#unary-and-binary-operator-on-matrix" id="toc-unary-and-binary-operator-on-matrix" class="nav-link" data-scroll-target="#unary-and-binary-operator-on-matrix"><span class="header-section-number">2.1</span> Unary and Binary Operator on Matrix</a></li>
+  <li><a href="#pseudomatrix" id="toc-pseudomatrix" class="nav-link" data-scroll-target="#pseudomatrix"><span class="header-section-number">2.2</span> Pseudomatrix</a></li>
+  </ul></li>
+  <li><a href="#design-and-implementation" id="toc-design-and-implementation" class="nav-link" data-scroll-target="#design-and-implementation"><span class="header-section-number">3</span> Design and Implementation</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion"><span class="header-section-number">4</span> Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5</span> Conclusion</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="header-section-number">6</span> Acknowledgements</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div style="margin-top: -7%;">
+    <div class="mymeta" resource="#limav typeof=" schema:article"="">
+        <span property="schema:name" content="Limav: Computation of Matrix and Vectors in Linear Algebra"></span>
+        <span property="schema:description" content="A C++ header to construct vectors and matrix"></span>
+        <span property="schema:author" resource="https://www.fahlevisia.com/muhammadrezafahlevi.html#me" typeof="schema:Person"></span>
+        <span property="schema:datePublished" content="2024-04-7"></span>
+        <span property="schema:copyrightHolder" content="https://www.fahlevisia.com/muhammadrezafahlevi.html#me" typeof="schema:Person"></span>
+        <span property="schema:copyrightYear" content="2024"></span>
+        <span property="schema:articleSection" content="Computer Science"></span>
+        <span property="schema:thumbnail" resource="https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi/main/www/LinavThumbnail.png" typeof="schema:ImageObject"></span>
+        <div class="mymeta-title">Email</div>
+        <div class="alinea"><p>muhammadrezafahlevi666@gmail.com</p></div>
+        <div class="mymeta-title">Abstract</div>
+        <div class="alinea">
+            <p property="schema:abstract">Developing a C++ header is a good practice and we do this at least once in a lifetime. In this paper, we develope our own C++ header to do a numerical computation of linear algebra by making our own C++ header that capable to construct two mathematical objects that mainly used in linear algebra, these are matrix and vectors. Once we have established our own C++ header, we may do a vast application of matrix and vectors by using our own C++ header as a form of intellectual satisfaction.</p>
+        </div>
+    </div>
+</div>
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<div class="alinea">
+<p>Vectors and matrix are 2 main mathematical objects that’s being studied in linear algebra. These 2 mathematical objects are useful when it comes to modeling a linear problems, and it has been applied in many fields like physics, computer science, statistics, machine learning, and more. In physics, vectors is something that has direction and value, and matrix can be thought as a map that take a vectors as its input and produce another vectors. In computer science, vectors can be thought as an array, and matrix can be thought as an “array of array”, and in the subject of image processing, matrix is a data structure that can be used to represents an image (Patel, D. and Raman, S., 2019). In statistics, matrix and/or vectors are used in (multi)-linear Poisson regression (Shimosaka, M. et al., 2018). In machine learning, matrix and vectors are main data structure to model the data, especially in support vector machine algorithms (Sheykhmousa, M. et al., 2020). In evolutionary computation, matrix and vectors are primary data structure in Covariance Matrix Adaptation Evolution Strategies (CMA-ES) by (Hansen, N. 2023), for which Hamano, R. et al.&nbsp;used this algorithms to solve mixed-integer black-box optimization problem (Hamano, R. et al., 2022).</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> Due to the vast application of matrix and vectors, we try to develope our own C++ header that capable to do a numerical computation of matrix and vectors in linear algebra. We use C++ as our programming language since C++ has incredible speed in execution of a program. This speed is an advantage when we attempt to solving hard optimization problem.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> There are 2 reasons to develope our own C++ header. First, even though there are already software out there that can do a numerical computation of matrix and vectors (e.g., GNU Octave, matlab, julia, etc), it’s a good practice to develope our own C++ header, at least once in a lifetime. Second, when we tried to implement the algorithm of numerical computation of matrix (e.g.&nbsp;LU, QR, or Cholensky factorization) by using higher level programming language like GNU Octave or matlab, why would we try to compute it manually (by write a function) when these programming language already provide a function that we need. Thereby, by develope our own C++ header, we are able to construct vectors and matrix together with its own basic operations. So, when we trying to implement the numerical computation of vectors and matrix, we can do it on our own C++ header, and we use theoritical results and another programming language to check either our own C++ header give the correct results or not. Moreover, if we want to do various applications of matrix and vectors, instead of using someone’s else library, we can use our own C++ header as a form of our intellectual satisfaction.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> The name of our C++ header is <code>limav.h</code> which is stand for vectors and matrix in linear algbera. We use the words “in linear algebra” to tell the honourable reader that almost all of functions that we had programmed in <code>limav.h</code> are based on mathematical maps and its mathematical objects’s properties.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> The rest of this paper is organized as follows. In section 2, we discuss the theory and computation of matrix and vectors, its map, definition, and what kind of data structure that we need. In section 3, we discuss about the class diagram of matrix, Limav’s directory, and error handling. In section 4, we test our C++ header and compare it to the theoritical reuslts, and we provide the table of summary of matrix and vectors computation. Finally, we conclude our discussion in section 5.</p>
+</div>
+</section>
+<section id="theory-and-computation" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Theory and Computation</h1>
+<div class="alinea">
+<p>With regards to the theory and computation of vectors in linear algebra, we refer to Linav: Computation of Vectors in Linear Algebra in section 2. Since we had discussed the theory and computation for vectors, in this article, we discuss the theory and computation for matrix. The definitions that we are presented here based on our reference on linear algebra book by (Körner, T.W., 2012) and numerical computation book by (Solomon, J., 2015), except the definition of the pseudomatrix. We start our discussion by the following definition.</p>
+</div>
+<div id="def-mn-matrix" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (matrix) </strong></span>A <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(A\)</span> having a real numbers as its entries is defined as the following array</p>
+<p><span id="eq-def-mn-matrix"><span class="math display">\[
+A_{m\times n}\coloneqq\left(\begin{array}{cccc}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+\end{array}\right)_{m\times n}
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(a_{ij}\in\mathbb{R}\)</span> for <span class="math inline">\(i=1,2,\ldots,m\)</span> and <span class="math inline">\(j=1,2,\ldots,n\)</span>. We have <span class="math inline">\(a_{ij}\)</span> is called entry/element of the matrix.</p>
+</div>
+<div class="alinea">
+<p><strong>Notation.</strong> The following is shortened notation for the entries of a matrix</p>
+<p><span id="eq-mat-notation"><span class="math display">\[
+\left(a_{ij}\right)\coloneqq\left(\begin{array}{cccc}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+\end{array}\right)
+\tag{2}\]</span></span></p>
+<p>Thereby, we may write <span class="math inline">\(A_{m\times n}\)</span> matrix as <span class="math inline">\(A_{m\times n}=\left(a_{ij}\right)\)</span>.</p>
+</div>
+<div id="def-set-of-mn-matrix" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 </strong></span>(Olievera, L. 2022) The set of <span class="math inline">\(m\times n\)</span> matrix is denoted as <span class="math inline">\(\mathscr{M}_{m\times n}(\mathbb{R})\)</span> and it is defined as follows</p>
+<p><span id="eq-set-of-mn-matrix"><span class="math display">\[
+\mathscr{M}_{m\times n}(\mathbb{R})\coloneqq\left\{ A_{m\times n}=\left(a_{ij}\right)\Big|a_{ij}\in\mathbb{R},i=1,2,\ldots,m\text{ and }j=1,2,\ldots,n\right\}
+\tag{3}\]</span></span></p>
+<p><em>Remark 1.</em> From <a href="#def-set-of-mn-matrix">Definition&nbsp;2</a>, the set of row matrix is defined as <span class="math inline">\(\mathscr{M}_{1\times n}(\mathbb{R})\)</span> and the set of column matrix is defined as <span class="math inline">\(\mathscr{M}_{n\times1}(\mathbb{R})\)</span>. For the set of square matrix, we simplify the notation into</p>
+<p><span id="eq-set-of-sq-matrix"><span class="math display">\[
+\mathscr{M}_{n}(\mathbb{R})\coloneqq\mathscr{M}_{n\times n}(\mathbb{R})
+\tag{4}\]</span></span></p>
+</div>
+<section id="unary-and-binary-operator-on-matrix" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="unary-and-binary-operator-on-matrix"><span class="header-section-number">2.1</span> Unary and Binary Operator on Matrix</h2>
+<div class="alinea">
+<p>For the unary operators on matrix, we only consider the transpose and the trace for a matrix. For the binary operators on matrix, we have addition, substraction, multiplication by a real numbers, and multiplication of a matrix.</p>
+</div>
+<div id="def-matrix-transpose" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (matrix transpose) </strong></span>Let <span class="math inline">\(A=\left(a_{ij}\right)\)</span> and <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span>, then transpose of a matrix is a map</p>
+<p><span class="math display">\[
+t(\cdot)\colon  \mathscr{M}_{m\times n}(\mathbb{R})\to\mathscr{M}_{n\times m}(\mathbb{R})
+\]</span> <span id="eq-tr-mat"><span class="math display">\[
+\text{s.t. }    A\mapsto t(A)\coloneqq(a_{ji})
+\tag{5}\]</span></span></p>
+<p><em>Remark 2.</em> The common notation for a transpose of a matrix <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> is <span class="math inline">\(A^{\top}\in\mathscr{M}_{n\times m}(\mathbb{R})\)</span> so that <span class="math inline">\(\left(a_{ij}\right)^{\top}=\left(a_{ji}\right)\)</span></p>
+</div>
+<div id="exm-one" class="alinea theorem example">
+<p><span class="theorem-title"><strong>Example 1 </strong></span>If <span class="math inline">\(A\in\mathscr{M}_{2\times3}(\mathbb{R})\)</span> such that</p>
+<p><span class="math display">\[
+A=\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}
+\end{array}\right)
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+A^{\top}    =\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}
+\end{array}\right)^{\top}
+    =\left(\begin{array}{cc}
+a_{11} &amp; a_{21}\\
+a_{12} &amp; a_{22}\\
+a_{13} &amp; a_{23}
+\end{array}\right)
+\]</span></p>
+<p>thereby, we have that <span class="math inline">\(A^{\top}\in\mathscr{M}_{3\times2}(\mathbb{R})\)</span>.</p>
+</div>
+<div id="def-trace-of-matrix" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (trace of matrix) </strong></span>Let <span class="math inline">\(A=\left(a_{ij}\right)\)</span>, then the trace of a matrix is a function <span class="math inline">\(\text{tr}(\cdot)\colon\mathscr{M}_{m\times n}(\mathbb{R})\to\mathbb{R}\)</span> s.t.</p>
+<p><span id="eq-trace-matrix"><span class="math display">\[
+A\mapsto\text{tr}(A)\coloneqq\sum_{i=1}^{t}a_{ii}
+\tag{6}\]</span></span></p>
+<p>where <span class="math inline">\(t=\min(m,n)\)</span>.</p>
+<p><em>Remark 3.</em> Due to numerical issue, we compute the <span class="math inline">\(\text{tr}(A)\)</span> by using the Kahan’s sum algorithm.</p>
+</div>
+<div id="exm-trace-of-matrix" class="alinea theorem example">
+<p><span class="theorem-title"><strong>Example 2 </strong></span>Suppose that <span class="math inline">\(A\in\mathscr{M}_{3}(\mathbb{R})\)</span> s.t.</p>
+<p><span class="math display">\[
+A=\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}\\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{array}\right)
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+\begin{align}
+\text{tr}(A)&amp;\coloneqq\sum_{i=1}^{3}a_{ii}\\
+\text{tr}(A)&amp;=a_{11}+a_{22}+a_{33}
+\end{align}
+\]</span></p>
+</div>
+<div id="def-mat-add" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 5 (matrix addition) </strong></span>Let <span class="math inline">\(A,B,C\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> where <span class="math inline">\(A=\left(a_{ij}\right)\)</span> and <span class="math inline">\(B=\left(b_{ij}\right)\)</span>, then the addition of 2 matrix is a map <span class="math inline">\(+\colon\mathscr{M}_{m\times n}(\mathbb{R})\times\mathscr{M}_{m\times n}(\mathbb{R})\to\mathscr{M}_{m\times n}(\mathbb{R})\)</span> s.t.</p>
+<p><span id="eq-mat-add"><span class="math display">\[
+(A,B)\mapsto C\coloneqq A+B
+\tag{7}\]</span></span></p>
+<p>where <span class="math inline">\(C=\left(c_{ij}\right)\)</span> and <span class="math inline">\(c_{ij}=a_{ij}+b_{ij}\)</span>.</p>
+</div>
+<div id="def-mat-substraction" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 6 (matrix substraction) </strong></span>Let <span class="math inline">\(A,B,C\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> where <span class="math inline">\(A=\left(a_{ij}\right)\)</span> and <span class="math inline">\(B=\left(b_{ij}\right)\)</span>, then the substraction of 2 matrix is a map <span class="math inline">\(-\colon\mathscr{M}_{m\times n}(\mathbb{R})\times\mathscr{M}_{m\times n}(\mathbb{R})\to\mathscr{M}_{m\times n}(\mathbb{R})\)</span> s.t.</p>
+<p><span id="eq-mat-substraction"><span class="math display">\[
+(A,B)\mapsto C\coloneqq A-B
+\tag{8}\]</span></span></p>
+<p>where <span class="math inline">\(C=\left(c_{ij}\right)\)</span> and <span class="math inline">\(c_{ij}=a_{ij}-b_{ij}\)</span>.</p>
+</div>
+<div id="def-scaled-matrix" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 7 (scaled matrix) </strong></span>Let <span class="math inline">\(\lambda\in\mathbb{R}\)</span> and <span class="math inline">\(A,B\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span>. If <span class="math inline">\(A=\left(a_{ij}\right)\)</span>, then such a matrix can be scaled by <span class="math inline">\(\lambda\)</span> by using the following maps, <span class="math inline">\(\cdot\colon\mathbb{R}\times\mathscr{M}_{m\times n}(\mathbb{R})\to\mathscr{M}_{m\times n}(\mathbb{R})\)</span> s.t.</p>
+<p><span id="eq-scaled-matrix"><span class="math display">\[
+(\lambda,A)\mapsto B\coloneqq\lambda A
+\tag{9}\]</span></span></p>
+<p>where <span class="math inline">\(B=\left(b_{ij}\right)\)</span> and <span class="math inline">\(b_{ij}=\lambda a_{ij}\)</span></p>
+</div>
+<div id="exm-three" class="alinea theorem example">
+<p><span class="theorem-title"><strong>Example 3 </strong></span>Let <span class="math inline">\(\lambda\in\mathbb{R}\)</span> and <span class="math inline">\(A,B,C\in\mathscr{M}_{2\times3}(\mathbb{R})\)</span>. If</p>
+<p><span class="math display">\[
+A=\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}
+\end{array}\right)\text{ and }B=\left(\begin{array}{ccc}
+b_{11} &amp; b_{12} &amp; b_{13}\\
+b_{21} &amp; b_{22} &amp; b_{23}
+\end{array}\right)
+\]</span></p>
+<p>then</p>
+<p><span class="math inline">\((i)\)</span> If <span class="math inline">\(C=A+B\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+C   &amp;=\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}
+\end{array}\right)+\left(\begin{array}{ccc}
+b_{11} &amp; b_{12} &amp; b_{13}\\
+b_{21} &amp; b_{22} &amp; b_{23}
+\end{array}\right) \\
+C   &amp;=\left(\begin{array}{ccc}
+a_{11}+b_{11} &amp; a_{12}+b_{12} &amp; a_{13}+b_{13}\\
+a_{21}+b_{21} &amp; a_{22}+b_{22} &amp; a_{23}+b_{23}
+\end{array}\right)
+\end{align}
+\]</span></p>
+<p><span class="math inline">\((ii)\)</span> If <span class="math inline">\(C=A-B\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+C   &amp;=\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}
+\end{array}\right)-\left(\begin{array}{ccc}
+b_{11} &amp; b_{12} &amp; b_{13}\\
+b_{21} &amp; b_{22} &amp; b_{23}
+\end{array}\right) \\
+C   &amp;=\left(\begin{array}{ccc}
+a_{11}-b_{11} &amp; a_{12}-b_{12} &amp; a_{13}-b_{13}\\
+a_{21}-b_{21} &amp; a_{22}-b_{22} &amp; a_{23}-b_{23}
+\end{array}\right)
+\end{align}
+\]</span></p>
+<p><span class="math inline">\((iii)\)</span> If <span class="math inline">\(C=\lambda A\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+C   &amp;=\lambda\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}
+\end{array}\right) \\
+C   &amp;=\left(\begin{array}{ccc}
+\lambda a_{11} &amp; \lambda a_{12} &amp; \lambda a_{13}\\
+\lambda a_{21} &amp; \lambda a_{22} &amp; \lambda a_{23}
+\end{array}\right)
+\end{align}
+\]</span></p>
+</div>
+<div id="def-multiplication-matandvec" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 8 (multiplication of matrix and vector) </strong></span>Suppose that <span class="math inline">\((\mathbb{R}^{n},+,\cdot)\)</span> and <span class="math inline">\((\mathbb{R}^{m},+,\cdot)\)</span> are 2 vector spaces, let <span class="math inline">\(\vec{x}\in\mathbb{R}^{n}\)</span> and <span class="math inline">\(\vec{y}\in\mathbb{R}^{m}\)</span>, then the multiplication of matrix and vector is defined through function <span class="math inline">\(\cdot\colon\mathscr{M}_{m\times n}(\mathbb{R})\times\mathbb{R}^{n}\to\mathbb{R}^{m}\)</span> s.t.</p>
+<p><span id="eq-maps-matandvec"><span class="math display">\[
+(A,\vec{x})\mapsto\vec{y}\coloneqq A\vec{x}
+\tag{10}\]</span></span></p>
+<p>Suppose that <span class="math inline">\(A=\left(a_{ij}\right)\)</span> and <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{n})\)</span>, if <span class="math inline">\(A\vec{x}=\vec{y}\)</span> then <span class="math inline">\(\vec{y}=(y_{1},y_{2},\ldots,y_{m})\)</span> s.t.</p>
+<p><span id="eq-comp-matandvec"><span class="math display">\[
+y_{i}=\sum_{j=1}^{n}a_{ij}x_{j}
+\tag{11}\]</span></span></p>
+</div>
+<div id="def-mat-multiplication" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 9 (matrix multiplication) </strong></span>Let <span class="math inline">\(A\in\mathscr{M}_{m\times t}(\mathbb{R}),B\in\mathscr{M}_{t\times n}(\mathbb{R})\)</span>, and <span class="math inline">\(C\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span>, if <span class="math inline">\(A=\left(a_{ij}\right)\)</span> and <span class="math inline">\(B=\left(b_{ij}\right)\)</span>, then the multiplication of a matrix is a function <span class="math inline">\(\cdot\colon\mathscr{M}_{m\times t}(\mathbb{R})\times\mathscr{M}_{t\times n}(\mathbb{R})\to\mathscr{M}_{m\times n}(\mathbb{R})\)</span> s.t.</p>
+<p><span id="eq-multiplication-2mat"><span class="math display">\[
+(A,B)\mapsto C\coloneqq AB
+\tag{12}\]</span></span></p>
+<p>where <span class="math inline">\(C=\left(c_{ij}\right)\)</span> and</p>
+<p><span id="eq-comp-multiplication-2mat"><span class="math display">\[
+c_{ij}=\sum_{k=1}^{t}a_{ik}b_{kj}
+\tag{13}\]</span></span></p>
+<p><em>Remark 4.</em> Two matrix <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, only can be multiplied if</p>
+<p><span id="eq-cond-multiplication-2mat"><span class="math display">\[
+\#\text{col}(A)=\#\text{row}(B)
+\tag{14}\]</span></span></p>
+<p>where <span class="math inline">\(\#\text{col}(A)\)</span> is the number of column of <span class="math inline">\(A\)</span> matrix and <span class="math inline">\(\#\text{row}(B)\)</span> is the number of row of <span class="math inline">\(B\)</span> matrix. If <span class="math inline">\(C=AB\)</span>, then <span class="math inline">\(\#\text{row}(C)=\#\text{row}(A)\)</span> and <span class="math inline">\(\#\text{col}(C)=\#\text{col}(B)\)</span>.</p>
+</div>
+<div id="def-rowel-cowel" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 10 </strong></span>Let <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> s.t. <span class="math inline">\(A=\left(a_{ij}\right)\)</span>, then the following operator <span class="math inline">\(\textit{row}(i;A)\)</span> return the elements of <span class="math inline">\(A\)</span> matrix at the <span class="math inline">\(i\)</span>th-row as a vector, i.e.,</p>
+<p><span id="eq-get-rowel"><span class="math display">\[
+A=\left(a_{ij}\right)\mapsto\textit{row}(i;A)\coloneqq(a_{i1},a_{i2},\ldots,a_{in})
+\tag{15}\]</span></span></p>
+<p>and <span class="math inline">\(\textit{col}(A;j)\)</span> return the entries of matrix <span class="math inline">\(A\)</span> at the <span class="math inline">\(j\)</span>th-column as a vector, i.e.,</p>
+<p><span id="eq-get-colel"><span class="math display">\[
+A=\left(a_{ij}\right)\mapsto\textit{col}(j;A)\coloneqq(a_{1j},a_{2j},\ldots,a_{mj})
+\tag{16}\]</span></span></p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> Theoritically, the computation of 2 matrix is defined in <a href="#eq-comp-multiplication-2mat">Equation&nbsp;13</a>. Due to numerical issue, we do not compute 2 matrix <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> as it is, instead, we compute it by the virtue of inner product <span class="math inline">\(\langle\cdot,\cdot\rangle\colon\mathbb{R}^{n}\times\mathbb{R}^{n}\to\mathbb{R}\)</span> s.t. if <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{n})\)</span> and <span class="math inline">\(\vec{y}=(y_{1},y_{2},\ldots,y_{n})\)</span> then</p>
+<p><span id="eq-def-inpro"><span class="math display">\[
+\langle\vec{x},\vec{y}\rangle\coloneqq\sum_{i=1}^{n}x_{i}y_{i}
+\tag{17}\]</span></span></p>
+<p>and again, due to numerical issue, we compute the inner product of 2 vectors by using the following equation</p>
+<p><span id="eq-comp-inpro"><span class="math display">\[
+\langle\vec{x},\vec{y}\rangle\coloneqq\lambda\mu\left\langle \frac{1}{\lambda}\vec{x},\frac{1}{\mu}\vec{y}\right\rangle
+\tag{18}\]</span></span></p>
+<p>where <span class="math inline">\(\lambda,\mu\in\mathbb{R}\)</span>, and with regards to the summation, we compute it by using the Kahan’s sum algorithm (Solomon, J., 2015). The following passage is description how we compute the multiplication of 2 matrix.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> Let <span class="math inline">\(A\in\mathscr{M}_{m\times t}(\mathbb{R}),B\in\mathscr{M}_{t\times n}(\mathbb{R})\)</span>, and <span class="math inline">\(C\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span>. If <span class="math inline">\(A=\left(a_{ij}\right)\)</span> and <span class="math inline">\(B=\left(b_{ij}\right)\)</span>, then</p>
+<p><span class="math display">\[
+(A,B)\mapsto C\coloneqq AB
+\]</span></p>
+<p>where <span class="math inline">\(C=\left(c_{ij}\right)\)</span> and <span class="math inline">\(c_{ij}\coloneqq\langle\vec{x}_{i},\vec{y}_{j}\rangle\)</span> for <span class="math inline">\(\vec{x}_{i},\vec{y}_{j}\in\mathbb{R}^{t}\)</span> s.t. <span class="math inline">\(\vec{x}_{i}\coloneqq\textit{row}(i;A)\)</span> and <span class="math inline">\(\vec{y}_{j}\coloneqq\textit{col}(j;B)\)</span>. In order to handle the numerical issue, the computation of the inner product is computed by using <a href="#eq-comp-inpro">Equation&nbsp;18</a> by choosing <span class="math inline">\(\lambda_{i},\mu_{j}\in\mathbb{R}\)</span> s.t.</p>
+<p><span class="math display">\[
+\begin{align}
+\lambda_{i} &amp;\coloneqq\max\left\{ \vert a_{i1}\vert,\vert a_{i2}\vert,\ldots,\vert a_{it}\vert\bigg|\vec{x}_{i}=(a_{i1},a_{i2},\ldots,a_{it})\right\} \\
+\mu_{j} &amp;\coloneqq\max\left\{ \vert b_{1j}\vert,\vert b_{2j}\vert,\ldots,\vert b_{tj}\vert\bigg|\vec{y}_{j}=(b_{1j},b_{2j},\ldots,b_{tj})\right\}
+\end{align}
+\]</span></p>
+<p>in other words, <span class="math inline">\(\lambda_{i}\)</span> and <span class="math inline">\(\mu_{j}\)</span> are the maximum of the absolute value of <span class="math inline">\(\vec{x}_{i}\)</span> and <span class="math inline">\(\vec{y}_{j}\)</span>, respectively. If it is happaned to be <span class="math inline">\(\lambda_{i}=0\)</span> or <span class="math inline">\(\mu_{j}=0\)</span>, then replace <span class="math inline">\(\lambda_{i}=\varepsilon\)</span> or <span class="math inline">\(\mu_{j}=\varepsilon\)</span> for <span class="math inline">\(0&lt;\varepsilon\ll1\)</span> to avoid division by <span class="math inline">\(0\)</span>. The following is algorithm for the computation of 2 matrix</p>
+<pre id="multiplicationOfTwoMatrix" class="pseudocode">    \begin{algorithm}
+    \caption{Multiplication of 2 matrix}
+    \begin{algorithmic}
+    \STATE Define $A\in\mathscr{M}_{m\times t}(\mathbb{R})$ s.t. $A=\left(a_{ij}\right)$
+    \STATE Define $B\in\mathscr{M}_{t\times n}(\mathbb{R})$ s.t. $B=\left(b_{ij}\right)$
+    \STATE let $C\in\mathscr{M}_{m\times n}(\mathbb{R})$ s.t. $C=\left(c_{ij}\right)\qquad$ // We may think $c_{ij}=0$ initially.
+    \FOR{$i\longleftarrow 1,2,\ldots,\#\textit{row}(A)$}
+        \For{$j\longleftarrow 1,2,\ldots,\#\textit{col}(B)$}
+            \STATE let $\vec{x}\longleftarrow\textit{row}(i;A)\qquad$ // $\vec{x}=(a_{i1},a_{i2},\ldots,a_{it})$
+            \STATE let $\vec{y}\longleftarrow\textit{col}(j;B)\qquad$ // $\vec{y}=(b_{1j},b_{2j},\ldots,b_{tj})$
+            \STATE $c_{ij}\longleftarrow\langle\vec{x},\vec{y}\rangle\qquad$ // the inner product is computed by using <a href="#eq-comp-inpro">Equation&nbsp;18</a>
+        \ENDFOR
+    \ENDFOR
+    \RETURN{$C$}
+    \end{algorithmic}
+    \end{algorithm}
+</pre>
+</div>
+<div id="exm-four" class="alinea theorem example">
+<p><span class="theorem-title"><strong>Example 4 </strong></span>Let <span class="math inline">\(A,B,C\in \mathscr{M}_3(\mathbb{R})\)</span>. If</p>
+<p><span class="math display">\[
+A=  \left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}\\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{array}\right)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+B=\left(\begin{array}{ccc}
+b_{11} &amp; b_{12} &amp; b_{13}\\
+b_{21} &amp; b_{22} &amp; b_{23}\\
+b_{31} &amp; b_{32} &amp; b_{33}
+\end{array}\right)
+\]</span></p>
+<p>then the multiplication of <span class="math inline">\(C=AB\)</span> as follows. Let <span class="math inline">\(\vec{x}_{i},\vec{y}_{i}\in\mathbb{R}^{3}\)</span> s.t. <span class="math inline">\(\vec{x}_{i}\coloneqq\textit{row}(i;A)\)</span> and <span class="math inline">\(\vec{y}_{j}\coloneqq\textit{col}(j;B)\)</span>, then we may write <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> matrix as follows</p>
+<p><span class="math display">\[
+A=\left(\begin{array}{ccc}
+\longleftarrow &amp; \vec{x}_{1} &amp; \longrightarrow \\
+\longleftarrow &amp; \vec{x}_{2} &amp; \longrightarrow \\
+\longleftarrow &amp; \vec{x}_{3} &amp; \longrightarrow
+\end{array}\right)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+B=\left(\begin{array}{ccc}
+\Big\uparrow &amp; \Big\uparrow &amp; \Big\uparrow\\
+\vec{y}_{1} &amp; \vec{y}_{2} &amp; \vec{y}_{3}\\
+\Big\downarrow &amp; \Big\downarrow &amp; \Big\downarrow
+\end{array}\right)
+\]</span></p>
+<p>then for <span class="math inline">\(C=AB\)</span> we have that <span class="math inline">\(C=\left(c_{ij}\right)\)</span> s.t.</p>
+<p><span class="math display">\[
+C=\left(\begin{array}{ccc}
+\langle\vec{x}_{1},\vec{y}_{1}\rangle &amp; \langle\vec{x}_{1},\vec{y}_{2}\rangle &amp; \langle\vec{x}_{1},\vec{y}_{3}\rangle\\
+\langle\vec{x}_{2},\vec{y}_{1}\rangle &amp; \langle\vec{x}_{2},\vec{y}_{2}\rangle &amp; \langle\vec{x}_{2},\vec{y}_{3}\rangle\\
+\langle\vec{x}_{3},\vec{y}_{1}\rangle &amp; \langle\vec{x}_{3},\vec{y}_{2}\rangle &amp; \langle\vec{x}_{3},\vec{y}_{3}\rangle
+\end{array}\right)
+\]</span></p>
+</div>
+</section>
+<section id="pseudomatrix" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="pseudomatrix"><span class="header-section-number">2.2</span> Pseudomatrix</h2>
+<div class="alinea">
+<p>One of common mistake when study computer science is happened to be when someone want to create/model a <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> by using a programming language. And that mistake is thinking that <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> is an array of an array, or more precisely, <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> is an array of size <span class="math inline">\(m\)</span> where each elements is an array of size <span class="math inline">\(n\)</span>.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> For example, in C++ programming language, thinking that <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> can be modeled as follows is a mistake</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&gt;</span> superevil <span class="op">=</span> <span class="op">{{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">},{</span><span class="fl">3.0</span><span class="op">,</span><span class="fl">4.0</span><span class="op">}};</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="dt">double</span> the_evil <span class="op">=</span> superevil<span class="op">.</span>at<span class="op">(</span><span class="dv">0</span><span class="op">).</span>at<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>even though that it works, nevertheless, it’s not good to do such a things, and there is a good reason for prohibited to do such a things. One of such a reasons for prohibit to thinking <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> is an array of an array is it’s like to have a 1 box where inside such a box there are <span class="math inline">\(m\)</span> boxes, and for each <span class="math inline">\(m\)</span> boxes there are <span class="math inline">\(n\)</span> items. Of course, if someone is delivering an items to someone else in such a way, then one may think that why don’t we just have a box that can be filled by <span class="math inline">\(mn\)</span> items. Therefore, in order to handle this ‘evil’, pseudomatrix is a good data structure to model a <span class="math inline">\(m\times n\)</span> matrix.</p>
+<p><span class="math inline">\(\quad\)</span> Pseudomatrix is a (non primitive) data structure to model <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span>. Pseudomatrix is a vector for which such a vector is treated as if it is a matrix. The following is definition of pseudomatrix.</p>
+</div>
+<div id="def-pseudomatrix" class="alinea theorem definition">
+<p><span class="theorem-title"><strong>Definition 11 (pseudomatrix) </strong></span>Let <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span>, a pseudomatrix is a vector <span class="math inline">\(\vec{x}\in\mathbb{R}^{t}\)</span> where <span class="math inline">\(t=mn\)</span> s.t.</p>
+<p><span id="eq-pseudomatrix"><span class="math display">\[
+A=\left(a_{ij}\right)\Leftrightarrow\vec{x}=(a_{11},a_{12},\ldots,a_{1n},a_{21},a_{22},\ldots,a_{2n},\ldots,a_{m1},a_{m2},\ldots,a_{mn})
+\tag{19}\]</span></span></p>
+<p>Since pseudomatrix is a vector, then each elements of such a vector only can be indexed by a number, not a pair of numbers. Hence, we need a function <span class="math inline">\(f\colon\mathbb{N}\times\mathbb{N}\to\mathbb{N}\)</span> so that</p>
+<p><span class="math display">\[
+\begin{align}
+A=\left(a_{ij}\right) &amp;\Leftrightarrow\vec{x}=(a_{f(1,1)},a_{f(1,2)},\ldots,a_{f(1,n)},\ldots,a_{f(m,1)},a_{f(m,2)},\ldots,a_{f(m,n)})\\
+    &amp;\Leftrightarrow\vec{x}=(x_{1},x_{2},\ldots,x_{t})
+\end{align}
+\]</span></p>
+<p>due to <span class="math inline">\(\vec{x}\in\mathbb{R}^{t}\)</span> and <span class="math inline">\(t=mn\)</span>. Such a function is written in the following theorem</p>
+</div>
+<div id="thm-pseudomatrix" class="alinea theorem">
+<p><span class="theorem-title"><strong>Theorem 1 </strong></span>Let <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R}),\vec{x}\in\mathbb{R}^{t}\)</span>, and <span class="math inline">\(t=mn\)</span>. If <span class="math inline">\(A=\left(a_{ij}\right)\)</span> and its pseudomatrix is a vector <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{t})\)</span>, then</p>
+<p><span class="math display">\[
+a_{ij}=x_{f(i,j)}
+\]</span></p>
+<p>where <span class="math inline">\(f\colon\mathbb{N}\times\mathbb{N}\to\mathbb{N}\)</span> s.t.</p>
+<p><span id="eq-idx-pseudomatrix"><span class="math display">\[
+(i,j)\mapsto f(i,j)\coloneqq(i-1)n+j
+\tag{20}\]</span></span></p>
+<p>for <span class="math inline">\(1\leq f(i,j)\leq t\)</span>, <span class="math inline">\(i=1,2,\ldots,m\)</span>, and <span class="math inline">\(j=1,2,\ldots,n\)</span>.</p>
+</div>
+<div class="alinea proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(A\in\mathscr{M}_{m\times n}(\mathbb{R})\)</span> and <span class="math inline">\(\vec{x}\in\mathbb{R}^{n},t=mn\)</span>. By definition, let the pseudomatrix of <span class="math inline">\(A\)</span> is a vector <span class="math inline">\(\vec{x}\)</span> s.t.</p>
+<p><span id="eq-prf"><span class="math display">\[
+\begin{align}
+A=\left(a_{ij}\right)   &amp;\Leftrightarrow\vec{x}=(a_{11},a_{12},\ldots,a_{1n},a_{21},a_{22},\ldots,a_{2n},\ldots,a_{m1},\ldots,a_{mn})\\
+    &amp;\Leftrightarrow\vec{x}=(x_{f(1,1)},x_{f(1,2)},\ldots,x_{f(1,n)},x_{f(2,1)},\ldots,x_{f(2,n)},\ldots,x_{f(m,1)},\ldots,x_{f(m,n)})\\
+    &amp;\Leftrightarrow\vec{x}=(x_{1},x_{2},\ldots,x_{t})
+\end{align}
+\tag{21}\]</span></span></p>
+<p>so for <span class="math inline">\(a_{ij}\)</span> in matrix <span class="math inline">\(A\)</span>, we have a corresponding element <span class="math inline">\(x_{f(i,j)}\)</span> in <span class="math inline">\(\vec{x}\)</span> s.t.</p>
+<p><span class="math display">\[
+a_{ij}=x_{f(i,j)}
+\]</span></p>
+<p>the definition of <span class="math inline">\(f\colon\mathbb{N}\times\mathbb{N}\to\mathbb{N}\)</span> s.t. <span class="math inline">\((i,j)\mapsto f(i,j)\)</span> is defined through induction of every <span class="math inline">\(i=1,2,\ldots,m\)</span> and <span class="math inline">\(j=1,2,\ldots,n\)</span> as follows. From <a href="#eq-prf">Equation&nbsp;21</a> line one and two, we may rearrange the pseudomatrix as a row and column to form a matrix, hence we have the following equality of a matrix</p>
+<p><span class="math display">\[
+\left(\begin{array}{cccc}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+a_{31} &amp; a_{32} &amp; \cdots &amp; a_{3n}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+\end{array}\right)=\left(\begin{array}{cccc}
+x_{f(1,1)} &amp; x_{f(1,2)} &amp; \cdots &amp; x_{f(1,n)}\\
+x_{f(2,1)} &amp; x_{f(2,2)} &amp; \cdots &amp; x_{f(2,n)}\\
+x_{f(3,1)} &amp; x_{f(3,2)} &amp; \cdots &amp; x_{f(3,n)}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+x_{f(m,1)} &amp; x_{f(m,2)} &amp; \cdots &amp; x_{f(m,n)}
+\end{array}\right)
+\]</span></p>
+<p>since we are interested in the index of the elements of a matrix, we simplify the notation of the matrix equality above by only look at the subscript, thus</p>
+<p><span class="math display">\[
+\left(\begin{array}{cccc}
+(1,1) &amp; (1,2) &amp; \cdots &amp; (1,n)\\
+(2,1) &amp; (2,2) &amp; \cdots &amp; (2,n)\\
+(3,1) &amp; (3,2) &amp; \cdots &amp; (3,n)\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+(m,1) &amp; (m,2) &amp; \cdots &amp; (m,n)
+\end{array}\right)=\left(\begin{array}{cccc}
+f(1,1) &amp; f(1,2) &amp; \cdots &amp; f(1,n)\\
+f(2,1) &amp; f(2,2) &amp; \cdots &amp; f(2,n)\\
+f(3,1) &amp; f(3,2) &amp; \cdots &amp; f(3,n)\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+f(m,1) &amp; f(m,2) &amp; \cdots &amp; f(m,n)
+\end{array}\right)
+\]</span></p>
+<p>through <a href="#eq-prf">Equation&nbsp;21</a> line two and three we have the equation for <span class="math inline">\(f(i,j)\)</span> by rearrange the elements of the pseudomatrix <span class="math inline">\(\vec{x}\)</span> as a row and column to form a matrix and looking at its subscript, hence we have the following equality of a matrix</p>
+<p><span class="math display">\[
+\left(\begin{array}{cccc}
+f(1,1) &amp; f(1,2) &amp; \cdots &amp; f(1,n)\\
+f(2,1) &amp; f(2,2) &amp; \cdots &amp; f(2,n)\\
+f(3,1) &amp; f(3,2) &amp; \cdots &amp; f(3,n)\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+f(m,1) &amp; f(m,2) &amp; \cdots &amp; f(m,n)
+\end{array}\right)=\left(\begin{array}{cccc}
+1 &amp; 2 &amp; \cdots &amp; n\\
+n+1 &amp; n+2 &amp; \cdots &amp; n+n=2n\\
+2n+1 &amp; 2n+2 &amp; \cdots &amp; 2n+n=3n\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+(m-1)n+1 &amp; (m-1)n+2 &amp; \cdots &amp; (m-1)n+n=mn
+\end{array}\right)
+\]</span></p>
+<p>if <span class="math inline">\(i\coloneqq m\)</span> and <span class="math inline">\(j\coloneqq n\)</span>, then from the equality of a matrix above, we see that</p>
+<p><span class="math display">\[
+\begin{align}
+f(m,n)  &amp;=(m-1)n+n\\
+\Leftrightarrow f(i,j)  &amp;=(i-1)n+j
+\end{align}
+\]</span></p>
+<p>and <span class="math inline">\(1\leq f(i,j)\leq t\)</span> since <span class="math inline">\(t=mn\)</span>. Therefore, the pseudomatrix of <span class="math inline">\(A\)</span> is a vector <span class="math inline">\(\vec{x}\)</span> s.t.</p>
+<p><span class="math display">\[
+A=\left(a_{ij}\right)\Leftrightarrow\vec{x}=\left(\begin{array}{ccc}
+\longleftarrow &amp; x_{f(i,j)} &amp; \longrightarrow\end{array}\right)
+\]</span></p>
+<p>where <span class="math inline">\(f\colon\mathbb{N}\times\mathbb{N}\to\mathbb{N}\)</span> s.t. <span class="math inline">\((i,j)\mapsto f(i,j)\coloneqq(i-1)n+j\)</span>, for which the following equality</p>
+<p><span class="math display">\[
+a_{ij}=x_{f(i,j)}=x_{(i-1)n+j}
+\]</span></p>
+<p>is obtained thereof.</p>
+<p style="text-align:right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><em>Remark 5.</em> The equality <span class="math inline">\(a_{ij}=x_{f(i,j)}\)</span> where <span class="math inline">\(f\colon\mathbb{N}\times\mathbb{N}\to\mathbb{N}\)</span> s.t.</p>
+<p><span class="math display">\[
+(i,j)\mapsto(i-1)n+j
+\]</span></p>
+<p>is true if we start counting from <span class="math inline">\(1\)</span>. If we start counting from <span class="math inline">\(0\)</span>, i.e., <span class="math inline">\(i=0,1,\ldots,m-1\)</span> and <span class="math inline">\(j=0,1,\ldots,n-1\)</span>, then we have that if <span class="math inline">\(A=(a_{ij})\)</span> and its pseudomatrix is vector <span class="math inline">\(\vec{x}=(x_{0},x_{1},\ldots,x_{t})\)</span> and <span class="math inline">\(t=mn-1\)</span>, then</p>
+<p><span class="math display">\[
+a_{ij} = x_{f(i,j)}
+\]</span></p>
+<p>where <span class="math inline">\(f\colon \mathbb{N}\times\mathbb{N}\to\mathbb{N}\)</span> s.t.</p>
+<p><span id="eq-idx-zero-pseudomat"><span class="math display">\[
+(i,j)\mapsto f(i,j)\coloneqq in+j
+\tag{22}\]</span></span></p>
+<p>and <span class="math inline">\(0\leq f(i,j)\leq t\)</span>. In this case, <span class="math inline">\(t=mn-1\)</span> since we start counting from <span class="math inline">\(0\)</span>. And the proof is similar to the proof of theorem [thm: idx_pseudomat].</p>
+</div>
+<div id="exm-four" class="alinea theorem example">
+<p><span class="theorem-title"><strong>Example 5 </strong></span>Let <span class="math inline">\(A\in\mathscr{M}_{2\times 3}(\mathbb{R})\)</span> s.t.</p>
+<p><span class="math display">\[
+A=\left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}
+\end{array}\right)
+\]</span></p>
+<p>then the pseudomatrix of <span class="math inline">\(A\)</span> is a vector <span class="math inline">\(\vec{x}\in\mathbb{R}^t\)</span> for <span class="math inline">\(t=mn=2\times 3=6\)</span></p>
+<p><span class="math display">\[
+\vec{x}=(a_{11},a_{12},a_{13},a_{21},a_{22},a_{23})
+\]</span></p>
+</div>
+<div id="exm-five" class="alinea theorem example">
+<p><span class="theorem-title"><strong>Example 6 </strong></span>If <span class="math inline">\(A\in\mathscr{M}_3(\mathbb{R})\)</span> s.t.</p>
+<p><span class="math display">\[
+A=  \left(\begin{array}{ccc}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}\\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{array}\right)
+\]</span></p>
+<p>then the pseudomatrix of <span class="math inline">\(A\)</span> is a vector <span class="math inline">\(\vec{x}\in\mathbb{R}^{t}\)</span> for <span class="math inline">\(t=mn=3\times3=9\)</span> and <span class="math inline">\(\vec{x}=(x_{f(1,1)},x_{f(1,2)},\ldots,x_{f(3,3)})\)</span>. Since we start counting from <span class="math inline">\(1\)</span>, then <span class="math inline">\(f(i,j)\coloneqq(i-1)n+j\)</span>. Thus,</p>
+<p><span class="math display">\[
+\begin{align}
+f(1,1)  &amp;=(1-1)3+1=0\times3+1=0+1=1\Rightarrow x_{1}=a_{11}\\
+f(1,2)  &amp;=(1-1)3+2=0\times3+2=0+2=2\Rightarrow x_{2}=a_{12}\\
+f(1,3)  &amp;=(1-1)3+3=0\times3+3=0+3=3\Rightarrow x_{3}=a_{13}\\
+f(2,1)  &amp;=(2-1)3+1=1\times3+1=3+1=4\Rightarrow x_{4}=a_{21}\\
+f(2,2)  &amp;=(2-1)3+2=1\times3+2=3+2=5\Rightarrow x_{5}=a_{22}\\
+f(2,3)  &amp;=(2-1)3+3=1\times3+3=3+3=6\Rightarrow x_{6}=a_{23}\\
+f(3,1)  &amp;=(3-1)3+1=2\times3+1=6+1=7\Rightarrow x_{7}=a_{31}\\
+f(3,2)  &amp;=(3-1)3+2=2\times3+2=6+2=8\Rightarrow x_{8}=a_{32}\\
+f(3,3)  &amp;=(3-1)3+3=2\times3+3=6+3=9\Rightarrow x_{9}=a_{33}
+\end{align}
+\]</span></p>
+<p>thereby, the pseudomatrix of A is a vector <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{9})\)</span> s.t.</p>
+<p><span class="math display">\[
+\vec{x}=(a_{11},a_{12},a_{13},a_{21},a_{22},a_{23},a_{31},a_{32},a_{33})
+\]</span></p>
+</div>
+<div id="exm-seven" class="alinea theorem example">
+<p><span class="theorem-title"><strong>Example 7 </strong></span>Suppose that <span class="math inline">\(A\in\mathscr{M}_2\)</span> s.t.</p>
+<p><span class="math display">\[
+A = \left(\begin{array}{cc}
+a_{00} &amp; a_{01} \\
+a_{10} &amp; a_{11}
+\end{array}\right)
+\]</span></p>
+<p>then the pseudomatrix of <span class="math inline">\(A\)</span> is a vector <span class="math inline">\(\vec{x}\in\mathbb{R}^{t}\)</span> where <span class="math inline">\(t=2\times2=4\)</span> and <span class="math inline">\(\vec{x}=(x_{f(0,0)},x_{f(0,1)},x_{f(1,0)},x_{f(1,1)})\)</span>. Since we start counting from <span class="math inline">\(0\)</span>, then <span class="math inline">\(f(i,j)=in+j\)</span>. Thus</p>
+<p><span class="math display">\[
+\begin{align}
+f(0,0)  &amp;=0\times2+0=0+0=0\Rightarrow x_{0}=a_{00}\\
+f(0,1)  &amp;=0\times2+1=0+1=1\Rightarrow x_{1}=a_{01}\\
+f(1,0)  &amp;=1\times2+0=2+0=2\Rightarrow x_{2}=a_{10}\\
+f(1,1)  &amp;=1\times2+1=2+1=3\Rightarrow x_{3}=a_{11}
+\end{align}
+\]</span></p>
+<p>thereby, the pseudomatrix of <span class="math inline">\(A\)</span> is a vector <span class="math inline">\(\vec{x}=(x_{0,}x_{1},x_{2},x_{3})\)</span> s.t. <span class="math inline">\(\vec{x}=(a_{00},a_{01},a_{10},a_{11})\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="design-and-implementation" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Design and Implementation</h1>
+<div class="alinea">
+<p>Before we start implementing the abstract concept of mathematics into a real programming language like C++, it’s better to visualize the structure of the directory and the structure of <code>Matrix</code> class. To do so, we use one of diagram of Unified Modelling Language (UML) by (Fowler, M., 2004), a class diagram to visualize Matrix class.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> The following is the structure of <code>Limav</code> directory (see Figure 1). Our <code>Limav</code> directory consist 2 type of file, either <code>.h</code> files or <code>.cpp</code> files. All classes, functions, and operators are declared in <code>.h</code> file, and how we program these class, functions, and operators are in <code>.cpp</code> files.</p>
+</div>
+<p><img src="www/dir_structure.png" class="imgcenter"></p>
+
+<div class="alinea">
+<p>Figure 1: Structure of directory of <code>linear_algebra</code> which consist of <code>Limav'</code>s directory, <code>mainprog.cpp, compfile.sh,</code> and <code>compandrun.sh</code>.</p>
+</div>
+
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> The <code>limav.h</code> header actually consist of 2 main header files, those are <code>linav.h</code> and <code>linam.h</code>. We have <code>linav.h</code> header for computation of vectors in linear algebra only, and we had explained it in detail in the following article by title <a href="https://www.fahlevisia.com/paper/2024/fsr1/">Linav: Computation of Vectors in Linear Algebra</a>. For <code>linam.h</code>, it’s a C++ header and it’s stand for matrix in linear algebra, and it’s intended to be used for computation of matrix only. And <code>limav.h</code> header involves <code>linav.h</code> and <code>linam.h</code> through the following operators, multiplication of matrix and vector, multiplication of 2 matrix, and transpose of a vector. In applied perspective, we add 3 more operators, those operators are <span class="math inline">\(\textit{row}(\cdot;A),\textit{col}(\cdot;A)\)</span> and <span class="math inline">\(\textit{tr}(A)\)</span> where <span class="math inline">\(A\)</span> is a <span class="math inline">\(m\times n\)</span> matrix. The description of all <code>.h</code> and <code>.cpp</code> files in <code>Limav</code>’s directory is presented in Table 1.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> Figure 2 shows a class diagram for Matrix class. Since we implement this class diagram into C++ programming language, then what we do have from Figure 2 is that Matrix class consist of 3 data members, 1 parameterized constructor, and 4 function members (notice that we use “members” terminology instead of properties and methods, to tell the honourable reader that we implement it in C++ programming language). The description of members of Matrix class is presented in Table 2, and Table 3 is description of operator with regards to matrix only (no vector is involve).</p>
+
+<img src="www/Matrix.png" class="imgcenter">
+
+    <p class="alinea" style="text-align: center; margin-top: 12px;">Figure 2: A class diagram for <code>Matrix</code></p>
+
+<style>
+    table,tr,td {
+        font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;
+    }
+</style>
+
+<table class="table" data-quarto-postprocess="true">
+<caption>Table 1: Description of <code>Limav</code> directory</caption>
+<tbody>
+<tr class="odd">
+<td colspan="2" data-quarto-table-cell-role="th"><strong>Directory</strong></td>
+<td data-quarto-table-cell-role="th"><strong>File</strong></td>
+<td data-quarto-table-cell-role="th"><strong>Description</strong></td>
+</tr>
+<tr class="even">
+<td rowspan="10">Limav/</td>
+<td rowspan="4">Linam/</td>
+<td><code>linam.cpp</code></td>
+<td>computation of all members of <code>Matrix</code> class</td>
+</tr>
+<tr class="odd">
+<td><code>linam.h</code></td>
+<td>declaration of matrix class and operators</td>
+</tr>
+<tr class="even">
+<td><code>matop.cpp</code></td>
+<td>computation of operators which have declared in <code>linam.h</code></td>
+</tr>
+<tr class="odd">
+<td><code>printprog.cpp</code></td>
+<td>program how we print the results</td>
+</tr>
+<tr class="even">
+<td rowspan="4">Linav/</td>
+<td><code>linav.cpp</code></td>
+<td>computation of all members of <code>Vector</code> class</td>
+</tr>
+<tr class="odd">
+<td><code>linav.h</code></td>
+<td>declaration of <code>Vector</code> class and operators</td>
+</tr>
+<tr class="even">
+<td><code>linop.cpp</code></td>
+<td>computation of operators which have declared in <code>linav.h</code></td>
+</tr>
+<tr class="odd">
+<td><code>printprog.cpp</code></td>
+<td>program how we print the results</td>
+</tr>
+<tr class="even">
+<td rowspan="2"></td>
+<td><code>limav.cpp</code></td>
+<td>computation of operators which have declared in <code>limav.h</code></td>
+</tr>
+<tr class="odd">
+<td><code>limav.h</code></td>
+<td>declaration of operators which involve <code>linav.h</code> and <code>linam.h</code></td>
+</tr>
+</tbody>
+</table>
+<table data-quarto-postprocess="true" class="table">
+<caption>Table 2: Description of members of <code>Matrix</code> class</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"><strong>Access Specifier</strong></td>
+<td data-quarto-table-cell-role="th"><strong>Member</strong></td>
+<td data-quarto-table-cell-role="th"><strong>Description</strong></td>
+</tr>
+<tr class="even">
+<td rowspan="3"><code>private</code></td>
+<td><code>mrow</code></td>
+<td>the number of row that matrix have</td>
+</tr>
+<tr class="odd">
+<td><code>ncol</code></td>
+<td>the number of column of matrix</td>
+</tr>
+<tr class="even">
+<td><code>matel</code></td>
+<td>the elements (entries) of the matrix</td>
+</tr>
+<tr class="odd">
+<td rowspan="5"><code>public</code></td>
+<td><code>Matrix(std::vector&lt;double&gt;, int m_row, int n_col)</code></td>
+<td>constructor to construct a <code>m_row</code> $\times$ <code>n_col</code> matrix object</td>
+</tr>
+<tr class="even">
+<td><code>row()</code></td>
+<td>return the number of row</td>
+</tr>
+<tr class="odd">
+<td><code>col()</code></td>
+<td>return the number of column</td>
+</tr>
+<tr class="even">
+<td><code>accs(unsigned int ith_row, unsigned int jth_col, </code></td>
+<td>return the element of matrix at $i$th-row and $j$th-column</td>
+</tr>
+<tr class="odd">
+<td><code>updt(double val, unsigned int ith_row, unsigned int jth_col)</code></td>
+<td>update the element of a matrix at $i$th-row and $j$th-column by new value</td>
+</tr>
+</tbody>
+</table>
+<table data-quarto-postprocess="true" class="table">
+<caption>Table 3: Description of operator for a matrix</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"><strong>Name</strong></td>
+<td data-quarto-table-cell-role="th"><strong>Return</strong></td>
+<td data-quarto-table-cell-role="th"><strong>Description</strong></td>
+</tr>
+<tr class="even">
+<td><code>t(anum::Matrix)</code></td>
+<td><code>anum::Matrix</code></td>
+<td>return the transpose of a matrix</td>
+</tr>
+<tr class="odd">
+<td><code>operator +(anum::Matrix A, anum::Matrix B)</code></td>
+<td><code>anum::Matrix</code></td>
+<td>addition for 2 matrix</td>
+</tr>
+<tr class="even">
+<td><code>operator -(anum::Matrix A, anum::Matrix B)</code></td>
+<td><code>anum::Matrix</code></td>
+<td>substraction for 2 matrix</td>
+</tr>
+<tr class="odd">
+<td><code>operator *(double sc, anum::Matrix A)</code></td>
+<td><code>anum::Matrix</code></td>
+<td>scaled matrix by real number <code>sc</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+</div>
+<div class="alinea">
+<p>Meanwhile, in <code>limav.h</code>, we have the following functions which involve <code>linam.h</code> and <code>linav.h</code> (see Table 4).</p>
+</div>
+<table data-quarto-postprocess="true" class="table">
+<caption>Table 4: Description of functions in <code>limav.h</code></caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"><strong>Name</strong></td>
+<td data-quarto-table-cell-role="th"><strong>Return</strong></td>
+<td data-quarto-table-cell-role="th"><strong>Description</strong></td>
+</tr>
+<tr class="even">
+<td><code>get_rowel(anum::Matrix, unsigned int ith_row)</code></td>
+<td><code>anum::Vector</code></td>
+<td>get the entries of matrix at $i$th-row</td>
+</tr>
+<tr class="odd">
+<td><code>get_colel(anum::Matrix, unsigned int jth_col</code></td>
+<td><code>anum::Vector</code></td>
+<td>get the entries of matrix at $j$th-column</td>
+</tr>
+<tr class="even">
+<td><code>operator *(anum::Matrix, anum::Matrix)</code></td>
+<td><code>anum::Matrix</code></td>
+<td>multiplication of 2 matrix</td>
+</tr>
+<tr class="odd">
+<td><code>operator *(anum::Matrix, anum::Vector)</code></td>
+<td><code>anum::Vector</code></td>
+<td>multiplication of matrix and vector</td>
+</tr>
+<tr class="even">
+<td><code>t(anum::Vector)</code></td>
+<td><code>anum::Matrix</code></td>
+<td>transpose of a vector</td>
+</tr>
+<tr class="odd">
+<td><code>trace(anum::Matrix)</code></td>
+<td><code>double</code></td>
+<td>the sum of diagonal elements of a matrix</td>
+</tr>
+</tbody>
+</table>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> When it comes to implement the mathematical concept into C++ programming language, we use <code>try-catch</code> and <code>throw</code> technique to evaluate if such an operation can be done or not (Stroustrup, B., 2001). For example, 2 matrix can only be added if and only if they have the same number of row and column. The elements of a matrix or vector can be accessed if and only if the given index is within in a range. And, 2 matrix, say <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(A\)</span> can only be multiplied by <span class="math inline">\(B\)</span> if and only if <span class="math inline">\(\#\textit{col}(A)=\#\textit{row}(B)\)</span>, etc.</p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> Some of function members or constructors are equipped by <code>try-catch</code> and/or <code>throw</code>, and some of them are not (see Table 5). And, for some of functions members or constructor which equipped with <code>try-catch</code> and <code>throw</code> are immidietly terminate the program if some error are catched due to the program will give undesired results if it’s not terminated. Nevertheless, some of constructor do not terminated the program if some error is catched due to we are capable to handle such an error, and that constructor is <code>anum::Matrix</code></p>
+</div>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> For <code>anum::Matrix(std::vector&lt;double&gt;, unsigned int m_row, unsigned int n_col)</code>, based on the number of the entries, there are 4 cases that we need to handle. Let <span class="math inline">\(\vec{x}=(x_{1},x_{2},\ldots,x_{t})\)</span> is a point in <span class="math inline">\(\mathbb{R}^{t}\)</span> where <span class="math inline">\(x_{1},x_{2},\ldots,x_{t}\)</span> are the entries of a <span class="math inline">\(\vec{v}\)</span> (pseudo) matrix, if <span class="math inline">\(m\coloneqq\)</span> <code>m_row</code> and <span class="math inline">\(n\coloneqq\)</span> <code>n_col</code> then</p>
+<p><span class="math display">\[
+\begin{array}{ccccccc}
+\left(\begin{array}{cc}
+x_{1} &amp; x_{2}\\
+x_{3} &amp; x_{4}\\
+x_{5} &amp; x_{6}
+\end{array}\right) &amp;  &amp; \left(\begin{array}{cc}
+x_{1} &amp; x_{2}\\
+x_{3} &amp; x_{4}\\
+\xcancel{x}_{5} &amp; \xcancel{x}_{6}
+\end{array}\right) &amp; \underrightarrow{\quad\textit{become}\quad} &amp; \left(\begin{array}{cc}
+x_{1} &amp; x_{2}\\
+x_{3} &amp; x_{4}
+\end{array}\right) &amp;  &amp; \left(\begin{array}{ccc}
+x_{1} &amp; x_{2} &amp; x_{3}\\
+x_{4} &amp; x_{5} &amp; x_{6}\\
+0 &amp; 0 &amp; 0
+\end{array}\right)\\
+\textit{case 1} &amp;  &amp;  &amp; \textit{case 2} &amp;  &amp;  &amp; \textit{case 3}
+\end{array}
+\]</span></p>
+</div>
+
+<div class="alinea">
+<p>Figure 3: 3 cases when construct a pseudomatrix \(\) where its entries is a point in <span class="math inline">\(\mathbb{R}^t\)</span> for \(t=6\) such that <span class="math inline">\(\vec{x}=(x_{1}, x_{2}, x_{3}, x_{4}, x_{5}, x_{6})\)</span>. In <span class="math inline">\(\textit{case 1}\)</span>, we have <span class="math inline">\(t=mn\)</span> or <span class="math inline">\(6=3\times 2\)</span>. In <span class="math inline">\(\textit{case 2}\)</span>, we have that <span class="math inline">\(t&gt;mn\)</span> or <span class="math inline">\(6&gt;2\times 2\)</span>, thereby <span class="math inline">\(x_{5}\)</span> and <span class="math inline">\(x_{6}\)</span> are ignored. In <span class="math inline">\(\textit{case 3}\)</span>, we have <span class="math inline">\(t&lt;mn\)</span> or <span class="math inline">\(6 &lt; 3\times 3\)</span>, thereby we have <span class="math inline">\(mn-t\)</span> or <span class="math inline">\(3\times 3 - 6 = 9 - 3= 3\)</span> “slots” are left, we fill these “empty slots” by <span class="math inline">\(0\)</span>.</p>
+</div>
+
+<div class="alinea" style="padding-left:1pc;">
+<p><span class="math inline">\(1.\)</span> If <span class="math inline">\(t=mn\)</span>, then no error will be catched, and we have <span class="math inline">\(\vec{v}\)</span> is the pseudomatrix. E.g., see <span class="math inline">\(\textit{case 1}\)</span> in Figure <span class="math inline">\(3\)</span>.</p>
+<p><span class="math inline">\(2.\)</span> If <span class="math inline">\(t&gt;mn\)</span>, then <code>std::domain_error&amp; doerr</code> will be throwed and catched. We could handle this error in the catch block code by returning the pseudomatrix <span class="math inline">\(\vec{v}\)</span> s.t. <span class="math inline">\(\forall i\leq mn,i=1,2,\ldots,t; x_{i}\)</span> is included in <span class="math inline">\(\vec{v}\)</span>, and <span class="math inline">\(\forall i&gt;mn,i=mn+1,mn+2,\ldots,t; x_{i}\)</span> in <span class="math inline">\(\vec{x}\)</span> is ignored so that <span class="math inline">\(x_{i}\)</span> is not in <span class="math inline">\(\vec{v}\)</span>. E.g., see <span class="math inline">\(\textit{case 2}\)</span> in Figure 3.</p>
+<p><span class="math inline">\(3\)</span>. If <span class="math inline">\(t&lt;mn\)</span>, then <code>std::domain_error&amp; doerr</code> will be throwed and catched. This error could be handled in the catch block code by <span class="math inline">\(\forall i\leq mn,i=1,2,\ldots,mn; x_{i}\)</span> is included in pseudomatrix <span class="math inline">\(\vec{v}\)</span>, and we include <span class="math inline">\(0\)</span> in pseudomatrix <span class="math inline">\(\vec{v}, mn-t\)</span> times. E.g., see <span class="math inline">\(\textit{case 3}\)</span> in Figure 3.</p>
+<p><span class="math inline">\(4.\)</span> Otherwise, <code>std::exception&amp; e</code> will be catched, and the program will be terminated, immidietly.</p>
+</div>
+<table class="table table-hover" data-quarto-postprocess="true">
+<caption>Table 5: Catch and throw</caption>
+<tbody>
+<tr class="odd">
+<td><strong>No.</strong></td>
+<td><strong>function/constructor/function members</strong></td>
+<td><strong>Catch</strong></td>
+<td><strong>Condition to throw</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1.</td>
+<td><code>Vector()</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2.</td>
+<td><code>Vector(unsigned int dimension)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3.</td>
+<td><code>Vector(std::vector&lt;double&gt;)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4.</td>
+<td><code>double accs(unsigned int ith_position)</code></td>
+<td><code>const std::out_of_range&amp; oor</code></td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>5.</td>
+<td><code>void updt(unsigned int ith_position, double)</code></td>
+<td><code>const std::out_of_range&amp; oor</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>6.</td>
+<td><code>unsigned int get_dim()</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>7.</td>
+<td><code>anum::Vector operator +(anum::Vector lhs, anum::Vector rhs)</code></td>
+<td><code>const std::domain_error&amp; doerr</code></td>
+<td><code> if (lhs.get_dim()!=rhs.get_dim()) { throw std::domain_error("..."); } </code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>8.</td>
+<td><code>anum::Vector operator -(anum::Vector lhs, anum::Vector rhs)</code></td>
+<td><code>const std::domain_error&amp; doerr</code></td>
+<td><code> if (lhs.get_dim()!=rhs.get_dim()) { throw std::domain_error("..."); } </code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>9.</td>
+<td><code>anum::Vector operator (anum::Vector lhs, anum::Vector rhs)</code></td>
+<td><code>const std::domain_error&amp; doerr</code></td>
+<td><code> if (lhs.get_dim()!=rhs.get_dim()) { throw std::domain_error("..."); } </code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>10.</td>
+<td><code>anum::Vector operator *(double, anum::Vector)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>11.</td>
+<td><code>anum::Vector operator *(anum::Vector, double)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>12.</td>
+<td><code>anum::Vector abs(anum::Vector)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>13.</td>
+<td><code>double sum(anum::Vector)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>14.</td>
+<td><code>anum::Vector power(anum::Vector, double)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>15.</td>
+<td><code>double lpnorm(anum::Vector, double)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>16.</td>
+<td><code>double eunorm(anum::Vector)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>17.</td>
+<td><code>double inpro(anum::Vector, anum::Vector)</code></td>
+<td><code>const std::domain_error&amp; doerr</code></td>
+<td><code> if (u.get_dim()!=v.get_dim()) { throw std::domain_error("..."); } </code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>18.</td>
+<td><code>double distance(anum::Vector, anum::Vector)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>19.</td>
+<td><code>anum::Vector normalize(anum::Vector)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td rowspan="2">20.</td>
+<td rowspan="2"><code>Matrix(std::vector&lt;double&gt;, unsigned int m_row, unsigned int n_col)</code></td>
+<td><code>std::domain_error&amp; doerr</code></td>
+<td rowspan="2"><code>if (vec.size() != m_row * n_col) { throw std::domain_error("..."); } </code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>const std::exception &amp;e</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>21.</td>
+<td><code>unsigned int row()</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>22.</td>
+<td><code>unsigned int col()</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td rowspan="2">23.</td>
+<td rowspan="2"><code>double accs(unsigned int ith_row, unsigned int jth_col)</code></td>
+<td><code>const std::out_of_range&amp; oor</code></td>
+<td rowspan="2"><code>if (ith_row &gt; (this-&gt;mrow-1)) { const std::string oor_log = "..."; throw std::out_of_range(oor_log); } </code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>const std::exception&amp; e</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td rowspan="2">24.</td>
+<td rowspan="2"><code>double updt(double val, unsigned int ith_row, unsigned int jth_col)</code></td>
+<td><code>const std::out_of_range &amp;oor</code></td>
+<td rowspan="2"><code>if (ith_row &gt; (this-&gt;m_row-1)){ const std::string oor_log = "..."; throw std::out_of_range(oor_log); }</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>const std::exception&amp; e</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>25.</td>
+<td><code>anum::Matrix t(anum::Matrix)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td rowspan="2">26.</td>
+<td rowspan="2"><code>anum::Matrix operator +(anum::Matrix A, anum::Matrix B)</code></td>
+<td><code>const std::domain_error&amp; doerr</code></td>
+<td rowspan="2"><code>if ((A.row()!=B.row()) || (A.col() != B.col())) { throw std::domain_error("..."); }</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>const std::exception&amp; e</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>27.</td>
+<td><code>anum::Matrix operator - (anum::Matrix A, anum::Matrix B)</code></td>
+<td><code>const std::domain_error&amp; doerr</code></td>
+<td><code>if ((A.row() != B.row()) || (A.col() != B.col())) { throw std::domain_error("..."); }</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>28.</td>
+<td><code>anum::Matrix operator *(double sc, anum::Matrix)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>29.</td>
+<td><code>anum::Vector get_rowel(anum::Matrix, unsigned int ith_row)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>30.</td>
+<td><code>anum::Vector get_colel(anum::Matrix, unsigned jth_col)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>31</td>
+<td><code>anum::Matrix operator *(anum::Matrix, anum::Vector)</code></td>
+<td><code>const std::domain_error &amp;doerr</code></td>
+<td><code>if (A.col() != B.row()) { throw std::domain_error("..."); } </code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>32.</td>
+<td><code>anum::Vector operator *(anum::Matrix, anum::Vector)</code></td>
+<td><code>const std::domain_error &amp;doerr</code></td>
+<td><code>if (mat.col()!=vec.get_dim()) { throw std::domain_error("..."); })</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>33.</td>
+<td><code>anum::Matrix t(anum::Vector)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>34.</td>
+<td><code>double trace(anum::Matrix)</code></td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="alinea">
+<p><span class="math inline">\(\quad\)</span> We suggest for those who want to use <code>limav.h</code>, to create a new folder having your purpose as the name of this new folder. In this new folder consist of our <code>Limav’s</code> directory and <code>mainprog.cpp</code>. For example, in my case, <code>linear_algebra</code> is the name of my new folder. In this new folder consist our Limav’s directory and <code>mainprog.cpp</code>. Since we use Fedora Linux as our operating system, we create 2 bash script, <code>compfile.sh</code> and <code>compandrun.sh</code>. For <code>compfile.sh</code> it’s a script for compile the program, and it’s written as follows</p>
+<pre><code>#!/bin/bash
+echo "g++ Limav/Linav/linav.h Limav/Linav/linav.cpp Limav/Linav/linop.cpp Limav/Linav/printprog.cpp Limav/Linam/linam.h Limav/Linam/linam.cpp Limav/Linam/matop.cpp Limav/Linam/printprog.cpp Limav/limav.h Limav/limav.cpp mainprog.cpp -o mainprog -O2 --time";
+g++ Limav/Linav/linav.h Limav/Linav/linav.cpp Limav/Linav/linop.cpp Limav/Linav/printprog.cpp Limav/Linam/linam.h Limav/Linam/linam.cpp Limav/Linam/matop.cpp Limav/Linam/printprog.cpp Limav/limav.h Limav/limav.cpp mainprog.cpp -o mainprog -O2 --time;</code></pre>
+<p><code>compandrun.sh</code> is a bash script to compile and then execute (run) the program, the script is written as follows</p>
+<pre><code>#!/bin/bash
+echo "g++ Limav/Linav/linav.h Limav/Linav/linav.cpp Limav/Linav/linop.cpp Limav/Linav/printprog.cpp Limav/Linam/linam.h Limav/Linam/linam.cpp Limav/Linam/matop.cpp Limav/Linam/printprog.cpp Limav/limav.h Limav/limav.cpp mainprog.cpp -o mainprog -O2";
+g++ Limav/Linav/linav.h Limav/Linav/linav.cpp Limav/Linav/linop.cpp Limav/Linav/printprog.cpp Limav/Linam/linam.h Limav/Linam/linam.cpp Limav/Linam/matop.cpp Limav/Linam/printprog.cpp Limav/limav.h Limav/limav.cpp mainprog.cpp -o mainprog -O2;
+./mainprog;</code></pre>
+</div>
+</section>
+<section id="results-and-discussion" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Results and Discussion</h1>
+<div class="alinea">
+<p>Suppose that <span class="math inline">\(A,B\in\mathscr{M}_{3}(\mathbb{R}),\vec{x},\vec{y}\in\mathbb{R}^{3}\)</span> s.t.</p>
+<p><span class="math display">\[
+A=\left(\begin{array}{ccc}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6 \\
+7 &amp; 8 &amp; 9
+\end{array}\right)
+\]</span></p>
+<p>and <span class="math inline">\(\vec{x}=(2,3,5)\)</span>, let <span class="math inline">\(\lambda=3\)</span>, then theoritically we have</p>
+<p><span class="math inline">\((i)\)</span> if <span class="math inline">\(B\coloneqq A+A\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+A+A&amp;=\left(\begin{array}{ccc}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6\\
+7 &amp; 8 &amp; 9
+\end{array}\right)+\left(\begin{array}{ccc}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6\\
+7 &amp; 8 &amp; 9
+\end{array}\right)\\
+&amp;=\left(\begin{array}{ccc}
+1+1 &amp; 2+2 &amp; 3+3\\
+4+4 &amp; 5+5 &amp; 6+6\\
+7+7 &amp; 8+8 &amp; 9+9
+\end{array}\right)\\&amp;=\left(\begin{array}{ccc}
+2 &amp; 4 &amp; 6\\
+8 &amp; 10 &amp; 12\\
+14 &amp; 16 &amp; 18
+\end{array}\right) \\
+A+A&amp;=2A
+\end{align}
+\]</span></p>
+<p><span class="math inline">\((ii)\)</span> if <span class="math inline">\(\vec{y}\coloneqq A\vec{x}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+A\vec{x}&amp;=\left(\begin{array}{ccc}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6\\
+7 &amp; 8 &amp; 9
+\end{array}\right)\left(\begin{array}{c}
+2\\
+3\\
+5
+\end{array}\right)\\
+&amp;=\left(\begin{array}{c}
+y_{1}\\
+y_{2}\\
+y_{3}
+\end{array}\right)\\
+A\vec{x}    &amp;=\vec{y}
+\end{align}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\begin{align}
+y_{1}   &amp;=1\times2+2\times3+3\times5=2+6+15=8+15=23\\
+y_{2}   &amp;=4\times2+5\times3+6\times5=8+15+30=23+30=53\\
+y_{3}   &amp;=7\times2+8\times3+9\times5=14+24+45=38+45=83
+\end{align}
+\]</span></p>
+<p>thereby, we have that <span class="math inline">\(\vec{y}=(23,53,83)\)</span>.</p>
+<p><span class="math inline">\((iii)\)</span> if <span class="math inline">\(\vec{y}\coloneqq\vec{x}+A\vec{x}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\vec{y}&amp;=\left(\begin{array}{c}
+2\\
+3\\
+5
+\end{array}\right)+\left(\begin{array}{ccc}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6\\
+7 &amp; 8 &amp; 9
+\end{array}\right)\left(\begin{array}{c}
+2\\
+3\\
+5
+\end{array}\right)\\
+&amp;=\left(\begin{array}{c}
+2\\
+3\\
+5
+\end{array}\right)+\left(\begin{array}{c}
+23\\
+53\\
+83
+\end{array}\right)\\
+&amp;=\left(\begin{array}{c}
+2+23\\
+3+53\\
+5+83
+\end{array}\right)\\
+\vec{y}&amp;=\left(\begin{array}{c}
+25\\
+56\\
+88
+\end{array}\right)
+\end{align}
+\]</span></p>
+<p>thus, <span class="math inline">\(\vec{y}=(25,56,88)\)</span>.</p>
+<p><span class="math inline">\((iv)\)</span> if <span class="math inline">\(B\coloneqq A2A\)</span>, then</p>
+<p><span class="math display">\[
+B=\left(\begin{array}{ccc}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6\\
+7 &amp; 8 &amp; 9
+\end{array}\right)\left(\begin{array}{ccc}
+2 &amp; 4 &amp; 6\\
+8 &amp; 10 &amp; 12\\
+14 &amp; 16 &amp; 18
+\end{array}\right)
+\]</span></p>
+<p>Let <span class="math inline">\(\vec{x}_{1}=(1,2,3);\vec{x}_{2}=(4,5,6);\vec{x}_{3}=(7,8,9)\)</span>; and <span class="math inline">\(\vec{y}_{1}=(2,8,14);\vec{y}_{2}=(4,10,16);\vec{y}_{3}=(6,12,18)\)</span>, then we may write B matrix as follows</p>
+<p><span class="math display">\[
+\begin{align}
+B   &amp;=\left(\begin{array}{ccc}
+\longleftarrow &amp; \vec{x}_{1} &amp; \longrightarrow\\
+\longleftarrow &amp; \vec{x}_{2} &amp; \longrightarrow\\
+\longleftarrow &amp; \vec{x}_{3} &amp; \longrightarrow
+\end{array}\right)\left(\begin{array}{ccc}
+\Big\uparrow &amp; \Big\uparrow &amp; \Big\uparrow\\
+\vec{y}_{1} &amp; \vec{y}_{2} &amp; \vec{y}_{3}\\
+\Big\downarrow &amp; \Big\downarrow &amp; \Big\downarrow
+\end{array}\right)\\
+B   &amp;=\left(\begin{array}{ccc}
+\langle\vec{x}_{1},\vec{y}_{1}\rangle &amp; \langle\vec{x}_{1},\vec{y}_{2}\rangle &amp; \langle\vec{x}_{1},\vec{y}_{3}\rangle\\
+\langle\vec{x}_{2},\vec{y}_{1}\rangle &amp; \langle\vec{x}_{2},\vec{y}_{2}\rangle &amp; \langle\vec{x}_{2},\vec{y}_{3}\rangle\\
+\langle\vec{x}_{3},\vec{y}_{1}\rangle &amp; \langle\vec{x}_{3},\vec{y}_{2}\rangle &amp; \langle\vec{x}_{3},\vec{y}_{3}\rangle
+\end{array}\right)
+\end{align}
+\]</span></p>
+<p>by compute their inner product, we have</p>
+<p><span class="math display">\[
+\begin{align}
+\langle\vec{x}_{1},\vec{y}_{1}\rangle   &amp;=1\times2+2\times8+3\times14=2+16+42=18+42=60\\
+\langle\vec{x}_{1},\vec{y}_{2}\rangle   &amp;=1\times4+2\times10+3\times16=4+20+48=24+48=72\\
+\langle\vec{x}_{1},\vec{y}_{3}\rangle   &amp;=1\times6+2\times12+3\times18=6+24+54=30+54=84\\
+\langle\vec{x}_{2},\vec{y}_{1}\rangle   &amp;=4\times2+5\times8+6\times14=8+40+84=48+84=132\\
+\langle\vec{x}_{2},\vec{y}_{2}\rangle   &amp;=4\times4+5\times10+6\times16=16+50+96=66+96=162\\
+\langle\vec{x}_{2},\vec{y}_{3}\rangle   &amp;=4\times6+5\times12+6\times18=24+60+108=84+108=192\\
+\langle\vec{x}_{3},\vec{y}_{1}\rangle   &amp;=7\times2+8\times8+9\times14=14+64+126=78+126=204\\
+\langle\vec{x}_{3},\vec{y}_{2}\rangle   &amp;=7\times4+8\times10+9\times16=28+80+144=108+144=252\\
+\langle\vec{x}_{3},\vec{y}_{3}\rangle   &amp;=7\times6+8\times12+9\times18=42+96+162=138+162=300
+\end{align}
+\]</span></p>
+<p>thereby, we have <span class="math inline">\(B\)</span> matrix is</p>
+<p><span class="math display">\[
+B=A2A=\left(\begin{array}{ccc}
+60 &amp; 72 &amp; 84\\
+132 &amp; 162 &amp; 192\\
+204 &amp; 252 &amp; 300
+\end{array}\right)
+\]</span></p>
+<p><span class="math inline">\((v)\)</span> if <span class="math inline">\(B\coloneqq\lambda A=3A\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+B&amp;=3\left(\begin{array}{ccc}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6\\
+7 &amp; 8 &amp; 9
+\end{array}\right)\\
+&amp;=\left(\begin{array}{ccc}
+3\times1 &amp; 3\times2 &amp; 3\times3\\
+3\times4 &amp; 3\times5 &amp; 3\times6\\
+3\times7 &amp; 3\times8 &amp; 3\times9
+\end{array}\right)\\
+B &amp;=\left(\begin{array}{ccc}
+3 &amp; 6 &amp; 9\\
+12 &amp; 15 &amp; 18\\
+21 &amp; 24 &amp; 27
+\end{array}\right)
+\end{align}
+\]</span></p>
+</div>
+<div class="alinea">
+<p>Having these theoritical results, now we compute it by using <code>limav.h</code>. We use the theoritical results to justify either our computation using <code>limav.h</code> is effective (return the correct answer) or not. The following is the body of the main code.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">"Limav/limav.h"</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> anum<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">const</span> Matrix A <span class="op">(</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>        <span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>        <span class="fl">4.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">,</span> <span class="fl">6.0</span><span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>        <span class="fl">7.0</span><span class="op">,</span> <span class="fl">8.0</span><span class="op">,</span> <span class="fl">9.0</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="op">},</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="at">const</span> Vector x <span class="op">(</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">});</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="at">const</span> Matrix AaddA <span class="op">=</span> A <span class="op">+</span> A<span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="at">const</span> Vector y <span class="op">=</span> A <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="at">const</span> Vector y2 <span class="op">=</span> x <span class="op">+</span> <span class="op">(</span>A <span class="op">*</span> x<span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="at">const</span> Matrix B <span class="op">=</span> A <span class="op">*</span> <span class="op">(</span><span class="dv">2</span> <span class="op">*</span> A<span class="op">);</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="at">const</span> Matrix Bis3A <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> A<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a>    println<span class="op">(</span><span class="st">"A + A = "</span><span class="op">,</span> AaddA<span class="op">);</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>    println<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">y = Ax = "</span><span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>    println<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">x + Ax = "</span><span class="op">,</span> y2<span class="op">);</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>    println<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">A2A = "</span><span class="op">,</span> B<span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>    println<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">3A = "</span><span class="op">,</span> Bis3A<span class="op">);</span> </span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="www/mainprog.png" class="imgcenter" style="width: 100%;">
+
+    <p class="alinea" style="text-align: center; margin-top: 12px;">Figure 4: What's written in <code>mainprog.cpp</code></p>
+
+<p>by compile and run this program we have the following output</p>
+<pre><code>A + A =  
+2 4 6
+8 10 12
+14 16 18
+
+y = Ax = (23, 53, 83) 
+
+x + Ax = (25, 56, 88) 
+A2A =
+60 72 84
+132 162 192
+204 252 300
+
+3A =
+3 6 9
+12 15 18
+21 24 27
+</code></pre>
+<img src="www/compandrun.png" class="imgcenter" style="width: 100%;">
+
+    <p class="alinea" style="text-align: center; margin-top: 12px;">Figure 5: Output of the <code>mainprog.cpp</code> program</p>
+
+<p>As we can see, the results given by is the same as the theoritical results. Thereby, we conclude that give the correct results.</p>
+<p>The summary of computation of matrix and vectors is presented in Table 8.</p>
+
+<p style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px; text-align: center;">Table 1: Summary of computation</p><table class="table table-hover">
+    
+    <tbody><tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <th>No.</th>
+        <th>Operator</th>
+        <th>Computation</th>
+        <th>Code</th>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>1</td>
+        <td>transpose</td>
+        <td>$\left(a_{ij}\right)^{\top}=\left(a_{ji}\right)$</td>
+        <td><code>t(A)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>2</td>
+        <td>matrix addition</td>
+        <td>$\left(a_{ij}\right)+\left(b_{ij}\right)=\left(a_{ij}+b_{ij}\right)$</td>
+        <td><code>A + B</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>3</td>
+        <td>matrix substraction</td>
+        <td>$\left(a_{ij}\right)-\left(b_{ij}\right)=\left(a_{ij}-b_{ij}\right)$</td>
+        <td><code>A - B</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>4</td>
+        <td>scaled matrix</td>
+        <td>$\lambda\left(a_{ij}\right)=\left(\lambda a_{ij}\right)$</td>
+        <td><code>sc * A</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>5</td>
+        <td>matrix multiplication</td>
+        <td colspan="1">$\left(a_{ij}\right)\left(b_{ij}\right)=\left(c_{ij}\right)$</td>
+        <td><code>A * B</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>6</td>
+        <td>multiplication of matrix and vector</td>
+        <td>$\left(a_{ij}\right)\left(x_{j}\right)=\left(y_{i}\right)$</td>
+        <td><code>A * x</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>7</td>
+        <td>transpose of a vector</td>
+        <td>$\left(\begin{array}{c}
+            x_{1}\\
+            x_{2}\\
+            \vdots\\
+            x_{n}
+            \end{array}\right)^{\top}=\left(x_{1}\,x_{2}\,\cdots\,x_{n}\right)$</td>
+        <td><code>t(x)</code></td>
+    </tr>
+    <tr style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+        <td>8</td>
+        <td>trace of matrix</td>
+        <td>$\textit{tr}\left(a_{ij}\right)={\displaystyle \sum_{i=1}^{\min(m,n)}a_{ii}}$</td>
+        <td><code>trace(A)</code></td>
+    </tr>
+</tbody></table>
+
+</div>
+</section>
+<section id="conclusion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Conclusion</h1>
+<div class="alinea">
+<p>A C++ header that we have been developing, <code>limav.h</code>, capable to do computation of vectors and matrix in linear algebra. Even though there are many C++ header can do the same thing, it’s a good practice to develope our own C++ hedaer at least once in a lifetime. There are things that need to be improve such as we think it’s better to use an array instead of <code>std::vector&lt;double&gt;</code> since the number of entries of vectors and matrix are fixed. Moreover, in computation of matrix point of view, <code>limav.h</code> does not provide a function to compute the determinant, inverse, diagonalisation of a matrix, yet. However, the initial motive of the development of <code>limav.h</code> is to construct and compute the mathematical object, and those mathematical objects are vectors and matrices.</p>
+</div>
+<div class="alinea">
+<p>And after all this, we have achieved one of our goals, that is to develope and having our own C++ header for numerical computation of matrices and vectors. Thereby, we can do computation and various applications of vectors and matrices by using our own C++ header. <em>Inshallah</em>, as the time goes by, <code>limav.h</code> is improving to be a better and worthy C++ header (library).</p>
+</div>
+</section>
+<section id="acknowledgements" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Acknowledgements</h1>
+<div class="alinea">
+<p>The Author is thanked to the honourable reader who dedicate some of his/her time to reading this paper.</p>
+</div>
+</section>
+<section id="references" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> References</h1>
+<table class="table" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Fowler, M.</td>
+<td>(2004) <em>UML Distilled: A Brief Guide to the Standard Object Modeling Language.</em> 3rd edn. New York: Addison-Wesley</td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Hamano, R., Saito, S., Nomura, M., &amp; Shirakawa, S.</td>
+<td>(2022) “CMA-ES with margin: lower-bounding marginal probability for mixed-integer black-box optimization”. <em>Proceedings of the Genetic and Evolutionary Computation Conference.</em></td>
+</tr>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Dadhley, R.</td>
+<td>(2019) 'Notes on THE WE-HERAEUS International Winter School on Gravity and Light'. Available at: <a href="https://richie291.wixsite.com/theoreticalphysics/post/the-we-heraeus-international-winter-school-on-gravity-and-light" target="_blank" rel="noopener noreferrer">https://richie291.wixsite.com/theoreticalphysics/post/the-we-heraeus-international-winter-school-on-gravity-and-light</a> (Accessed: 7 February 2024).</td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Hansen, Nikolaus.</td>
+<td>“The CMA Evolution Strategy: A Tutorial”. <em>arXiv:1604.00772</em>. Available at: <a href="https://doi.org/10.48550/arXiv.1604.00772" target="_blank" rel="noopener noreferrer">https://doi.org/10.48550/arXiv.1604.00772</a></td>
+</tr>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Körner, T.W.</td>
+<td>(2012) <em>Vectors, Pure and Applied: A General Introduction to Linear Algebra</em>. Cambridge: Cambridge University Press.</td>
+</tr>
+<tr class="even">
+<td>Oliveira, L.</td>
+<td>(2022). <em>Linear Algebra</em> (1st edn). Chapman and Hall/CRC. Available at: <a href="https://doi.org/10.1201/9781351243452" target="_blank" rel="noopener noreferrer">https://doi.org/10.1201/9781351243452</a></td>
+</tr>
+<tr class="odd">
+<td>Patel, D. and Raman, S.</td>
+<td>(2019) "Accelerated seam carving for image retargeting". <em>IET Image Processing,</em> 13: 885-895. Available: <a href="https://doi.org/10.1049/iet-ipr.2018.5283" target="_blank" rel="noopener noreferrer">https://doi.org/10.1049/iet-ipr.2018.5283</a></td>
+</tr>
+<tr class="even">
+<td>Sheykhmousa, M., Mahdianpari, M., Ghanbari, H., Mohammadimanesh, F., Ghamisi, P., &amp; Homayouni, S.</td>
+<td>(2020) "Support Vector Machine Versus Random Forest for Remote Sensing Image Classification: A Meta-Analysis and Systematic Review". <em>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing,</em> 13, 6308-6325.</td>
+</tr>
+<tr class="odd">
+<td>Shimosaka, M., Tsukiji, T., Wada, H., &amp; Tsubouchi, K.</td>
+<td>(2018) "Predictive population behavior analysis from multiple contexts with multilinear poisson regression". <em>Proceedings of the 26th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems</em> SIGSPATIAL ’18. Available at: <a href="https://doi.org/10.1145/3274895.3274964" target="_blank" rel="noopener noreferrer">https://doi.org/10.1145/3274895.3274964</a></td>
+</tr>
+<tr class="even" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Solomon, J.</td>
+<td>(2015) <em>Numerical Algorithms: Methods for Computer Vision, Machine Learning, and Graphics</em>. USA: A. K. Peters, Ltd.</td>
+</tr>
+<tr class="odd" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
+<td>Stroustrup, B.</td>
+<td>(2001) 'Exception Safety: Concepts and Techniques', in Deny, C., Knudsen, J.L., Romanovsky, A. and Tripathi, A. (eds), <em>Advances in Exception Handling Techniques</em>. Springer Verlag Lectures Notes in Computer Science. Available at: <a href="https://www.stroustrup.com/except.pdf" target="_blank" rel="noopener noreferrer">https://www.stroustrup.com/except.pdf</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="mymeta">
+    <div class="mymeta-title">Copyright</div>
+    <div style="text-align: justify; font-size: .9em;">
+        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+        <span property="dct:title">Limav: Computation of Matrix and Vectors in Linear Algebra</span> © 2024 by <span property="cc:attributionName">Muhammad Reza Fahlevi</span> is licensed under 
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution-NonCommercial-ShareAlike 4.0 International</a><br>
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank">
+            <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1">
+        </a>
+        </p>
+    </div>
+</div>
+<div class="mymeta">
+    <details>
+        <summary class="mymeta-title" style="opacity: 1;"><span>Cite this article</span></summary>
+        <div class="mymeta-title">Harvard</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, M.R. (2024) 'Limav: Computation of Matrix and Vectors in Linear Algebra'. Available at: https://www.fahlevisia.com/paper/2024/fsr2/ (Accessed: <span id="currAccsHarvard"></span>).</p>
+        </div>
+        <div class="mymeta-title">APA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, M.R. (2024, April 7) <i>Limav: Computation of Matrix and Vectors in Linear Algebra</i>. Fahlevisia. Retrieved <span id="currAccsAPA"></span>, from https://www.fahlevisia.com/paper/2024/fsr2/</p>
+        </div>
+        <div class="mymeta-title">Chicago</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, M.R. "Limav: Computation of Matrix and Vectors in Linear Algebra." Accessed <span id="currAccsChicago"></span>. https://www.fahlevisia.com/paper/2024/fsr2/</p>
+        </div>
+        <div class="mymeta-title">IEEE</div>
+        <div style="text-align: justify; font-size: .9em;;">
+            <p>M.R. Fahlevi. "Limav: Computation of Matrix and Vectors in Linear Algebra." <i>Fahlevisia</i>, Apr. 7, 2024. Accessed: <span id="currAccsIEEE"></span>. [Online]. Available: https://www.fahlevisia.com/paper/2024/fsr2/</p>
+        </div>
+        <div class="mymeta-title">MHRA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi, Muhammad Reza, Limav: Computation of Matrix and Vectors in Linear Algebra (2024) &lt;https://www.fahlevisia.com/paper/2024/fsr2/&gt; [accessed <span id="currAccsMHRA"></span>]</p>
+        </div>
+        <div class="mymeta-title">MLA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Muhammad Reza Fahlevi. "Limav: Computation of Matrix and Vectors in Linear Algebra". <i>Fahlevisia</i>, 7 April 2024, https://www.fahlevisia.com/paper/2024/fsr2/</p>
+        </div>
+        <div class="mymeta-title">OSCOLA</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Muhammad Reza Fahlevi, 'Limav: Computation of Matrix and Vectors in Linear Algebra' (Fahlevisia, 7 April 2024) &lt;https://www.fahlevisia.com/paper/2024/fsr2/&gt; accessed <span id="currAccsOSCOLA"></span>.</p>
+        </div>
+        <div class="mymeta-title">Vancouver</div>
+        <div style="text-align: justify; font-size: .9em;">
+            <p>Fahlevi MR. Limav: Computation of Matrix and Vectors in Linear Algebra [Internet]. 2024 [cited <span id="currAccsVancouver"></span>]. Available from: https://www.fahlevisia.com/paper/2024/fsr2/</p>
+        </div>
+    </details>
+    <div class="mymeta-title">Publisher</div>
+    <div class="sociabuzz-fahlevisia-tribe">
+        <img alt="FahlevisiaIcon" src="https://www.fahlevisia.com/www/fahlevisiaicon.png" width="144" height="144" style="border-radius: 100%; margin-top: 3%; margin-bottom: 1%;">
+        <div>Fahlevisia</div>
+        <div>Repositori Digital Personal</div><br>
+        <div>Do you like what you have read?<br>You may treat the author a cup of coffee as a form of thank you</div>
+        <a href="https://sociabuzz.com/fahlevisia/support" target="_blank">
+            <button class="btn-to-SociaBuzz"><i class="bi bi-cup-hot"></i> Treate the author a cup of coffee</button>
+        </a>
+        <div><i>Fahlevisia is thanked to the honourable reader who support us and/or dedicate some of his/her time reading our article.</i></div>
+    </div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<footer class="footer">
+	<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1440 320">
+		<path fill="#313352" fill-opacity="1" d="M0,64L80,101.3C160,139,320,213,480,240C640,267,800,245,960,224C1120,203,1280,181,1360,170.7L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+	</svg>
+	<div style="background-image: url(https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi/main/www/particles.png); background-size: cover;
+		position: absolute; 
+		width: 100%; 
+		padding-left:3pc;
+		font-size: 3pc;">
+		<a href="https://www.fahlevisia.com">
+			<img src="https://www.fahlevisia.com/www/fahlevisiaicon.png" height="15%" width="15%" alt="Fahlevisia"><br>
+			<img src="https://raw.githubusercontent.com/m-RezaFahlevi/m-RezaFahlevi.github.io/main/www/fahlevisiawhite.svg" alt="fahlevisia_repositori" style="margin-left:-0.8pc;">
+		</a>
+		<p style="color: white; font-size:1.5pc;">© <span id="cpRight"></span> by <a href="https://www.fahlevisia.com/muhammadrezafahlevi.html">Muhammad Reza Fahlevi</a></p>
+		<script>
+			obtCopyRightYear() // obtain copy right year
+
+			function obtCopyRightYear() {
+				const copyRightYear = new Date()
+				document.getElementById("cpRight").innerHTML =  "<span typeof='schema:Number'>" + copyRightYear.getFullYear() + "</span>"
+			}
+
+			function getCurrAccsReader(EnOrId, isAbbr) {
+        		var monthName
+
+        		if ((EnOrId == "id") && (isAbbr === false)) {
+        		    monthName = ["Januari", "Februari", "Maret", "April", "May", "Juni", "July", "Agustus", "September", "Oktober", "November", "Desember"]
+        		} else if ((EnOrId == "id") && (isAbbr === true)) {
+					monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+				} else if ((EnOrId == "en") && (isAbbr === true)) {
+					monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+				} else {
+        		    monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        		}
+
+        		const dateObj = new Date()
+
+        		const whatYear = dateObj.getFullYear()
+        		const whatMonth = dateObj.getMonth()
+        		const whatDate = dateObj.getDate()
+
+				
+        		const currAccsDate = whatDate + " " + monthName[whatMonth] + " " + whatYear
+        		return currAccsDate
+    		}
+		</script>
+	</div>
+</footer>
+<script>
+    document.getElementsByClassName("quarto-title-meta-contents")[0].innerHTML = "<p style='font-size: 15px;'><a href='https://www.fahlevisia.com/muhammadrezafahlevi.html' target='_blank'>Muhammad Reza Fahlevi</a> <a href='https://orcid.org/0009-0007-6787-6479' class='quarto-title-author-orcid'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=='></a></p>"
+    
+    document.getElementsByClassName("quarto-title-meta-contents")[1].innerHTML = "<p style='font-size: 15px'>7 April 2024</p>"
+
+    const today = getCurrAccsReader("en", false).split(" ") // [date, month, year]
+    const todayAbbr = getCurrAccsReader("en", true).split(" ") // [date, month, year] but month is abbrivieted
+    /*
+     * today[0]: date
+     * today[1]: month
+     * today[2]: year
+     * 
+     * todayAbbr[0]: date
+     * todayAbbr[1]: month but month is abbrivieted
+     * todayAbbr[2]: year
+     */
+    document.getElementById("currAccsHarvard").innerHTML = today[0] + " " + today[1] + " " + today[2]
+    document.getElementById("currAccsAPA").innerHTML = today[1] + " " + today[0] + ", " + today[2]
+    document.getElementById("currAccsChicago").innerHTML = today[1] + " " + today[0] + ", " + today[2]
+    document.getElementById("currAccsIEEE").innerHTML = todayAbbr[1] + ". " + todayAbbr[0] + ", " + todayAbbr[2]
+    document.getElementById("currAccsMHRA").innerHTML = today[0] + " " + today[1] + " " + today[2]
+    document.getElementById("currAccsOSCOLA").innerHTML = today[0] + " " + today[1] + " " + today[2]
+    document.getElementById("currAccsVancouver").innerHTML = todayAbbr[2] + " " + todayAbbr[1] + " " + todayAbbr[0]
+    
+    pseudocode.renderElement(document.getElementById("multiplicationOfTwoMatrix"), { lineNumber: true })
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
