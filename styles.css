@@ -81,23 +81,42 @@ details > summary {
 
 .btn-to-SociaBuzz {
     padding: 1pc;
-    background-color: #00c8b7;
     color: white;
+    background-color: #00c8b7;
+    box-shadow: 1px 1px 2pc #00c8b7;
     border: none;
     margin-top: 1%;
     margin-bottom: 1%;
     border-radius: 2pc;
+    transition: background-color 1s cubic-bezier(0.075, 0.82, 0.165, 1), text-shadow 1s ease;
+    animation-name: animBtn;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 .btn-to-SociaBuzz:hover {
     background-color: #00b4a5;
-    text-shadow: 1px 1px 1pc whitesmoke;
     box-shadow: 1px 1px 1pc #00d8c8;
+    text-shadow: 1px 1px 2pc whitesmoke;
+}
+
+@keyframes animBtn {
+    0% {box-shadow: 1px 1px 2pc #00c8b7;}
+    50% {box-shadow: 1px 1px 1pc #009fe0;}
+    100% {box-shadow: 1px 1px 2pc #00c8b7;}
+    
 }
 
 .alinea {
 	text-align: justify;
     font-size: 15px;
+}
+
+.imgcenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .footer {
