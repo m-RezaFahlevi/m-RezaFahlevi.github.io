@@ -1,8 +1,22 @@
 [
   {
-    "listing": "/artikelYth.html",
+    "listing": "/paper/index.html",
     "items": [
-      "/post_artikelYth/IntervensiStunting/index.html"
+      "/paper/2024/fsr2/index.html",
+      "/paper/2024/fsr1/index.html"
+    ]
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/2024/fsb2/index.html",
+      "/blog/2024/fsb1/index.html"
+    ]
+  },
+  {
+    "listing": "/yth/index.html",
+    "items": [
+      "/yth/2024/IntervensiStunting/index.html"
     ]
   }
 ]
