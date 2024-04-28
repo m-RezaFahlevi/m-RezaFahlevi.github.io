@@ -107,6 +107,10 @@ details > summary {
     
 }
 
+.lead {color: #f5f5f5;}
+
+.abstract-title {margin-bottom: -1em;}
+
 .alinea {
 	text-align: justify;
     font-size: 15px;
