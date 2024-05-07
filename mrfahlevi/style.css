@@ -1,0 +1,289 @@
+body { 
+    -webkit-margin-collapse: collapse;
+    margin: 0;
+}
+
+/* Section Cover  */
+
+.cover-container {
+    background-color: #313352;
+    background-image: url(www/particles.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 20pc;
+    background-origin: padding-box;
+    position: relative;
+}
+
+.bottomleft {
+    position: absolute;
+    bottom: 1pc;
+    right: 1pc;
+}
+
+.cover-icon {
+    max-width: 5vw;
+    max-height: 5vw;
+    opacity: 0.55;
+}
+
+.atcenter{
+    position: absolute;
+    width: 100%;
+    margin: auto;
+    top: 50%;
+    text-align: center;
+}
+
+.cover-svg {
+    background-size: contain;
+    max-width: 75%;
+    max-height: auto;
+}
+
+/* Section Virtual Card (VCard) Container */
+
+.imgprofile-container {
+    /* background-color: #352853; */
+    background-image: linear-gradient(to top, #352853, #35315e, #333969, #2f4273, #2a4b7d);
+    padding: 1em;
+    margin: auto;
+}
+
+.imgprofile-container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.profile-picture {
+    float: left;
+}
+
+.imgprofile {
+    border-radius: 100%;
+    max-width: 240px;
+    max-height: 240px;
+}
+
+/* How it's looks in mobile screen */
+
+@media screen and (max-width: 585px) {
+    .cover-container {
+        background-size: cover;
+        background-attachment: local;
+		height: 13pc;
+    }
+    .profile-picture {float: left;}
+    .imgprofile {
+        width: 77px;
+        height: 77px;
+    }
+    div.vcard-description > h1, h2, span, a {
+        font-size: 16px;
+    }
+    .section-title { font-size: 25px; }
+    div.education-description li { 
+        font-size: 16px;
+        padding-left: .5em;
+        padding-bottom: 1pc;
+    }
+    div.education-description img {
+        width: 77px;
+        height: auto;
+    }
+}
+
+.vcard-description {
+    font-family: Arial, 'Helvetica', sans-serif;
+    color: snow;
+    margin: auto;
+    width: 60%;
+    display: table-cell;
+    padding-left: 0.5em;
+}
+
+div.vcard-description span, a {
+    color: snow;
+    text-decoration: none;
+}
+
+.profile-name {
+    text-transform: capitalize;
+}
+
+.stay-connected {
+    font-family: Arial, 'Helvetica', sans-serif;
+    color: snow;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+.stay-connected::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.stay-connected span i {
+    font-size: 2pc;
+    margin: .2em;
+}
+
+.stay-connected i:hover {
+    text-shadow: 1px 1px 1pc snow;
+}
+
+/* How Every Document's Section Look */
+
+.section {
+    position: relative;
+    padding: 1em;
+    font-size: 20px;
+}
+
+.section::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Eductaion Section */
+
+.education {
+    /* background-color: darkgreen; */
+    /* background-color: #352853; */
+    background-image: linear-gradient(to bottom, #352853, #2e2345, #271f37, #201a2a, #19161d);
+    color: snow;
+    font-family: Arial, 'Helvetica', sans-serif;
+    font-size: 16px !important;
+}
+
+.education-description {
+    width: 90%;
+    margin: auto;
+}
+
+div.education-description img {
+    max-width: 140px;
+    max-height: auto;
+    float: left;
+}
+
+div.education-description ul {
+    list-style-type: none;
+    padding-bottom: 1em;
+    display: inline-block;
+}
+
+div.education-description li {
+    float: left;
+    border-left: 1px solid snow;
+}
+
+/* Research Section */
+
+.research {
+    background-image: linear-gradient(to bottom, #19161d, #251d28, #322533, #402c3d, #503346);
+    color: #ccad5f;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+div.research h2, div.myproject h2 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+div.research ul {
+    overflow-wrap: anywhere;
+}
+
+/* Myproject Section */
+
+.myproject {
+    background-color: #503346;
+    color: #ccad5f;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Myskiils Section */
+
+.myskills {
+    font-family: Arial, 'Helvetica', sans-serif;
+    background-color: #594d6d;
+    color: snow;
+    padding-top: 7pc;
+    padding-inline: 1pc;
+    text-align: center;
+}
+
+div.myskills>ul {
+    list-style-type: none;
+    padding: 1px;
+}
+
+div.myskills>ul::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+ul.list-of-skills li {
+    float: left;
+    margin: 1pc;
+}
+
+div.myskills>ul>li img {
+    height: 5pc;
+    width: auto;
+}
+
+.subsection-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* GitHub's Stats Section */
+
+.mygithub-stats {
+    text-align: center; font-family: Arial, 'Helvetica', sans-serif;
+    background-color: lavenderblush;
+    padding-top: 10%;
+}
+
+/* Mywork Experiences Section */
+
+.work-experiences  {
+    background-image: linear-gradient(to bottom, #0099ff, #2284dd, #2b70bc, #2d5d9c, #2a4b7d);
+    font-family: Arial, 'Helvetica', sans-serif;
+    color: snow;
+    padding-top: 10%;
+}
+
+/* How Document's footer look */
+
+footer {
+    position: relative;
+    padding: 1em;
+    padding-top: 12%;
+    /* background-color: #24354e; */
+    background-color: #313352;
+    color: snow;
+    font-family: Arial, 'Helvetica', sans-serif;
+}
+
+footer svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+footer::after {
+    content: "";
+    clear: both;
+    display: table;
+}
