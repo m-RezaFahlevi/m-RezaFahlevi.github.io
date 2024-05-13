@@ -83,6 +83,7 @@ nav > a {
     border-radius: 14%;
     max-width: 240px;
     max-height: 240px;
+	margin-right: 5px;
 }
 
 /* How it's looks in mobile screen */
@@ -140,6 +141,7 @@ div.vcard-description span, a {
 
 .profile-name {
     text-transform: capitalize;
+	margin-top: 0;
 }
 
 /* Social Media */
