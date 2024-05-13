@@ -3,6 +3,22 @@ body {
     margin: 0;
 }
 
+/* navbar */
+
+nav {
+    background-color: #313352;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    font-family: Arial, 'Helvetica', sans-serif;
+}
+
+nav > a {
+    margin: .3em;
+    padding: .5pc;
+    text-align: center;
+}
+
 /* Section Cover  */
 
 .cover-container {
@@ -64,7 +80,7 @@ body {
 }
 
 .imgprofile {
-    border-radius: 100%;
+    border-radius: 14%;
     max-width: 240px;
     max-height: 240px;
 }
@@ -72,6 +88,9 @@ body {
 /* How it's looks in mobile screen */
 
 @media screen and (max-width: 585px) {
+    nav {
+        flex-direction: column;
+    }
     .cover-container {
         background-size: cover;
         background-attachment: local;
@@ -80,7 +99,7 @@ body {
     .profile-picture {float: left;}
     .imgprofile {
         width: 77px;
-        height: 77px;
+        height: 90px;
     }
     div.vcard-description > h1, h2, span, a {
         font-size: 16px;
@@ -111,9 +130,19 @@ div.vcard-description span, a {
     text-decoration: none;
 }
 
+.selected-span {
+    transition: padding-left .2s ease-in-out;
+}
+
+.selected-span:hover {
+    padding-left: 2pc;
+}
+
 .profile-name {
     text-transform: capitalize;
 }
+
+/* Social Media */
 
 .stay-connected {
     font-family: Arial, 'Helvetica', sans-serif;
@@ -131,10 +160,11 @@ div.vcard-description span, a {
 .stay-connected span i {
     font-size: 2pc;
     margin: .2em;
+    transition: text-shadow .2s ease-in-out;
 }
 
 .stay-connected i:hover {
-    text-shadow: 1px 1px 1pc snow;
+    text-shadow: 2px 2px 1pc snow;
 }
 
 /* How Every Document's Section Look */
@@ -181,8 +211,72 @@ div.education-description ul {
 
 div.education-description li {
     float: left;
-    border-left: 1px solid snow;
+    margin-right: .3em;
+    padding-top: .3em;
+    padding-bottom: .3em;
 }
+
+.college-logo:hover {
+    animation-name: thelogo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes thelogo {
+    0% {transform: translateY(0);}
+    25% {transform: translateY(-1pc);}
+    50% {transform: translateY(0pc);}
+    75% {transform : translateY(-1pc);}
+    100% {transform: translateY(0pc);}
+}
+
+li.ilkomusu {
+    background-size: cover  ;
+    border-radius: 1em;
+    transition: box-shadow 0.2s ease-in-out;
+    /* background-image: radial-gradient(rgba(53, 40, 83, 0.65), rgba(25, 22, 29, 1)), url(https://konten.usu.ac.id/storage/satker/0/statis/prodi/DSC00578.webp); */
+}
+
+li.ilkomusu:hover {
+    box-shadow: 1px 1px 1pc #2f4273;
+    animation-name: background-ilkom;
+    animation-duration: .2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes background-ilkom {
+    from {
+        background-image: "";
+    } to {
+        background-image: radial-gradient(rgba(53, 40, 83, 0.65), rgba(25, 22, 29, 1)), url(https://konten.usu.ac.id/storage/satker/0/statis/prodi/DSC00578.webp);
+    }
+}
+
+li.smanda2bangkot {
+    background-size: cover;
+    border-radius: 1em;
+    padding-right: .5em;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+li.smanda2bangkot:hover {
+    box-shadow: 1px 1px 1pc #2f4273;
+    animation-name: background-smanda;
+    animation-timing-function: ease-in-out;
+    animation-duration: .2s;
+    animation-fill-mode: both;
+}
+
+@keyframes background-smanda {
+    from {
+        background-image: "";
+    } to {
+        background-image: radial-gradient(rgba(53, 40, 83, 0.65), rgba(25, 22, 29, 1)), url(https://lh3.googleusercontent.com/p/AF1QipMs2ajW60LqWSMhm0c97mRDNv1_Kcm41mFHOXlk=s680-w680-h510);
+    }
+}
+
 
 /* Research Section */
 
@@ -232,11 +326,23 @@ div.myskills>ul::after {
     display: table;
 }
 
+.list-of-skills {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 ul.list-of-skills li {
     float: left;
     margin: 1pc;
+    transition: transform .2s ease-in-out, text-shadow .2s ease-in-out;
 }
 
+ul.list-of-skills li:hover {
+    transform: translateY(-1pc);
+    text-shadow: 1px 2px 1pc white;
+}
 div.myskills>ul>li img {
     height: 5pc;
     width: auto;
