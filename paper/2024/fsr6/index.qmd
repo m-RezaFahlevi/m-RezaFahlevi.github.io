@@ -1,0 +1,357 @@
+---
+title: "Mengulas Buku &quot;Yahudi&semi; Mengapa Mereka Berprestasi&quot; yang Ditulis oleh alm. K.H. Toto Tasmara"
+subtitle: "Disertai Ikhtisar dan Data yang Ada pada Buku"
+image: "www/thumbnail.png"
+author:
+ - name: "Muhammad Reza Fahlevi <svg aria-label='Verified' class='x1lliihq x1n2onr6' fill='rgb(0, 149, 246)' height='18' role='img' viewBox='0 0 40 40' width='18'><title>Verified</title><path d='M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z' fill-rule='evenodd'></path></svg>"
+date: "07-14-2024"
+categories: [Bahasa Indonesia, Yahudi, Filsafat]
+keywords: [Pengembangan Diri, Filsafat, Yahudi]
+page-layout: article
+include-after-body: www/idx_footer.html
+include-in-header: www/jsonld.html
+abstract: "<p class='alinea' style='font-size: 15px;'>Pada dekade ini, dunia dihebohkan dengan berita-berita yang berkaitan dengan umat Yahudi. Baik berita itu mengenai dunia ilmu pengetahuan, teknologi informasi, politik, bahkan dunia yang dimaksud adalah bagian belahan bumi itu sendiri, yaitu &quot;negara Israel&quot; yang menjajah negara Palestina. Dengan apa yang terjadi di dunia belakangan ini, membuat seolah-olah abad ini adalah abad yang kebanyakan diwarnai oleh umat Yahudi, meskipun dari segi jumlah umat, dibandingkan umat Islam atau Kristen, mereka adalah minoritas. Pada tulisan ini, kami mengulas salah satu buku yang membahas alasan mengapa umat Yahudi yang minoritas ini, mampu untuk mewarnai dunia dengan prestasinya yang begitu monumental. Adapun buku yang kami maksud adalah buku yang ditulis oleh alm. K.H. Toto Tasmara, &quot;Yahudi&semi; Mengapa Mereka Berprestasi.&quot; Pada tulisan ini, kami memaparkan hal ihwal mengenai buku, penunjuk/ikhtisar buku, dan penunjuk halaman yang mana suatu data dipaparkan.</p>"
+---
+
+# 1. Pendahuluan
+
+::: {.alinea}
+
+Yahudi, dibandingkan dengan agama yang lain (seperti, Islam, Kristen, Hindu, dll), merupakan agama yang unik. Hal ini disebabkan, hanya orang-orang keturunan bangsa Israel saja yang dianggap sebagai benar-benar seorang yang beragama Yahudi, selain daripada itu, mereka tidak memedulikan/menerima orang non-Yahudi yang pindah ke agama Yahudi. Mereka yang mula-mulanya tidak beragama Yahudi, menjadi seorang Yahudi, tidak dianggap sebagai orang Yahudi yang sebenar-benarnya. Dan, mereka yang mula-mulanya Yahudi, kemudian pindah ke agama yang lain, tidak dianggap sebagai orang Yahudi yang sebenar-benarnya. Bagi mereka yang mula-mulanya Yahudi, kemudian menikah dengan seorang non-Yahudi, maka keturunannya tidak dianggap sebagai seorang Yahudi yang sebenar-benarnya. Bagi orang-orang Yahudi, mereka menganggap bahwa mereka adalah "bangsa pilihan Tuhan (*The Choosen People*)", selain dari golongan mereka disebut sebagai *gentile, goyyim*. Dikarenakan kebanggaan mereka, dibandingkan dengan populasi agama lain di dunia, Yahudi merupakan umat minoritas. Jika umat Yahudi dibandingkan dengan umat Kristen atau Muslim, maka Yahudi merupakan umat minoritas. Meskipun demikian, dengan jumlah umat Yahudi yang minoritas ini, umat Yahudi mampu mendirikan "negara Israel" di dalam wilayah negara Palestina yang dikelilingi negara yang mayoritasnya beragama Islam, mampu untuk mendikte pemerintahan Amerika Serikat, dan mampu untuk mewarnai peradaban saat ini. Hanya dengan meyakini bahwa mereka adalah "*The Choosen People*", umat Yahudi mampu menciptakan abad yang mana seolah-olah abad ini adalah milik mereka.
+
+:::
+
+::: {.alinea}
+
+<span style="margin-left: 2em;">P</span>ada tulisan ini, kami mengulas salah satu buku yang mencoba untuk menjawab pertanyaan apa yang membuat umat Yahudi yang minoritas, mampu untuk mewarnai peradaban ini dengan prestasi-prestasi mereka yang begitu monumental. Adapun buku yang dimaksud adalah buku yang ditulis oleh alm. K.H. Toto Tasmara dengan judul buku "Yahudi&semi; Mengapa Mereka Berprestasi".
+
+:::
+
+::: {.alinea}
+
+<span style="margin-left: 2em;">S</span>usunan dari tulisan ini sebagai berikut. Pada segmen serba-serbi buku membahas hal ihwal buku, seperti apa saja isi buku tersebut, tahun terbit, gambaran sekilas masing-masing bab buku. Segmen ikhtisar berisikan daftar ikhtisar yang dilengkapi dengan nomor ikhtisar dan penunjuk (*pointer*) halaman buku. Segmen daftar data adalah penunjuk halaman yang mana suatu data dilampirkan/dicantumkan. Terakhir, segmen kesimpulan.
+
+:::
+
+# 2. Serba-Serbi Buku
+
+::: {.alinea}
+
+Buku dengan judul "Yahudi&semi; Mengapa Mereka Berprestasi" ditulis oleh alm. K.H. Toto Tasmara. Buku ini pertama kali terbit pada tahun 2010, yang diterbitkan oleh Sinergi Publishing. Tebal buku adalah 268 hlm. Buku ini terdiri dari 6 bab ditambah 4 bagian (segmen). 4 segmen itu adalah Pengantar Penerbit; Belajar dari Orang Yahudi Kenapa Mereka Berprestasi; Iftitah; dan Pengantar. Dan keenam bab tersebut adalah BAB 1: Matahari Bersinar di Andalusia; BAB 2: Karena Derita Menindas Aku Menjadi Cerdas; BAB 3: Pendidikan Ruh Kehidupan; BAB 4: Prestasi Orang Yahudi; BAB 5: Talmud Kitab Rasialis; dan terakhir BAB 6: Character Building --- *illaa Bi Shulthaan*.
+
+<span style="margin-left: 2em;">B</span>AB I memaparkan sejarah bagaimana panglima Thariq bin Ziyad mampu membebaskan masyarakat Andalusia dari kekejaman monarki non-Muslim, dan menjadikan kota tersebut sebagai kota yang mana masyarakatnya hidup penuh dengan toleransi. Di Andalusia ini, berbagai cendekiawan muslim mewariskan pemikiran gamblangnya yang abadi. Pada BAB 1, penulis buku memaparkan prestasi 5 cendekiawan muslim, yaitu Abu Qasim Az-Zahrawi, seorang dokter, dan dikenal sebagai *the father of surgeon*. Ibnu Tufail, seorang cendekiawan muslim Andalusia yang menulis suatu novel dengan judul *Hayyn Ibn Yaqdhan* (Hidup anaknya Sadar), yang sudah diterjemahkan ke bahasa Inggris dengan judul *Philosophus Autodidactus*. Ibnu Rusyd, seorang filsuf muslim Andalusia, yang mengajukan fondasi pemikiran eksistensialisme, yaitu eksistensi mendahului esensi. Ibnul Arabi, seorang filsuf muslim Andalusia yang mana filsafat ketuhanannya dikenal dengan *Tazih* dan *Tasybih*, atau di dunia barat dikenal sebagai "*Apohatic Theology*". Dan yang terkahir adalah Ibnu Bajjah. Setelah pemaparan prestasi 5 cendekiawan muslim ini, BAB 1 ditutup dengan pemaparan sejarah kejatuhan pemerintahan muslim di Andalusia dan dampaknya pada umat Muslim dan Yahudi pada waktu itu.
+
+<span style="margin-left: 2em;">P</span>ada BAB II, penulis memaparkan paham milleniarisme dan mesianisme. Yaitu, paham akan hadirnya seseorang yang ditunggu-tunggu. Yang mana, ketika seseorang yang ditunggu-tunggu itu datang, Ia akan memimpin suatu umat tertentu, dan mengubah keterpurukan umat menjadi kejayaan. Pada bab ini, penulis buku menyampaikan bahwa paham milleniarisme ini diperlukan umat Yahudi sebagai kepercayaan mereka agar tidak putus asa di masa keterpurukan umat. Bukan hanya itu saja, aliran kebatinan Kabbala dan kepercayaan sebagai "*The Choosen People*" juga diterapkan agar mereka bangkit dari keterpurukan menjadi kejayaan. Adapun mengenai alasan mengapa mereka berprestasi adalah sebagaimana orang lain bisa berprestasi, yaitu kecerdasan. Pada bab ini, penulis buku memaparkan hipotesis penyebab kenapa umat Yahudi itu cerdas. Jika dilihat dari faktor luar (lingkungan), umat Yahudi cerdas dikarenakan mereka dulu merupakan umat yang tertindas. Umat Yahudi menyadari keadaanya dan segera berpikir dan berbuat bagaimana caranya mereka untuk bangkit. Jika ditinjau dari faktor dalam, kecerdasan umat Yahudi merupakan kecerdasan genetika.
+
+<span style="margin-left: 2em;">P</span>ada BAB III, penulis buku memaparkan bagaimana umat Yahudi menyiapkan generasi mudanya untuk menghadapi masa depan. Dalam bab ini, umat Yahudi dianjurkan untuk menyadari dan meyakini bahwa mereka adalah umat pilihan Tuhan. Mereka diajarkan untuk melakukan apa yang orang tua katakan, bukan apa yang mereka lakukan (*do as I say, not what I do*). Para generasi muda Yahudi juga dianjurkan menyimak perkataan Rabi, dan menjunjung Talmud lebih dibandingkan Taurat. Generasi Yahudi dianjurkan untuk gemar membaca, dan membelanjakan sebagian hartanya dengan membeli buku. Umat Yahudi meyakini bahwa kualitas itu mahal. Pada bab ini, hal ihwal kebudayaan umat Yahudi dipaparkan, seperti pernikahan, cara ibadah, doa-doa, dan peranan ibu.
+
+<span style="margin-left: 2em;">U</span>ntuk BAB IV, sesuai dengan judulnya yaitu "Prestasi Yauhdi", memaparkan data prestasi orang-orang Yahudi yang begitu monumental. Prestasi ini bisa berupa bisnis yang sukses, penghargaan yang diberikan kepada organisasi yang didirikan oleh Yahudi, dan karya-karya monumental yang dihasilkan dari pemikiran orang-orang Yahudi. Dikarenakan penulis ulasan buku adalah orang yang memiliki latar belakang Ilmu Komputer, berikut sebagian saintis yang penulis ulasan buku tahu, yang mana mereka adalah seorang Yahudi:
+
+$1.$ Albert Einstein, seorang fisikawan yang mencetuskan teori relativitas umum dan khusus.<br/>
+$2.$ Karl Marx, seorang filsuf yang mengajukan doktrin Marxisme.<br/>
+$3.$ Noam Chomsky, seorang filsuf dan saintis yang menyatukan filsafat bahasa, psikologi, dan biologi.<br/>
+$4.$ Anna Freud dan Sigmund Freud, pelopor di bidang psikologi.<br/>
+$5.$ Richard Feynman seorang fisikawan yang mengajukan teori *Quantum Electrodynamics* (QED) dan *Feynman Diagram*.<br/>
+$6.$ Alfred Tarski, pakar logika dan filsafat matematika.
+
+<span style="margin-left: 2em;">P</span>enulis ulasan buku tidak mencatat/membuat ikhtisar untuk BAB V dengan judul Talmud Kitab Rasialis. Sesuai dengan judul babnya, bab ini memaparkan sebagian isi kitab Talmud yang hanya berisikan kebanggan mereka sebagai "umat pilihan Tuhan", dan pada bab ini juga memaparkan isi Kitab Talmud yang mencaci maki, sumpah serapah untuk orang bukan Yahudi.
+
+<span style="margin-left: 2em;">T</span>erakhir, yaitu BAB VI, berisikan motivasi agar umat Muslim mampu membentuk dirinya sebagai hamba kesayangan Tuhan yang Maha Pengasih.
+
+:::
+
+::: {.alinea}
+
+<span style="margin-left: 2em;">S</span>ecara keseluruhan, buku ini sudah menjelaskan dan memaparkan dengan gamblang alasan mengapa Yahudi itu cerdas dan berprestasi. Hal ini dapat dibuktikan langsung dari isi buku. Kebanyakan pokok-pokok pikiran buku ditulis dengan bentuk deduktif jika dilihat dari segi dimana letak pokok pikiran utama suatu paragraf. Jika dilihat dari segi penulisan paragraf, kebanyakan menggunakan paragraf yang bersifat deskripsi dan persuasif. Hal ihwal mengenai sejarah, kebudayaan, dan prestasi Yahudi ditulis dengan bentuk paragraf deskripsi. Sedangkan isi paragraf yang isinya berupa motivasi dan perenungan ditulis/disusun membentuk paragraf persuasif. Jika dilihat dari segi tata cara menulis, penulis buku sudah berusaha menulis dengan menggunakan kaidah Ejaan yang Disempurnakan (EyD). Contohnya, istilah-istilah atau kalimat asing ditulis dengan cetak miring (contoh, "*Stilla cavet lapidem ...*", hlm. 256), menggunakan tanda petik untuk memberitahu pembaca bahwa ia hanya mengutip yang dikatakan orang-orang (contoh, ... mereka mengkalim dirinya sebagai "*The Choosen People*", hlm. 256). Meskipun demikian, penulis ulasan buku menemukan penulisan kata yang tidak baku, seperti kata 'hipotesa' (hlm. 86), yang merupakan bentuk kata tidak baku dari 'hipotesis', dan, kata '*al-hukuma*' (hlm. 228) yang mungkin penulis buku maksud adalah '*al-hikma*'.
+
+:::
+
+# 3. Ikhtisar
+
+::: {.alinea}
+
+Seperti yang penulis ulasan sampaikan di akhir segmen 2, penulis ulasan tidak mencatat atau menggarisbawahi kajian BAB V, dikarenakan isinya hanya berupa cacian dan sumpah serapah untuk orang yang bukan Yahudi. Adapun yang penulis ulasan maksud dengan daftar kajian buku yang pembaca menggarisbawahinya adalah ikhtisar buku, yang mana penulis ulasan catat garis besar dan halamannya. Berikut adalah penunjuk/ikhtisar buku:
+
+:::
+
+::: {.alinea}
+
+$\ast1.$ Tafsir *hubbud dunya* dan *karahiyatul maut*. Hlm. 18.<br/>
+
+> Mereka tidak minum alkohol, tetapi mereka menenggak kebodohan sehingga mabuk tak mengenal jalan syariat. Mereka tidak memakan babi, tetapi melahap riba dan keserakahan duniawi sehingga doa-doanya terpasung.
+
+$\ast2.$ Fatwa yang ditawarkan oleh Hedonis.
+
+> Jujur hancur, curang menang, kaya dipuja, miskin dicerca. <br/>-Hlm. 20.-
+
+$\ast3.$ Sisa kejayaan ilmu pengetahuan dan peradaban Islam di masa lalu yang sekarang masih menjadi bahasa dunia. Hlm. 21.<br/>
+$\ast4.$ Tujuan buku ini ditulis:
+
+<div style="margin-left: 2em;">
+
+$1.$ Membedah rahasisa prestasi, budaya, dan cara mendidik generasi mudanya Yahudi. Hlm. 10.<br/>
+$2.$ Sebagai bahan perenungan dan motivasi. Hlm. 15.<br/>
+$3.$ Mengkaji [menggali] nilai-nilai universal yang objektif. Hlm. 25.<br/>
+
+</div>
+
+$\ast5.$ Hubungan antara cinta dan kekuatan. Hlm. 26.
+
+```{=html}
+
+<table class="table table-hover">
+    <tr>
+        <th>$\textbf{Cinta}$</th>
+        <th>$\textbf{Kekuatan}$</th>
+        <th>$\textbf{Konsekuensi}$</th>
+    </tr>
+    <tr>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{prestasi}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{banci}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{anarki}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{"mati"}$</td>
+    </tr>
+</table>
+
+```
+
+$\ast6.$ Era Andalusia merupakan kesejarahan yang begitu monumental. Hlm. 28.<br/>
+$\ast7.$ Keberhasilan Yahudi dipengaruhi cendekiawan Andalusia. Hlm. 29.<br/>
+$\ast8.$ Umat Islam harus memiliki etos keimanan, keilmuan, dan kerja, dan harus mampu memberikan warna pada peradaban. Hlm. 29.<br/>
+$\ast9.$ Amanah Thariq bin Ziyad kepada prajuritnya. Hlm. 33.<br/>
+$\ast10.$ Semangat keilmuan yang bijak ... buku lawan buku, pena lawan pena, argumen lawan argumen. Hlm. 38.<br/>
+$\ast11.$ Konsekuensi mereka yang berkeluh kesah. Hlm. 38.<br/>
+$\ast12.$ Konsekuensi bagi mereka yang ujub dengan masa lalunya. Hlm. 38-39.<br/>
+$\ast13.$ Ibnu Tufail, pencetus filsafat "*Philosophus Autodidactus*". Hlm. 42-43.<br/>
+$\ast14.$ Jihad adalah bentuk kesungguhan untuk menjadikan sekali hidup penuh arti. Hlm. 44.<br/>
+$\ast15.$ Salah satu bentuk "Gimnastik Moral". Hlm. 34.<br/>
+$\ast16.$ Filsafatnya Ibnu Rusyd. Hlm. 46.<br/>
+$\ast17.$ Ibnu Rusyd vs Imam Al-Ghazali, buku lawan buku. Hlm. 47.<br/>
+$\ast18.$ Metode *al-I'tibar*. Hlm. 47.<br/>
+$\ast19.$ Tingkat intelektual yang rendah menyebabkan timbulnya fitnah dan kesalahpahaman. Hlm. 48.<br/>
+$\ast20.$ Ibnu Rusyd yang pertama kali menemukan penyakit Parkinson. Hlm. 51.<br/>
+$\ast21.$ Ibnu Rusyd yang mengajukan fondasi pemikiran Eksistensialisme. Hlm. 51.<br/>
+$\ast22.$ Ibnu Rusyd yang mengajukan *corpus quantum*. Hlm. 51.<br/>
+$\ast23.$ Banyaknya karya Ibnu Rusyd. Hlm. 51.<br/>
+$\ast24.$ Nama Ibnu Rusyd diabadikan sebagai nama benda langit [bintang]. Hlm. 52.<br/>
+$\ast25.$ Filsafatnya Ibnul Arabi dikenal dengan *tanzih* dan *tasybih*. Hlm. 54.<br/>
+$\ast26.$ Tidak ada satu bentuk pemikiran yang berdiri sendiri secara absolut, melainkan suatu proses yang saling mempengaruhi. Hlm. 71.<br/>
+$\ast27.$ Peribahasa yang mulai pudar. Hlm. 78.<br/>
+
+> Berjalan sampai ke batas, berenang sampai ke pulau.
+
+$\ast28.$ Iman dan Ilmu harus menjadi "bahan bakar" untuk melahirkan etos modern yang prestatif. Hlm. 79.<br/>
+$\ast29.$ Konsekuensi etos = mitos dan logos. Hlm. 80.<br/>
+$\ast30.$ Eros = memberikan nilai lebih untuk orang lain. Hlm. 80.<br/>
+$\ast31.$ Hubungan antara mitos/kepercayaan dan *logos*. Hlm. 80.<br/>
+```{=html}
+
+<table class="table table-hover">
+    <tr>
+        <th>$\textbf{Mitos/Kepercayaan}$</th>
+        <th>$\textbf{Logos}$</th>
+        <th>$\textbf{Konsekuensi}$</th>
+    </tr>
+    <tr>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{eros}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{sesat}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{ada}$</td>
+        <td >$
+            \begin{matrix}
+            \textit{kesombongan} \\
+            \textit{intelektual}
+            \end{matrix}
+        $</td>
+    </tr>
+    <tr>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{"mati"}$</td>
+    </tr>
+</table>
+
+```
+
+$\ast32.$ Motivasi = *motive* + *action*; *the action will be effective if and only if it's accompany by appropriate knowledge.* Hlm. 86.<br/>
+$\ast33.$ Salah satu hipotesis mengapa Yahudi itu cerdas. Hlm. 86-87.<br/>
+$\ast34.$ Watak seorang Yahudi. Hlm. 90<br/>
+$\ast35.$ Siapa saja yang mampu memasuki dunia "*Genuie suffering*" niscaya memperoleh/menggapai cita-citanya. Hlm. 90.<br/>
+$\ast36.$ Mungkin orang Yahudi dapat dikategorikan sebagai "*choleric*" dalam teori psikologi klasik. Hlm. 91.<br/>
+$\ast37.$ Sampel cerita bagaimana seorang Yahudi menggapai cita-citanya. Hlm. 96-97.<br/>
+$\ast38.$ Kualitas itu mahal. Hlm. 120.<br/>
+$\ast39.$ Salah satu bentuk Hukum Universal. Hlm. 121.<br/>
+$\ast40.$ Membaca buku merupakan bagian/contoh dari *deffered gratification.* Hlm. 126.<br/>
+$\ast41.$ Kebiasaan positif melahirkan hasil yang positif pula. Hlm. 128.<br/>
+$\ast42.$ Di dalam dunia jurnalistik, "*Bad news is a good news*". Hlm. 166.<br/>
+$\ast43.$ Tayangan yang paling berpotensi meningkatkan rating adalah tayangan yang bersifat kontradiktif. Hlm. 167.<br/>
+$\ast44.$ Komitmen adalah ungkapan mulia Rasulullah SAW. Hlm. 219.<br/>
+$\ast45.$ Komiten adalah cara seseorang memenuhi janji. Hlm. 221.<br/>
+$\ast46.$ Hubungan antara *commitment/promise* dengan bukti (*proof*). Hlm. 221.<br/>
+
+<table class="table table-hover">
+    <tr>
+        <th>$\textbf{Janji}$</th>
+        <th>$\textbf{Bukti}$</th>
+        <th>$\textbf{Tipe Orang}$</th>
+    </tr>
+    <tr>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{al-Amin}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{ada}$</td>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{munafik}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{ada}$</td>
+        <td >$\textit{prudent}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{tanpa}$</td>
+        <td>$\textit{"mati"}$</td>
+    </tr>
+</table>
+
+$\ast47.$ *Walam Yahsya Illallah.* Hlm. 222.<br/>
+$\ast48.$ *You are what quality of the mind of yours is.* Hlm. 223<br/>
+$\ast49.$ Setiap perbuatan melahirkan resiko atau tantangan. Hlm. 224-225<br/>
+$\ast50.$ Hadits Rasulullah SAW tentang mencari ilmu. Hlm. 227.<br/>
+$\ast51.$ 4 Tipe seseorang menurut *ahlul hikmah*. Hlm. 228.<br/>
+
+<table class="table table-hover">
+    <tr>
+        <th>$\textbf{Sebenarnya}$</th>
+        <th>$\textbf{Mengaku}$</th>
+        <th>$\textbf{Tipe Orang}$</th>
+    </tr>
+    <tr>
+        <td>$\textit{tahu}$</td>
+        <td>$\textit{tahu}$</td>
+        <td>$\textit{bijak}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tahu}$</td>
+        <td>$\textit{tidak}$</td>
+        <td>$\textit{tidur}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tidak}$</td>
+        <td>$\textit{tahu}$</td>
+        <td >$\textit{jahil muraqab (sok tahu)}$</td>
+    </tr>
+    <tr>
+        <td>$\textit{tidak}$</td>
+        <td>$\textit{tidak}$</td>
+        <td>$\textit{jahil basith (bodoh)}$</td>
+    </tr>
+</table>
+
+$\ast52.$ Jika tidak melakukan sesuatu, niscaya orang lain akan melakukannya. Hlm. 232.<br/>
+$\ast53.$ Dalam ilmu komunikasi, ketika berkomunikasi, seseorang semestinya tahu mengenai apa yang ingin dikomunikasikannya, cara menyampaikannya, dan menggunakan etika komunikasi yang tinggi.<br/>
+$\ast54.$ Di dalam Al-Quran, etika komunikasi ini disebut sebagai *qaulan*, yaitu Hlm. 243-247:
+
+<div style="margin-left: 2em;">
+
+$1.$ *Qaulan Sadidan.* QS. An-Nisa:9, Al-Ahzab:70. Hlm. 243.<br/>
+$2.$ *Qaulan Balighan.* QS. An-Nisa:63. Hlm. 244.<br/>
+$3.$ *Qaulan Masyuran.* QS. Al-Isra:28. Hlm. 244-245.<br/>
+$4.$ *Qaulan Layyinan.* QS. Thaha:44. Hlm. 245.<br/>
+$5.$ *Qaulan Kariman.* QS. Al-Isra:23. Hlm. 246.<br/>
+$6.$ *Qaulan Maarufan.* QS. An-Nisa:5. Hlm. 247.
+
+</div>
+:::
+
+# 4. Daftar Data
+
+::: {.alinea}
+
+$\ast1.$ Komperatif mengenai (Hlm. 16):
+
+<div style="margin-left: 2em;">
+
+$1.$ Universitas di negara muslim dan non-muslim.<br/>
+$2.$ Gemar membaca di negara muslim dan non-muslim.<br/>
+$3.$ Saintis dan $\#\text{saintis}$ dan $\#\text{anggaran}$ riset di negara muslim dan non-muslim.<br/>
+$4.$ $\#\text{anak}$ menikmati sekolah pada negara muslim dan non-muslim.
+
+</div>
+
+$\ast2.$ Perbandingan populasi muslim dengan agama lainnya. Hlm. 17.<br/>
+$\ast3.$ Beberapa buah karya Ibnu Arabi. Hlm. 56-57.<br/>
+$\ast4.$ Pemegang hadiah nobel di bidang ekonomi yang mengajar di universitas adalah orang-orang Yahudi. Hlm. 119-120.<br/>
+$\ast5.$ Survei yang dilakukan oleh *Jewish Federation* pada tahun 1190. Hlm. 111.<br/>
+$\ast6.$ Data orang Yahudi Amerika dan membaca buku oleh majalah *Reform Jewish*. Hlm. 120.<br/>
+$\ast7.$ Data hasil program SuperCamp yang ditulis oleh Babbi deFotter, *et al.* Hlm. 125.<br/>
+$\ast8.$ Yayasan yang bergerak di bidang sosial, 12 diantaranya adalah Yahudi, menurut majalah *Forbes*. Hlm. 133.<br/>
+$\ast9.$ 19 bentuk doa Yahudi. Hlm. 143.<br/>
+$\ast10.$ 8 hari raya Yahudi. Hlm. 140-151.<br/>
+$\ast11.$ Kalender orang Yahudi. Hlm. 151.<br/>
+$\ast12.$ Karya cipta Yahudi yang monumental. Hlm. 158-159.<br/>
+$\ast13.$ Prestasi Yahudi. Hlm. 160.<br/>
+$\ast14.$ Temuan di bidang kedokteran yang penemunya adalah seorang Yahudi. Hlm. 160-161.<br/>
+$\ast15.$ Penerima hadiah nobel di bidang perdamaian adalah seorang Yahudi. Hlm. 162.<br/>
+$\ast16.$ 4 organisasi yang didirikan atau keturunan Yahudi. Hlm. 162.<br/>
+$\ast17.$ 7 chairman FED adalah seorang Yahudi. Hlm. 163.<br/>
+$\ast18.$ 9 CEO perusahaan adalah seorang Yahudi. Hlm. 163-164.<br/>
+$\ast19.$ 7 konglomerat Yahudi yang mengontrol jaringan televisi, media cetak, Hollywood, industri rekaman, dan dunia hiburan lainnya. Hlm. 164. <br/>
+$\ast20.$ 4 koran di Amerika yang dimiliki atau dikelola oleh seorang Yahudi. Hlm. 172-174.<br/>
+$\ast21.$ 74 pemikir Yahudi/cendekia Yahudi. Hlm. 174.
+
+:::
+
+# 5. Kesimpulan
+
+::: {.alinea}
+
+Terdapat 2 subjek untuk menutup tulisan ulasan ini, yaitu, kesimpulan mengenai buku yang ditulis oleh alm. K.H. Toto Tasmara, dan umat Yahudi menurut buku alm. K.H. Toto Tasmara, "Yahudi&semi; Mengapa Mereka Berprestasi". Mengenai buku, alm. K.H. Toto Tasmara sudah memaparkan alasan mengapa umat Yahudi adalah umat minoritas dibandingkan umat Kristen atau Muslim, dan mengapa dengan umat yang minor ini, orang-orang Yahudi mampu untuk mewarnai peradaban saat ini dengan karya-karyanya yang begitu monumental. Berkenaan dengan umat Yahudi, mereka adalah umat-umat yang unik, baik berkenaan dengan orang-orangnya maupun agamanya. Hal ini dikarenakan hanya keturunan Yahudi saja yang dianggap sebagai seorang Yahudi yang sebenar-benarnya, sedangkan orang yang bukan Yahudi adalah *goyyim, gentile*. Dikarenakan mereka begitu selektif ketika memilih pasangan untuk menikah, membuat faktor keturunan menjadi salah satu hipotesis kecerdasan orang Yahudi. Berkenaan dengan kitab sucinya, Taurat merupakan kitab suci orang-orang Yahudi, meskipun demikian, seorang Yahudi diperintahkan untuk memperhatikan perkataan para Rabi yang tertulis di dalam kitabnya, yaitu Talmud. Dan perlu diingat juga, bahwa para cendekia Muslim di Andalusia dahulu, juga menjadi salah satu faktor alasan mengapa mereka berprestasi saat ini.
+
+:::
+
+# Referensi
+
+::: {.alinea}
+
+Tasmara, T. (2010). *Yahudi; Mengapa Mereka Berprestasi*. Jakarta: Sinergi Publishing.
+
+:::
+
+```{=html}
+<script>
+    document.getElementById("toc-title").innerHTML = "Daftar Isi";
+    document.getElementsByClassName("quarto-title-meta-heading")[0].innerHTML = "Penulis";
+    document.getElementsByClassName("quarto-title-meta-heading")[1].innerHTML = "Terbit";
+    document.getElementsByClassName("abstract-title")[0].innerHTML = "Abstrak";
+</script>
+
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('www/mymetapart2.html')
+```
+```
